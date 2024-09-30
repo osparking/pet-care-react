@@ -1,7 +1,7 @@
 @startuml
 class           User
-User <|-- Admin
 User <|-- Patient
 User <|-- Vet
-
+Vet : String specialization
+User <|-- Admin
 @enduml
