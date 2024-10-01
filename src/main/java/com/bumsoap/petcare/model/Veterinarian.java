@@ -1,14 +1,19 @@
 package com.bumsoap.petcare.model;
 
-public class Veterinarian {
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@PrimaryKeyJoinColumn(name = "vet_id")
+public class Veterinarian extends User{
     private long id;
-    private String firstName;
-    private String lastName;
-    private String gender;
-    private String phoneNumber;
-    private String email;
-    private String password;
-    private String userType;
-    private boolean isUsable;
     private String specialization;
 }
