@@ -1,4 +1,9 @@
 package com.bumsoap.petcare.repository;
 
-public interface RepositoryPatient {
+import com.bumsoap.petcare.model.Patient;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface RepositoryPatient extends JpaRepository<Patient, Long> {
 }
