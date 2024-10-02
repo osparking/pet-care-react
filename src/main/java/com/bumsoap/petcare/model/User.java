@@ -23,5 +23,5 @@ public class User {
     private String email;
     private String password;
     private String userType;
-    private boolean isUsable;
+    private Boolean isUsable;
 }
