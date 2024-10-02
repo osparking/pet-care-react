@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn // 기본열: dtype
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +23,5 @@ public class User {
     private String phoneNumber;
     private String email;
     private String password;
-    private String userType;
     private Boolean isUsable;
 }
