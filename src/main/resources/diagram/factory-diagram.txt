@@ -1,0 +1,10 @@
+@startuml
+interface       UserFactory
+UserFactory : createUser()
+UserFactory <|-- SimpleUserFactory
+SimpleUserFactory : checkUserType()
+
+class           Admin
+class           Patient
+class           Veterinarian
+@enduml
