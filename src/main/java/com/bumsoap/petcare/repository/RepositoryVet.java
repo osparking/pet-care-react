@@ -1,4 +1,7 @@
 package com.bumsoap.petcare.repository;
 
-public interface RepositoryVet {
+import com.bumsoap.petcare.model.Veterinarian;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RepositoryVet extends JpaRepository<Veterinarian, Long> {
 }
