@@ -1,4 +1,4 @@
-package com.bumsoap.petcare.service;
+package com.bumsoap.petcare.service.user;
 
 import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.repository.RepositoryUser;
