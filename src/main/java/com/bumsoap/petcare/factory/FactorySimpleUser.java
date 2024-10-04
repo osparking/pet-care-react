@@ -5,7 +5,9 @@ import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.repository.RepositoryUser;
 import com.bumsoap.petcare.request.RegistrationRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
 @RequiredArgsConstructor
 public class FactorySimpleUser implements FactoryUser{
     private final RepositoryUser userRepository;
