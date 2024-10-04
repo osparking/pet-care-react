@@ -15,7 +15,7 @@ public class FactoryAdmin {
     private final RepositoryAdmin repositoryAdmin;
     private final UserAttributesMapper userAttributesMapper;
 
-    public User createAdmin(RegistrationRequest request) {
+    public Admin createAdmin(RegistrationRequest request) {
         Admin admin = new Admin();
         userAttributesMapper.setCommonAttributes(request, admin);
         return repositoryAdmin.save(admin);
