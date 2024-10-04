@@ -23,7 +23,7 @@ public class User {
     private String email;
     private String password;
     private String userType;
-    private Boolean isUsable;
+    private Boolean enabled;
     @Transient
     private String specialization;
 }
