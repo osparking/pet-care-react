@@ -1,7 +1,7 @@
 package com.bumsoap.petcare.controller;
 
 import com.bumsoap.petcare.model.User;
-import com.bumsoap.petcare.service.ServiceUser;
+import com.bumsoap.petcare.service.user.ServiceUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
