@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class ServiceUser {
     private final RepositoryUser repositoryUser;
 
-    public void add(User user) {
-        repositoryUser.save(user);
+    public User add(User user) {
+        return repositoryUser.save(user);
     }
 }

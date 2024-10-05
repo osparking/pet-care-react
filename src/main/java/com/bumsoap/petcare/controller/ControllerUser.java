@@ -12,7 +12,7 @@ public class ControllerUser {
     private final ServiceUser serviceUser;
 
     @PostMapping
-    public void add(@RequestBody User user) {
-        serviceUser.add(user);
+    public User add(@RequestBody User user) {
+        return serviceUser.add(user);
     }
 }
