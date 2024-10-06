@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class ServiceUser {
     private final FactoryUser userFactory;
 
-    public User add(RegistrationRequest request) {
-        return userFactory.createUser(request);
+    public User register(RegistrationRequest request) {
+        return userFactory.register(request);
     }
 }

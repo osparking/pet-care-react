@@ -27,9 +27,9 @@ public class ControllerUser {
     private final EntityConverter<User, DtoUser> userConverter;
 
     @PostMapping
-    public ResponseEntity<ApiResponse> add(@RequestBody RegistrationRequest request) {
+    public ResponseEntity<ApiResponse> register(@RequestBody RegistrationRequest request) {
         try {
-            User userSaved = serviceUser.add(request);
+            User userSaved = serviceUser.register(request);
             DtoUser userDto = userConverter.mapEntityToDto(userSaved, DtoUser.class);
             return ResponseEntity.ok(new ApiResponse(FeedbackMessage.SUCCESS, userDto));
         } catch (UserAlreadyExistsException exEx) {

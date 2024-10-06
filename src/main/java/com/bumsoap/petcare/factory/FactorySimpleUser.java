@@ -16,7 +16,7 @@ public class FactorySimpleUser implements FactoryUser{
     private final FactoryAdmin adminFactory;
 
     @Override
-    public User createUser(RegistrationRequest registrationRequest) {
+    public User register(RegistrationRequest registrationRequest) {
         if(userRepository.existsByEmail(registrationRequest.getEmail())) {
             throw new UserAlreadyExistsException("오류 - 등록된 이메일 : "
                     + registrationRequest.getEmail());
