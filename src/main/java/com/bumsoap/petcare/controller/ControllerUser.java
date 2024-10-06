@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.HttpStatus.CONFLICT;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @RestController
 @RequestMapping("/users")
@@ -31,6 +32,9 @@ public class ControllerUser {
             return ResponseEntity.ok(new ApiResponse("유저 등록 성공!", userDto));
         } catch (UserAlreadyExistsException exEx) {
             return ResponseEntity.status(CONFLICT).body(new ApiResponse(exEx.getMessage(), null));
+        } catch (Exception ex) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(ex.getMessage(), null));
         }
     }
 }
