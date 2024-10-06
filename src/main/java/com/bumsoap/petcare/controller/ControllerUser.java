@@ -1,5 +1,8 @@
 package com.bumsoap.petcare.controller;
 
+import com.bumsoap.petcare.dto.DtoUser;
+import com.bumsoap.petcare.dto.EntityConverter;
+import com.bumsoap.petcare.exception.UserAlreadyExistsException;
 import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.request.RegistrationRequest;
 import com.bumsoap.petcare.response.ApiResponse;
@@ -16,12 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ControllerUser {
     private final ServiceUser serviceUser;
+    private final EntityConverter<User, DtoUser> userConverter;
 
     @PostMapping
     public ResponseEntity<ApiResponse> add(@RequestBody RegistrationRequest request) {
         try {
             User userSaved = serviceUser.add(request);
-        } catch (Exception e) {}
-        return null;
+            DtoUser userDto = userConverter.mapEntityToDto(userSaved, DtoUser.class);
+            return ResponseEntity.ok(new ApiResponse("유저 등록 성공!", userDto));
+        } catch (UserAlreadyExistsException exEx) {
+            return ResponseEntity.ok(new ApiResponse(exEx.getMessage(), null));
+
+        }
     }
 }
