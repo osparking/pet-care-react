@@ -24,7 +24,7 @@ public class ControllerUser {
     private final ServiceUser serviceUser;
     private final EntityConverter<User, DtoUser> userConverter;
 
-    @PostMapping("/register")
+    @PostMapping(UrlMapping.REGISTER_USER)
     public ResponseEntity<ApiResponse> register(@RequestBody RegistrationRequest request) {
         try {
             User userSaved = serviceUser.register(request);
@@ -38,7 +38,7 @@ public class ControllerUser {
         }
     }
 
-    @PutMapping("/update/{userId}")
+    @PutMapping(UrlMapping.UPDATE_USER)
     public ResponseEntity<ApiResponse> update(@PathVariable Long userId,
                                               @RequestBody UserUpdateRequest request) {
         try {
