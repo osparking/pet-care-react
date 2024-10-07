@@ -2,22 +2,20 @@ package com.bumsoap.petcare.controller;
 
 import com.bumsoap.petcare.dto.DtoUser;
 import com.bumsoap.petcare.dto.EntityConverter;
+import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.exception.UserAlreadyExistsException;
 import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.request.RegistrationRequest;
+import com.bumsoap.petcare.request.UserUpdateRequest;
 import com.bumsoap.petcare.response.ApiResponse;
 import com.bumsoap.petcare.service.user.ServiceUser;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.UrlMapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.http.HttpStatus.CONFLICT;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequestMapping(UrlMapping.USERS)
@@ -26,7 +24,7 @@ public class ControllerUser {
     private final ServiceUser serviceUser;
     private final EntityConverter<User, DtoUser> userConverter;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<ApiResponse> register(@RequestBody RegistrationRequest request) {
         try {
             User userSaved = serviceUser.register(request);
@@ -39,4 +37,29 @@ public class ControllerUser {
                     .body(new ApiResponse(ex.getMessage(), null));
         }
     }
+
+    @PutMapping("/update/{userId}")
+    public ResponseEntity<ApiResponse> update(@PathVariable Long userId,
+                                              @RequestBody UserUpdateRequest request) {
+        try {
+            User theUser = serviceUser.update(userId, request);
+            DtoUser updatedUser = userConverter.mapEntityToDto(theUser, DtoUser.class);
+            return ResponseEntity.ok(
+                    new ApiResponse(FeedbackMessage.UPDATE_SUCCESS, updatedUser));
+        } catch (ResourceNotFoundException ex) {
+            return ResponseEntity.status(NOT_FOUND)
+                    .body(new ApiResponse(ex.getMessage(), null));
+        } catch (Exception ex) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR)
+                   .body(new ApiResponse(ex.getMessage(), null));
+        }
+    }
+
 }
+
+
+
+
+
+
+
