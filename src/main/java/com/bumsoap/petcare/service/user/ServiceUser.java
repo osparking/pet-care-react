@@ -21,8 +21,17 @@ public class ServiceUser implements IServiceUser {
         return userFactory.register(request);
     }
 
-    public User update(UserUpdateRequest request) {
-        return null; // update logic here
+    @Override
+    public User update(Long userId, UserUpdateRequest request) {
+        User user = findById(userId);
+
+        user.setPhoneNumber(request.getPhoneNumber());
+        user.setGender(request.getGender());
+        user.setSpecialization(request.getSpecialization());
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+
+        return repositoryUser.save(user);
     }
 
     public User findById(Long userId) {
