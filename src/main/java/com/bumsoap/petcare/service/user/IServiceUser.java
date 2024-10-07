@@ -8,4 +8,6 @@ public interface IServiceUser {
     User register(RegistrationRequest request);
 
     User update(Long userId, UserUpdateRequest request);
+
+    User findById(Long userId);
 }

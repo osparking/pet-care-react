@@ -34,6 +34,7 @@ public class ServiceUser implements IServiceUser {
         return repositoryUser.save(user);
     }
 
+    @Override
     public User findById(Long userId) {
         return repositoryUser.findById(userId).orElseThrow(() ->
                 new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_USERID));
