@@ -1,9 +1,12 @@
 package com.bumsoap.petcare.service.user;
 
+import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.factory.FactoryUser;
 import com.bumsoap.petcare.model.User;
+import com.bumsoap.petcare.repository.RepositoryUser;
 import com.bumsoap.petcare.request.RegistrationRequest;
 import com.bumsoap.petcare.request.UserUpdateRequest;
+import com.bumsoap.petcare.utils.FeedbackMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ServiceUser implements IServiceUser {
     private final FactoryUser userFactory;
+    private final RepositoryUser repositoryUser;
 
     @Override
     public User register(RegistrationRequest request) {
@@ -19,5 +23,10 @@ public class ServiceUser implements IServiceUser {
 
     public User update(UserUpdateRequest request) {
         return null; // update logic here
+    }
+
+    public User findById(Long userId) {
+        return repositoryUser.findById(userId).orElseThrow(() ->
+                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_USERID));
     }
 }
