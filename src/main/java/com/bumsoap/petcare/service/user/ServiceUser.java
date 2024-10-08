@@ -54,6 +54,7 @@ public class ServiceUser implements IServiceUser {
                 new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_USERID));
     }
 
+    @Override
     public List<DtoUser> getAllUsers() {
         return repositoryUser.findAll().stream().map
                         (user -> entityConverter.mapEntityToDto(user, DtoUser.class))
