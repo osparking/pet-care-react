@@ -38,5 +38,12 @@ public class Appointment {
         }
         patient.getAppointments().add(this);
     }
-    
+
+    public void addVeterinarian(Veterinarian veterinarian) {
+        this.setPatient(veterinarian);
+        if (veterinarian.getAppointments() == null) {
+            veterinarian.setAppointments(new ArrayList<>());
+        }
+        veterinarian.getAppointments().add(this);
+    }
 }
