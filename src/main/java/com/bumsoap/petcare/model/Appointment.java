@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 @Entity
 @AllArgsConstructor
@@ -29,4 +30,13 @@ public class Appointment {
     @Column(name = "recipient")
     @ManyToOne(fetch = FetchType.LAZY)
     private User veterinarian;
+
+    public void addPatient(User patient) {
+        this.setPatient(patient);
+        if (patient.getAppointments() == null) {
+            patient.setAppointments(new ArrayList<>());
+        }
+        patient.getAppointments().add(this);
+    }
+    
 }
