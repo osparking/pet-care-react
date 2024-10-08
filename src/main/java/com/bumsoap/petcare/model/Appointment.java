@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Random;
 
 @Entity
 @AllArgsConstructor
@@ -45,5 +46,10 @@ public class Appointment {
             veterinarian.setAppointments(new ArrayList<>());
         }
         veterinarian.getAppointments().add(this);
+    }
+
+    public void setAppointmentNo() {
+        this.appointmentNo = String.valueOf(
+                new Random().nextLong()).substring(1,11);
     }
 }
