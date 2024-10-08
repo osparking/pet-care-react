@@ -24,11 +24,11 @@ public class Appointment {
     private String appointmentNo;
     private LocalDate createdDate;
 
-    @Column(name = "sender")
+    @JoinColumn(name = "sender_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private User patient;
 
-    @Column(name = "recipient")
+    @JoinColumn(name = "recipient_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private User veterinarian;
 
