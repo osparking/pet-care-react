@@ -7,4 +7,5 @@ public class UrlMapping {
     public static final String UPDATE_USER = "/update/{userId}";
     public static final String USER_BY_ID = "/user/{userId}";
     public static final String DELETE_USER = "/delete/{userId}";
+    public static final String GET_ALL_USER = "/get_all";
 }
