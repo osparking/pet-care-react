@@ -70,6 +70,21 @@ public class ControllerUser {
                    .body(new ApiResponse(ex.getMessage(), null));
         }
     }
+
+    @DeleteMapping(UrlMapping.DELETE_USER)
+    public ResponseEntity<ApiResponse> deleteById(@PathVariable Long userId) {
+
+        try {
+            serviceUser.deleteById(userId);
+            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.USER_DELETED, null));
+        } catch (ResourceNotFoundException ex) {
+            return ResponseEntity.status(NOT_FOUND)
+                   .body(new ApiResponse(ex.getMessage(), null));
+        } catch (Exception ex) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR)
+                   .body(new ApiResponse(ex.getMessage(), null));
+        }
+    }
 }
 
 
