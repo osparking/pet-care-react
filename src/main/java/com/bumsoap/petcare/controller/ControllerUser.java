@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
@@ -84,6 +86,13 @@ public class ControllerUser {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR)
                    .body(new ApiResponse(ex.getMessage(), null));
         }
+    }
+
+    @GetMapping(UrlMapping.GET_ALL_USER)
+    public ResponseEntity<ApiResponse> getAllUsers(){
+        List<DtoUser> theUsers = serviceUser.getAllUsers();
+        return ResponseEntity.status(FOUND).body(
+                new ApiResponse(FeedbackMessage.ALL_USERS_READ, theUsers));
     }
 }
 
