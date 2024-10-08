@@ -1,5 +1,7 @@
 package com.bumsoap.petcare.service.user;
 
+import com.bumsoap.petcare.dto.DtoUser;
+import com.bumsoap.petcare.dto.EntityConverter;
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.factory.FactoryUser;
 import com.bumsoap.petcare.model.User;
@@ -10,11 +12,15 @@ import com.bumsoap.petcare.utils.FeedbackMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ServiceUser implements IServiceUser {
     private final FactoryUser userFactory;
     private final RepositoryUser repositoryUser;
+    private final EntityConverter<User, DtoUser> entityConverter;
 
     @Override
     public User register(RegistrationRequest request) {
@@ -46,5 +52,11 @@ public class ServiceUser implements IServiceUser {
     public User findById(Long userId) {
         return repositoryUser.findById(userId).orElseThrow(() ->
                 new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_USERID));
+    }
+
+    public List<DtoUser> getAllUsers() {
+        return repositoryUser.findAll().stream().map
+                        (user -> entityConverter.mapEntityToDto(user, DtoUser.class))
+                .collect(Collectors.toList());
     }
 }
