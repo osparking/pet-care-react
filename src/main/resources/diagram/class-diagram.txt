@@ -5,3 +5,20 @@ User <|-- Vet
 Vet : String specialization
 User <|-- Admin
 @enduml
+
+@startuml
+class    User {
+         List<Appoinement> appoinements
+}
+
+class    Appointment {
+         User sender; // patient
+         User receiver; // vet'
+}
+
+class    Patient
+class    Veterinarian
+
+Patient "1" *-- "many" Appointment
+Veterinarian "1" *-- "many" Appointment
+@enduml
