@@ -9,5 +9,7 @@ public interface IServiceUser {
 
     User update(Long userId, UserUpdateRequest request);
 
+    void deleteById(Long userId);
+
     User findById(Long userId);
 }
