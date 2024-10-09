@@ -22,6 +22,7 @@ public class Appointment {
     private LocalDate date;
     private LocalTime time;
     private String reason;
+    @Column(unique = true)
     private String appointmentNo;
     private LocalDate createdDate;
 
