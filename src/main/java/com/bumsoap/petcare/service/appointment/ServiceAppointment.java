@@ -65,7 +65,10 @@ public class ServiceAppointment implements IServiceAppointment {
 
     @Override
     public Appointment getAppointmentById(Long appointmentId) {
-        return null;
+        return repositoryAppointment
+                .findById(appointmentId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        FeedbackMessage.NOT_FOUND_USERID));
     }
 
     @Override
