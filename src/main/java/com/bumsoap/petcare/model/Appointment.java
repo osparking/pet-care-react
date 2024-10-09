@@ -1,5 +1,6 @@
 package com.bumsoap.petcare.model;
 
+import com.bumsoap.petcare.utils.StatusAppointment;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,9 @@ public class Appointment {
     private String reason;
     private String appointmentNo;
     private LocalDate createdDate;
+
+    @Enumerated(EnumType.STRING)
+    private StatusAppointment status;
 
     @JoinColumn(name = "sender_id")
     @ManyToOne(fetch = FetchType.LAZY)
