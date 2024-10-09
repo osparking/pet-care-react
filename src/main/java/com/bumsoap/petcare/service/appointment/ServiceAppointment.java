@@ -35,8 +35,8 @@ public class ServiceAppointment implements IServiceAppointment {
         Optional<User> veterinarian = repositoryUser.findById(recipientId);
 
         if (patient.isPresent() && veterinarian.isPresent()) {
-            appointment.setPatient(patient.get());
-            appointment.setVeterinarian(veterinarian.get());
+            appointment.addPatient(patient.get());
+            appointment.addVeterinarian (veterinarian.get());
             appointment.setAppointmentNo();
             appointment.setStatus(StatusAppointment.APPROVE_WAIT);
             return repositoryAppointment.save(appointment);
