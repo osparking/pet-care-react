@@ -5,13 +5,16 @@ import com.bumsoap.petcare.model.Appointment;
 import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.repository.RepositoryAppointment;
 import com.bumsoap.petcare.repository.RepositoryUser;
+import com.bumsoap.petcare.request.AppointmentRequest;
 import com.bumsoap.petcare.utils.FeedbackMessage;
-import com.bumsoap.petcare.utils.StatusAppointment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+
+import static com.bumsoap.petcare.utils.StatusAppointment.APPROVE_WAIT;
 
 @Service
 @RequiredArgsConstructor
@@ -38,7 +41,7 @@ public class ServiceAppointment implements IServiceAppointment {
             appointment.addPatient(patient.get());
             appointment.addVeterinarian (veterinarian.get());
             appointment.setAppointmentNo();
-            appointment.setStatus(StatusAppointment.APPROVE_WAIT);
+            appointment.setStatus(APPROVE_WAIT);
             return repositoryAppointment.save(appointment);
         } else {
             throw new ResourceNotFoundException(
@@ -52,7 +55,12 @@ public class ServiceAppointment implements IServiceAppointment {
     }
 
     @Override
-    public Appointment updateAppointment(Long id, Appointment appointment) {
+    public Appointment updateAppointment(Long id, AppointmentRequest appointment) {
+        Appointment oldAppointment = getAppointmentById(id);
+        if (!Objects.equals(oldAppointment.getStatus(), APPROVE_WAIT)) {
+            throw new IllegalStateException(
+                    FeedbackMessage.ILLEGAL_APPOINTMENT_UPDATE);
+        }
         return null;
     }
 
