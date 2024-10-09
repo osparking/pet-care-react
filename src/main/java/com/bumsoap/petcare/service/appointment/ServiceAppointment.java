@@ -58,8 +58,12 @@ public class ServiceAppointment implements IServiceAppointment {
 
     @Override
     public void deleteAppointment(Long id) {
-        repositoryUser.findById(id).ifPresentOrElse(repositoryUser::delete, () -> {
-            throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_USERID);
+        repositoryAppointment
+                .findById(id)
+                .ifPresentOrElse(repositoryAppointment::delete,
+                        () -> {
+                    throw new ResourceNotFoundException(
+                            FeedbackMessage.NOT_FOUND_USERID);
         });
     }
 
