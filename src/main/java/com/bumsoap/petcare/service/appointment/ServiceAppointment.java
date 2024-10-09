@@ -5,11 +5,13 @@ import com.bumsoap.petcare.model.Appointment;
 import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.repository.RepositoryAppointment;
 import com.bumsoap.petcare.repository.RepositoryUser;
-import com.bumsoap.petcare.request.AppointmentRequest;
+import com.bumsoap.petcare.request.AppointmentUpdateRequest;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -55,13 +57,17 @@ public class ServiceAppointment implements IServiceAppointment {
     }
 
     @Override
-    public Appointment updateAppointment(Long id, AppointmentRequest appointment) {
+    public Appointment updateAppointment(Long id, AppointmentUpdateRequest request) {
         Appointment oldAppointment = getAppointmentById(id);
         if (!Objects.equals(oldAppointment.getStatus(), APPROVE_WAIT)) {
             throw new IllegalStateException(
                     FeedbackMessage.ILLEGAL_APPOINTMENT_UPDATE);
         }
-        return null;
+        oldAppointment.setDate(LocalDate.parse(request.getAppointmentDate());
+        oldAppointment.setTime(LocalTime.parse(request.getAppointmentTime());
+        oldAppointment.setReason(request.getReason());
+        
+        return repositoryAppointment.save(oldAppointment);
     }
 
     @Override
