@@ -73,6 +73,6 @@ public class ServiceAppointment implements IServiceAppointment {
 
     @Override
     public Appointment getByAppointmentNo(String appointmentNo) {
-        return null;
+        return repositoryAppointment.findByAppointmentNo(appointmentNo);
     }
 }
