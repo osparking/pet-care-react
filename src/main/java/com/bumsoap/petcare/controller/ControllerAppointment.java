@@ -18,6 +18,21 @@ import static org.springframework.http.HttpStatus.*;
 public class ControllerAppointment {
     private final ServiceAppointment serviceAppointment;
 
+    @GetMapping(UrlMapping.APPOINTMENT_BY_ID)
+    public ResponseEntity<ApiResponse> getAppointmentById(@PathVariable Long id) {
+        try {
+            return ResponseEntity.status(FOUND)
+                    .body(new ApiResponse(FeedbackMessage.FOUND,
+                            serviceAppointment.getAppointmentById(id)));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(NOT_FOUND)
+                    .body(new ApiResponse(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(e.getMessage(), null));
+        }
+    }
+
     /**
      * 애완동물 수의사 진료 예약을 신청한다.
      *
@@ -27,7 +42,7 @@ public class ControllerAppointment {
      * @return ResponseEntity<ApiResponse> 반응 상태 및 예약 요청 객체
      */
     @PostMapping(UrlMapping.CREATE)
-    public ResponseEntity bookAppointment(@RequestBody Appointment appointment,
+    public ResponseEntity<ApiResponse> bookAppointment(@RequestBody Appointment appointment,
                                           @RequestParam Long senderId,
                                           @RequestParam Long recipientId) {
         try {
@@ -45,7 +60,7 @@ public class ControllerAppointment {
     }
 
     @GetMapping(UrlMapping.GET_ALL)
-    public ResponseEntity getAllAppointments() {
+    public ResponseEntity<ApiResponse> getAllAppointments() {
         try {
             return ResponseEntity.status(FOUND)
                     .body(new ApiResponse(FeedbackMessage.FOUND,
