@@ -32,7 +32,9 @@ public class ServiceAppointment implements IServiceAppointment {
      *                    senderId - 환자/pet 주인 ID
      *                    recipientId - 수의사/vet' ID
      * return - 저장된 예약 객체
-     */
+     * throws - ResourceNotFoundException
+     *
+     **/
     public Appointment createAppointment(
             Appointment appointment, Long senderId, Long recipientId) {
 

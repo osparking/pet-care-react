@@ -9,4 +9,5 @@ public class UrlMapping {
     public static final String DELETE_USER = "/delete/{userId}";
     public static final String GET_ALL = "/get_all";
     public static final String APPOINTMENT = API + "/appointments";
+    public static final String CREATE = "/create";
 }
