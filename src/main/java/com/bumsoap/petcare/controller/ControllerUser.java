@@ -78,7 +78,7 @@ public class ControllerUser {
 
         try {
             serviceUser.deleteById(userId);
-            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.USER_DELETED, null));
+            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.RESOURCE_DELETED, null));
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(NOT_FOUND)
                    .body(new ApiResponse(ex.getMessage(), null));

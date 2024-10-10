@@ -7,7 +7,7 @@ public class FeedbackMessage {
     public static final String UPDATE_SUCCESS = "유저 정보 갱신 성공!";
     public static final String USER_FOUND = "유저 정보 읽기 성공!";
     public static final String FOUND = "DB 정보 읽기 성공!";
-    public static final String USER_DELETED = "유저 삭제 성공!";
+    public static final String RESOURCE_DELETED = "자원 삭제 성공!";
     public static final String ALL_USERS_READ = "모든 유저 읽음!";
     public static final String PATIENT_OR_VETERINARIAN_NOT_FOUND
             = "동물 주인 혹은 수의사 부재!";
