@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -26,6 +27,8 @@ public class Appointment {
     private String reason;
     @Column(unique = true)
     private String appointmentNo;
+
+    @CreationTimestamp
     private LocalDate createdDate;
 
     @Enumerated(EnumType.STRING)
