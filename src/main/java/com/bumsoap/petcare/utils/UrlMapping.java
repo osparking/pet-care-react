@@ -13,4 +13,8 @@ public class UrlMapping {
     public static final String APPOINTMENT_BY_ID = "/get_by_id/{id}";
     public static final String DELETE_BY_ID = "/delete/{id}";
     public static final String APPOINTMENT_BY_NO = "/get_by_no/{no}";
+    /**
+     * 이것이 최신 유행 URL 형태
+     */
+    public static final String UPDATE_APPOINTMENT_BY_ID = "/{id}/update";
 }

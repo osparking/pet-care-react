@@ -2,11 +2,13 @@ package com.bumsoap.petcare.controller;
 
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.model.Appointment;
+import com.bumsoap.petcare.request.AppointmentUpdateRequest;
 import com.bumsoap.petcare.response.ApiResponse;
 import com.bumsoap.petcare.service.appointment.ServiceAppointment;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.UrlMapping;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +20,22 @@ import static org.springframework.http.HttpStatus.*;
 public class ControllerAppointment {
     private final ServiceAppointment serviceAppointment;
 
-
+    @PutMapping(UrlMapping.UPDATE_APPOINTMENT_BY_ID)
+    public ResponseEntity<ApiResponse> updateAppointment(
+            @PathVariable Long id,
+            @RequestBody AppointmentUpdateRequest appointment) {
+        try {
+            return ResponseEntity.ok().body(
+                    new ApiResponse(FeedbackMessage.UPDATE_SUCCESS,
+                            serviceAppointment.updateAppointment(id, appointment)));
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(NOT_ACCEPTABLE)
+                    .body(new ApiResponse(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(e.getMessage(), null));
+        }
+    }
 
     @DeleteMapping(UrlMapping.DELETE_BY_ID)
     public ResponseEntity<ApiResponse> deleteAppointment(@PathVariable Long id) {
