@@ -1,6 +1,7 @@
 package com.bumsoap.petcare.model;
 
 import com.bumsoap.petcare.utils.StatusAppointment;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.util.Random;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
+@JsonIgnoreProperties({"patient", "veterinarian"})
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
