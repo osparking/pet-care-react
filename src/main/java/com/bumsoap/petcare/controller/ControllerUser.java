@@ -88,7 +88,7 @@ public class ControllerUser {
         }
     }
 
-    @GetMapping(UrlMapping.GET_ALL_USER)
+    @GetMapping(UrlMapping.GET_ALL)
     public ResponseEntity<ApiResponse> getAllUsers(){
         List<DtoUser> theUsers = serviceUser.getAllUsers();
         return ResponseEntity.status(FOUND).body(
