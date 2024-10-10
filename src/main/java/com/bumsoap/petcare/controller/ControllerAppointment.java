@@ -18,12 +18,29 @@ import static org.springframework.http.HttpStatus.*;
 public class ControllerAppointment {
     private final ServiceAppointment serviceAppointment;
 
+
+
     @DeleteMapping(UrlMapping.DELETE_BY_ID)
     public ResponseEntity<ApiResponse> deleteAppointment(@PathVariable Long id) {
         try {
             serviceAppointment.deleteAppointment(id);
             return ResponseEntity.ok().body(
                     new ApiResponse(FeedbackMessage.RESOURCE_DELETED, null));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(NOT_FOUND)
+                    .body(new ApiResponse(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(e.getMessage(), null));
+        }
+    }
+
+    @GetMapping(UrlMapping.APPOINTMENT_BY_NO)
+    public ResponseEntity<ApiResponse> getByAppointmentNo(@PathVariable String no) {
+        try {
+            return ResponseEntity.status(FOUND)
+                    .body(new ApiResponse(FeedbackMessage.FOUND,
+                            serviceAppointment.getByAppointmentNo(no)));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
                     .body(new ApiResponse(e.getMessage(), null));

@@ -10,6 +10,7 @@ public class UrlMapping {
     public static final String GET_ALL = "/get_all";
     public static final String APPOINTMENT = API + "/appointments";
     public static final String CREATE = "/create";
-    public static final String APPOINTMENT_BY_ID = "/get_by_id/{i}";
-    public static final String DELETE_BY_ID = "/delete/{i}";
+    public static final String APPOINTMENT_BY_ID = "/get_by_id/{id}";
+    public static final String DELETE_BY_ID = "/delete/{id}";
+    public static final String APPOINTMENT_BY_NO = "/get_by_no/{no}";
 }
