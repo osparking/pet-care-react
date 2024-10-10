@@ -46,7 +46,7 @@ public class Appointment {
     }
 
     public void addVeterinarian(User veterinarian) {
-        this.setPatient(veterinarian);
+        this.setVeterinarian(veterinarian);
         if (veterinarian.getAppointments() == null) {
             veterinarian.setAppointments(new ArrayList<>());
         }
