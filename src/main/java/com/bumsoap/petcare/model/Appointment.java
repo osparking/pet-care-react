@@ -1,6 +1,7 @@
 package com.bumsoap.petcare.model;
 
 import com.bumsoap.petcare.utils.StatusAppointment;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,11 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
+
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime time;
     private String reason;
     @Column(unique = true)
