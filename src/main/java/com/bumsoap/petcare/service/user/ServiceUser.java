@@ -44,14 +44,14 @@ public class ServiceUser implements IServiceUser {
     public void deleteById(Long userId) {
         repositoryUser.findById(userId).ifPresentOrElse(repositoryUser::delete, ()
                 -> {
-            throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_USERID);
+            throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND);
         });
     }
 
     @Override
     public User findById(Long userId) {
         return repositoryUser.findById(userId).orElseThrow(() ->
-                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_USERID));
+                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
     }
 
     @Override

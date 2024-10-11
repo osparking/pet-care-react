@@ -79,7 +79,7 @@ public class ServiceAppointment implements IServiceAppointment {
                 .ifPresentOrElse(repositoryAppointment::delete,
                         () -> {
                     throw new ResourceNotFoundException(
-                            FeedbackMessage.NOT_FOUND_USERID);
+                            FeedbackMessage.NOT_FOUND);
         });
     }
 
@@ -88,7 +88,7 @@ public class ServiceAppointment implements IServiceAppointment {
         return repositoryAppointment
                 .findById(appointmentId)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        FeedbackMessage.NOT_FOUND_USERID));
+                        FeedbackMessage.NOT_FOUND));
     }
 
     @Override

@@ -8,7 +8,6 @@ import com.bumsoap.petcare.service.appointment.ServiceAppointment;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.UrlMapping;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +25,7 @@ public class ControllerAppointment {
             @RequestBody AppointmentUpdateRequest appointment) {
         try {
             return ResponseEntity.ok().body(
-                    new ApiResponse(FeedbackMessage.UPDATE_SUCCESS,
+                    new ApiResponse(FeedbackMessage.RESOURCE_UPDATED,
                             serviceAppointment.updateAppointment(id, appointment)));
         } catch (IllegalStateException e) {
             return ResponseEntity.status(NOT_ACCEPTABLE)
@@ -98,7 +97,7 @@ public class ControllerAppointment {
             Appointment savedAppointment = serviceAppointment.createAppointment(
                     appointment, senderId, recipientId);
             return ResponseEntity.status(CREATED)
-                    .body(new ApiResponse(FeedbackMessage.BOOKED, savedAppointment));
+                    .body(new ApiResponse(FeedbackMessage.CREATED, savedAppointment));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
                     .body(new ApiResponse(e.getMessage(), null));

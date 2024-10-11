@@ -31,7 +31,7 @@ public class ControllerUser {
         try {
             User userSaved = serviceUser.register(request);
             DtoUser userDto = userConverter.mapEntityToDto(userSaved, DtoUser.class);
-            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.SUCCESS, userDto));
+            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.CREATED, userDto));
         } catch (UserAlreadyExistsException exEx) {
             return ResponseEntity.status(CONFLICT).body(new ApiResponse(exEx.getMessage(), null));
         } catch (Exception ex) {
@@ -47,7 +47,7 @@ public class ControllerUser {
             User theUser = serviceUser.update(userId, request);
             DtoUser updatedUser = userConverter.mapEntityToDto(theUser, DtoUser.class);
             return ResponseEntity.ok(
-                    new ApiResponse(FeedbackMessage.UPDATE_SUCCESS, updatedUser));
+                    new ApiResponse(FeedbackMessage.RESOURCE_UPDATED, updatedUser));
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(NOT_FOUND)
                     .body(new ApiResponse(ex.getMessage(), null));
@@ -63,7 +63,7 @@ public class ControllerUser {
         try {
             User theUser = serviceUser.findById(userId);
             DtoUser userDto = userConverter.mapEntityToDto(theUser, DtoUser.class);
-            return ResponseEntity.status(FOUND).body(new ApiResponse(FeedbackMessage.USER_FOUND, userDto));
+            return ResponseEntity.status(FOUND).body(new ApiResponse(FeedbackMessage.FOUND, userDto));
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(NOT_FOUND)
                    .body(new ApiResponse(ex.getMessage(), null));
@@ -92,7 +92,7 @@ public class ControllerUser {
     public ResponseEntity<ApiResponse> getAllUsers(){
         List<DtoUser> theUsers = serviceUser.getAllUsers();
         return ResponseEntity.status(FOUND).body(
-                new ApiResponse(FeedbackMessage.ALL_USERS_READ, theUsers));
+                new ApiResponse(FeedbackMessage.FOUND, theUsers));
     }
 }
 
