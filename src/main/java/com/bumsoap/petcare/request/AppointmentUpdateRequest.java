@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class AppointmentUpdateRequest {
-    private String appointmentDate;
-    private String appointmentTime;
+    private String date;
+    private String time;
     private String reason;
 }

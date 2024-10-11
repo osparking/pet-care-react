@@ -65,8 +65,8 @@ public class ServiceAppointment implements IServiceAppointment {
             throw new IllegalStateException(
                     FeedbackMessage.ILLEGAL_APPOINTMENT_UPDATE);
         }
-        oldAppointment.setDate(LocalDate.parse(request.getAppointmentDate()));
-        oldAppointment.setTime(LocalTime.parse(request.getAppointmentTime()));
+        oldAppointment.setDate(LocalDate.parse(request.getDate()));
+        oldAppointment.setTime(LocalTime.parse(request.getTime()));
         oldAppointment.setReason(request.getReason());
 
         return repositoryAppointment.save(oldAppointment);
