@@ -22,3 +22,16 @@ class    Veterinarian
 Patient "1" *-- "many" Appointment
 Veterinarian "1" *-- "many" Appointment
 @enduml
+
+@startuml
+class Pet {
+  type,
+  breed,
+  ...
+}
+Pet <|-- Cat
+Pet <|-- Dog
+Pet <|-- Fish
+class Appointment
+Appointment *- Pet : have 1+
+@enduml
