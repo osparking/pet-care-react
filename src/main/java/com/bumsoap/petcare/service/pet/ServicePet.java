@@ -1,13 +1,22 @@
 package com.bumsoap.petcare.service.pet;
 
 import com.bumsoap.petcare.model.Pet;
+import com.bumsoap.petcare.repository.RepositoryPet;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class ServicePet implements IServicePet{
+
+@Service
+@RequiredArgsConstructor
+public class ServicePet implements IServicePet {
+
+    private final RepositoryPet repositoryPet;
+    
     @Override
-    public List<Pet> addPetForAppointment(List<Pet> pets) {
-        return List.of();
+    public List<Pet> addPetsForAppointment(List<Pet> pets) {
+        return repositoryPet.saveAll(pets);
     }
 
     @Override
