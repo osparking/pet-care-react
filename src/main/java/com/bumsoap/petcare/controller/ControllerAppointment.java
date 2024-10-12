@@ -19,7 +19,7 @@ import static org.springframework.http.HttpStatus.*;
 public class ControllerAppointment {
     private final ServiceAppointment serviceAppointment;
 
-    @PutMapping(UrlMapping.UPDATE_APPOINTMENT_BY_ID)
+    @PutMapping(UrlMapping.UPDATE_BY_ID)
     public ResponseEntity<ApiResponse> updateAppointment(
             @PathVariable Long id,
             @RequestBody AppointmentUpdateRequest appointment) {

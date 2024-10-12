@@ -36,6 +36,22 @@ public class ControllerPet {
         }
     }
 
+    @PutMapping(UrlMapping.UPDATE_BY_ID)
+    public ResponseEntity<ApiResponse> updateById(
+            @PathVariable Long id, @RequestBody Pet pet) {
+        try {
+            Pet petUpdated = servicePet.updatePet(pet, id);
+            return ResponseEntity.ok(
+                    new ApiResponse(FeedbackMessage.RESOURCE_UPDATED, petUpdated));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(NOT_FOUND)
+                    .body(new ApiResponse(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(e.getMessage(), null));
+        }
+    }
+
     @GetMapping(UrlMapping.GET_BY_ID)
     public ResponseEntity<ApiResponse> findById(@PathVariable Long id) {
         try {
