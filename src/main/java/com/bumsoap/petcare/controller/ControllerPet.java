@@ -1,5 +1,6 @@
 package com.bumsoap.petcare.controller;
 
+import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.model.Pet;
 import com.bumsoap.petcare.response.ApiResponse;
 import com.bumsoap.petcare.service.pet.IServicePet;
@@ -8,18 +9,31 @@ import com.bumsoap.petcare.utils.UrlMapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestController
 @RequestMapping(UrlMapping.PETS)
 @RequiredArgsConstructor
 public class ControllerPet {
     private final IServicePet servicePet;
+
+    @GetMapping(UrlMapping.GET_BY_ID)
+    public ResponseEntity<ApiResponse> findById(@PathVariable Long id) {
+        try {
+            Pet pet = servicePet.findById(id);
+            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, pet));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(NOT_FOUND)
+                    .body(new ApiResponse(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(e.getMessage(), null));
+        }
+    }
 
     @PostMapping(UrlMapping.ADD_PETS_FOR_APPOINTMENT)
     public ResponseEntity<ApiResponse> addPetsForAppointment(@RequestBody List<Pet> pets) {

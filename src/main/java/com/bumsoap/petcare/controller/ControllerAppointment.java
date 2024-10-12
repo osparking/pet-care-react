@@ -66,7 +66,7 @@ public class ControllerAppointment {
         }
     }
 
-    @GetMapping(UrlMapping.APPOINTMENT_BY_ID)
+    @GetMapping(UrlMapping.GET_BY_ID)
     public ResponseEntity<ApiResponse> getAppointmentById(@PathVariable Long id) {
         try {
             return ResponseEntity.status(FOUND)
