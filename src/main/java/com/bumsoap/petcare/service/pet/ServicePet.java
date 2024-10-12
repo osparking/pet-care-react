@@ -22,8 +22,15 @@ public class ServicePet implements IServicePet {
     }
 
     @Override
-    public Pet updatePeet(Pet pet) {
-        return null;
+    public Pet updatePet(Pet pet, Long id) {
+        Pet existPet = findById(id);
+        existPet.setName(pet.getName());
+        existPet.setAge(pet.getAge());
+        existPet.setType(pet.getType());
+        existPet.setBreed(pet.getBreed());
+        existPet.setColor(pet.getColor());
+
+        return repositoryPet.save(existPet);
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IServicePet {
     List<Pet> addPetsForAppointment(List<Pet> pets);
-    Pet updatePeet(Pet pet);
+    Pet updatePet(Pet pet, Long id);
     void deletePet(Long id);
     Pet findById(Long id);
 }
