@@ -21,6 +21,21 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class ControllerPet {
     private final IServicePet servicePet;
 
+    @DeleteMapping(UrlMapping.DELETE_BY_ID)
+    public ResponseEntity<ApiResponse> deleteById(@PathVariable Long id) {
+        try {
+            servicePet.deletePet(id);
+            return ResponseEntity
+                    .ok(new ApiResponse(FeedbackMessage.RESOURCE_DELETED, null));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(NOT_FOUND)
+                    .body(new ApiResponse(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(e.getMessage(), null));
+        }
+    }
+
     @GetMapping(UrlMapping.GET_BY_ID)
     public ResponseEntity<ApiResponse> findById(@PathVariable Long id) {
         try {
