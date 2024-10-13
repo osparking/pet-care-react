@@ -2,6 +2,7 @@ package com.bumsoap.petcare.controller;
 
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.model.Appointment;
+import com.bumsoap.petcare.request.AppointmentRequest;
 import com.bumsoap.petcare.request.AppointmentUpdateRequest;
 import com.bumsoap.petcare.response.ApiResponse;
 import com.bumsoap.petcare.service.appointment.ServiceAppointment;
@@ -90,7 +91,8 @@ public class ControllerAppointment {
      * @return ResponseEntity<ApiResponse> 반응 상태 및 예약 요청 객체
      */
     @PostMapping(UrlMapping.CREATE)
-    public ResponseEntity<ApiResponse> bookAppointment(@RequestBody Appointment appointment,
+    public ResponseEntity<ApiResponse> bookAppointment(
+            @RequestBody AppointmentRequest appointment,
                                           @RequestParam Long senderId,
                                           @RequestParam Long recipientId) {
         try {
