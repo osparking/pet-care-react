@@ -1,6 +1,7 @@
 package com.bumsoap.petcare.service.photo;
 
 import com.bumsoap.petcare.model.Photo;
+import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.repository.RepositoryPhoto;
 import com.bumsoap.petcare.repository.RepositoryUser;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,12 @@ public class ServicePhoto implements IServicePhoto  {
     private final RepositoryPhoto repositoryPhoto; // Assuming RepositoryPhoto is a Spring Data JPA Repository for Photo entity
     private final RepositoryUser repositoryUser; // Assuming RepositoryUser is a Spring Data JPA
     @Override
-    public Photo save(Long userId, MultipartFile photo) {
+    public Photo save(Long userId, MultipartFile file) {
+        Optional<User> theUser = repositoryUser.findById(userId);
+        Photo photo = new Photo();
+
+        if (file != null && !file.isEmpty()) {
+        }
         return null;
     }
 
