@@ -12,5 +12,5 @@ public interface IServicePhoto {
     Optional<Photo> findById(Long id);
     void deleteById(Long id);
     Photo update(Long id, byte[] imageData) throws SQLException;
-    byte[] getImageData(Long id);
+    byte[] getImageData(Long id) throws SQLException;
 }

@@ -68,7 +68,13 @@ public class ServicePhoto implements IServicePhoto  {
     }
 
     @Override
-    public byte[] getImageData(Long id) {
+    public byte[] getImageData(Long id) throws SQLException {
+        Optional<Photo> thePhoto = findById(id);
+
+        if (thePhoto.isPresent()) {
+            return thePhoto.get().getImage()
+                    .getBytes(1, (int) thePhoto.get().getImage().length());
+        }
         return new byte[0];
-    } // ServicePhoto class extends IServicePhoto interface   {
+    }
 }
