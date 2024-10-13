@@ -11,6 +11,6 @@ public interface IServicePhoto {
     Photo save(Long userId, MultipartFile photo) throws IOException, SQLException;
     Optional<Photo> findById(Long id);
     void deleteById(Long id);
-    Photo update(Long id, byte[] imageData);
+    Photo update(Long id, byte[] imageData) throws SQLException;
     byte[] getImageData(Long id);
 }
