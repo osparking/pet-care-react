@@ -43,12 +43,11 @@ public class ServicePhoto implements IServicePhoto  {
 
     @Override
     public Optional<Photo> findById(Long id) {
-        return Optional.empty();
+        return repositoryPhoto.findById(id);
     }
 
     @Override
     public void deleteById(Long id) {
-
     }
 
     @Override
