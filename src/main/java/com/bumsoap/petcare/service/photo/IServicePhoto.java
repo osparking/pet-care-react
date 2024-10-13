@@ -9,4 +9,6 @@ public interface IServicePhoto {
     Photo save(Long userId, MultipartFile photo);
     Optional<Photo> findById(Long id);
     void deleteById(Long id);
+    Photo update(Long id, byte[] imageData);
+    byte[] getImageData(Long id);
 }
