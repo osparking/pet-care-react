@@ -47,7 +47,7 @@ public class ServicePhoto implements IServicePhoto  {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Long id) throws ResourceNotFoundException{
         repositoryPhoto.findById(id)
                 .ifPresentOrElse(repositoryPhoto::delete,
                         () -> {

@@ -21,6 +21,21 @@ public class ControllerPhoto {
 
     private final IServicePhoto servicePhoto;
 
+    @DeleteMapping(UrlMapping.DELETE_BY_ID)
+    public ResponseEntity<ApiResponse> delete(@PathVariable Long id) {
+        try {
+            servicePhoto.deleteById(id);
+            return ResponseEntity.ok()
+                    .body(new ApiResponse(FeedbackMessage.RESOURCE_DELETED, null));
+        }  catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiResponse(FeedbackMessage.NOT_FOUND, null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(FeedbackMessage.SERVER_ERROR, null));
+        }
+    }
+
     /**
      *
      * @param id the id of the User Photo
