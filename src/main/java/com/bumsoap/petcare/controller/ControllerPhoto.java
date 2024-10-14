@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @RestController
-@RequestMapping("/photos")
+@RequestMapping(UrlMapping.PHOTO)
 @RequiredArgsConstructor
 public class ControllerPhoto {
 
