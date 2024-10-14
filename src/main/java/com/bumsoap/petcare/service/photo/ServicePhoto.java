@@ -57,16 +57,22 @@ public class ServicePhoto implements IServicePhoto  {
     }
 
     @Override
-    public Photo update(Long id, byte[] imageData)
+    public Photo update(Long id, MultipartFile file)
             throws SQLException, ResourceNotFoundException {
-        Optional<Photo> thePhoto = findById(id);
-
-        if (thePhoto.isPresent()) {
-            Photo photo = thePhoto.get();
-            photo.setImage(new SerialBlob(imageData));
+        try {
+            Photo photo = findById(id);
+            if (photo != null) {
+                photo.setFileType(file.getContentType());
+                if (file!= null &&!file.isEmpty()) {
+                    photo.setImage(new SerialBlob(file.getBytes()));
+                }
+            }
             return repositoryPhoto.save(photo);
+        } catch (ResourceNotFoundException e) {
+            throw e;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND);
     }
 
     @Override
