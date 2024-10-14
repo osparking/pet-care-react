@@ -29,6 +29,7 @@ public class ServicePhoto implements IServicePhoto  {
         if (file != null && !file.isEmpty()) {
             photo.setImage(new SerialBlob(file.getBytes()));
             photo.setFileType(file.getContentType());
+            photo.setFileName(file.getOriginalFilename());
         }
         Photo savedPhoto = repositoryPhoto.save(photo);
 
@@ -65,6 +66,7 @@ public class ServicePhoto implements IServicePhoto  {
                 photo.setFileType(file.getContentType());
                 if (file!= null &&!file.isEmpty()) {
                     photo.setImage(new SerialBlob(file.getBytes()));
+                    photo.setFileName(file.getOriginalFilename());
                 }
             }
             return repositoryPhoto.save(photo);
