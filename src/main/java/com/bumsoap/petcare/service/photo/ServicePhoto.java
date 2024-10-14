@@ -76,13 +76,18 @@ public class ServicePhoto implements IServicePhoto  {
     }
 
     @Override
-    public byte[] getImageData(Long id) throws SQLException {
-        Optional<Photo> thePhoto = findById(id);
+    public byte[] getImageData(Long id)
+            throws SQLException, ResourceNotFoundException{
+        try {
+            Photo thePhoto = findById(id);
 
-        if (thePhoto.isPresent()) {
-            return thePhoto.get().getImage()
-                    .getBytes(1, (int) thePhoto.get().getImage().length());
+            if (thePhoto != null) {
+                return thePhoto.getImage()
+                        .getBytes(1, (int) thePhoto.getImage().length());
+            }
+            return new byte[0];
+        } catch (ResourceNotFoundException e) {
+            throw e;
         }
-        return new byte[0];
     }
 }
