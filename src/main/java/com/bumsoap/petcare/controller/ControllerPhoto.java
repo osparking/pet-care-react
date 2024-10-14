@@ -61,9 +61,10 @@ public class ControllerPhoto {
     public ResponseEntity<ApiResponse> update(@PathVariable Long id,
                                               @RequestBody MultipartFile file) {
         try {
-            servicePhoto.update(id, file);
+            Photo updatedPhoto = servicePhoto.update(id, file);
             return ResponseEntity.ok()
-                    .body(new ApiResponse(FeedbackMessage.RESOURCE_UPDATED, null));
+                    .body(new ApiResponse(
+                            FeedbackMessage.RESOURCE_UPDATED, updatedPhoto.getId()));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ApiResponse(FeedbackMessage.NOT_FOUND, null));
