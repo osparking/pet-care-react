@@ -56,7 +56,8 @@ public class ServicePhoto implements IServicePhoto  {
     }
 
     @Override
-    public Photo update(Long id, byte[] imageData) throws SQLException {
+    public Photo update(Long id, byte[] imageData)
+            throws SQLException, ResourceNotFoundException {
         Optional<Photo> thePhoto = findById(id);
 
         if (thePhoto.isPresent()) {
