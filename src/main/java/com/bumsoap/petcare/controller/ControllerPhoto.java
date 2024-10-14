@@ -1,6 +1,7 @@
 package com.bumsoap.petcare.controller;
 
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
+import com.bumsoap.petcare.model.Photo;
 import com.bumsoap.petcare.response.ApiResponse;
 import com.bumsoap.petcare.service.photo.IServicePhoto;
 import com.bumsoap.petcare.utils.FeedbackMessage;
@@ -76,9 +77,10 @@ public class ControllerPhoto {
     public ResponseEntity<ApiResponse> upload(@RequestParam MultipartFile file,
                                               @RequestParam Long userId) {
         try {
-            servicePhoto.save(userId, file);
+            Photo savedPhoto = servicePhoto.save(userId, file);
             return ResponseEntity.ok()
-                    .body(new ApiResponse(FeedbackMessage.CREATED, null));
+                    .body(new ApiResponse(FeedbackMessage.CREATED,
+                            savedPhoto.getId()));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ApiResponse(FeedbackMessage.NOT_FOUND, null));
