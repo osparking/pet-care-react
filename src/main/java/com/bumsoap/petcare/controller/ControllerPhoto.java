@@ -53,14 +53,14 @@ public class ControllerPhoto {
     /**
      *
      * @param id the id of the User Photo
-     * @param imageData the new image data to update
+     * @param file the new image file to update
      * @return
      */
     @PutMapping(UrlMapping.UPDATE_BY_ID)
     public ResponseEntity<ApiResponse> update(@PathVariable Long id,
-                                              @RequestBody byte[] imageData) {
+                                              @RequestBody MultipartFile file) {
         try {
-            servicePhoto.update(id, imageData);
+            servicePhoto.update(id, file);
             return ResponseEntity.ok()
                     .body(new ApiResponse(FeedbackMessage.RESOURCE_UPDATED, null));
         } catch (ResourceNotFoundException e) {
