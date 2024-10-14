@@ -42,8 +42,9 @@ public class ServicePhoto implements IServicePhoto  {
     }
 
     @Override
-    public Optional<Photo> findById(Long id) {
-        return repositoryPhoto.findById(id);
+    public Photo findById(Long id) throws ResourceNotFoundException {
+        return repositoryPhoto.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
     }
 
     @Override

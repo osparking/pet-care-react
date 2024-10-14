@@ -21,6 +21,20 @@ public class ControllerPhoto {
 
     private final IServicePhoto servicePhoto;
 
+    @GetMapping(UrlMapping.GET_BY_ID)
+    public ResponseEntity<ApiResponse> findById(@RequestParam Long id) {
+        try {
+            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND,
+                            servicePhoto.findById(id)));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiResponse(FeedbackMessage.NOT_FOUND, null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(FeedbackMessage.SERVER_ERROR, null));
+        }
+    }
+
     @DeleteMapping(UrlMapping.DELETE_BY_ID)
     public ResponseEntity<ApiResponse> delete(@PathVariable Long id) {
         try {
