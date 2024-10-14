@@ -9,4 +9,5 @@ public class FeedbackMessage {
     public static final String PATIENT_OR_VETERINARIAN_NOT_FOUND
             = "동물 주인 혹은 수의사 부재!";
     public static final String ILLEGAL_APPOINTMENT_UPDATE = "예약의 불법적인 갱신";
+    public static final String SERVER_ERROR = "팻 응용 서버 내부 오류";
 }
