@@ -1,5 +1,6 @@
 package com.bumsoap.petcare.request;
 
+import com.bumsoap.petcare.model.Photo;
 import lombok.Data;
 
 @Data
@@ -9,4 +10,5 @@ public class UserUpdateRequest {
     private String gender;
     private String phoneNumber;
     private String specialization;
+    private Photo photo;
 }

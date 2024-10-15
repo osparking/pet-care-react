@@ -2,8 +2,11 @@ package com.bumsoap.petcare.controller;
 
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.model.Photo;
+import com.bumsoap.petcare.model.User;
+import com.bumsoap.petcare.request.UserUpdateRequest;
 import com.bumsoap.petcare.response.ApiResponse;
 import com.bumsoap.petcare.service.photo.IServicePhoto;
+import com.bumsoap.petcare.service.user.IServiceUser;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.UrlMapping;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +24,7 @@ import java.sql.SQLException;
 public class ControllerPhoto {
 
     private final IServicePhoto servicePhoto;
+    private final IServiceUser serviceUser;
 
     @GetMapping(UrlMapping.GET_BY_ID)
     public ResponseEntity<ApiResponse> findById(@PathVariable Long id) {
@@ -39,10 +43,21 @@ public class ControllerPhoto {
                 .body(new ApiResponse(FeedbackMessage.SERVER_ERROR, null));
     }
 
+    /**
+     * 한 유저에 속하는 포토를 삭제한다.
+     * @param id    the id of the User who owns the Photo
+     * @return null if not found, otherwise the deleted Photo's id.'
+     */
     @DeleteMapping(UrlMapping.DELETE_BY_ID)
-    public ResponseEntity<ApiResponse> delete(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse> deleteByUserId(@PathVariable Long id) {
         try {
-            servicePhoto.deleteById(id);
+            User photoOwner = serviceUser.findById(id);
+            Photo photo = photoOwner.getPhoto();
+            if (photo == null) {
+                throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND);
+            }
+            photoOwner.setPhoto(null);
+            servicePhoto.deleteById(photo.getId());
             return ResponseEntity.ok()
                     .body(new ApiResponse(FeedbackMessage.RESOURCE_DELETED, null));
         }  catch (ResourceNotFoundException e) {
