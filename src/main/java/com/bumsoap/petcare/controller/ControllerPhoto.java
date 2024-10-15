@@ -12,6 +12,7 @@ import com.bumsoap.petcare.utils.UrlMapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -49,6 +50,7 @@ public class ControllerPhoto {
      * @return null if not found, otherwise the deleted Photo's id.'
      */
     @DeleteMapping(UrlMapping.DELETE_BY_ID)
+    @Transactional
     public ResponseEntity<ApiResponse> deleteByUserId(@PathVariable Long id) {
         try {
             User photoOwner = serviceUser.findById(id);
