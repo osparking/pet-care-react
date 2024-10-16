@@ -19,6 +19,15 @@ public class ServiceReview implements IServiceReview {
 
     @Override
     public void saveReview(Long patId, Long vetId, Review review) {
+//        1) 리뷰어/환자와 수의사가 같은지 검사한다.
+        if (vetId.equals(patId)) {
+            throw new IllegalArgumentException(FeedbackMessage.INVALID_VAT_ID);
+        }
+//        2) 리뷰어가 이 수의사에 대해 리뷰한 적이 있는지 검사한다.
+//        3) 리뷰어가 이 수의사에게 완료된 진료를 받았는지 검사한다.
+//        4) 리뷰어와 수의사 정보를 디비에서 읽어온다.
+//        5) 리뷰어와 수의사를 리뷰 레코드에 대입한다.
+//        6) 리뷰를 저장한다.
 
     }
 
