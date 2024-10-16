@@ -1,5 +1,6 @@
 package com.bumsoap.petcare.service.review;
 
+import com.bumsoap.petcare.exception.AlreadyReviewedException;
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.model.Review;
 import com.bumsoap.petcare.model.User;
@@ -25,7 +26,7 @@ public class ServiceReview implements IServiceReview {
     private final RepositoryUser repositoryUser;
 
     @Override
-    public void saveReview(Long patId, Long vetId, Review review) {
+    public Review saveReview(Long patId, Long vetId, Review review) {
 //        1) 리뷰어/환자와 수의사가 같은지 검사한다.
         if (vetId.equals(patId)) {
             throw new IllegalArgumentException(FeedbackMessage.INVALID_VAT_ID);
@@ -34,7 +35,7 @@ public class ServiceReview implements IServiceReview {
         Optional<Review> existingReview =
                 repositoryReview.findByPatientIdAndVeterinarianId(patId, vetId);
         if (existingReview.isPresent()) {
-            throw new IllegalArgumentException(FeedbackMessage.ALREADY_REVIEWED);
+            throw new AlreadyReviewedException(FeedbackMessage.ALREADY_REVIEWED);
         }
 
 //        3) 리뷰어가 이 수의사에게 완료된 진료를 받았는지 검사한다.
@@ -48,16 +49,16 @@ public class ServiceReview implements IServiceReview {
 
 //        4) 리뷰어와 수의사 정보를 디비에서 읽어온다.
         User veterinarian = repositoryUser.findById(vetId).orElseThrow(
-                () -> new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
+                () -> new ResourceNotFoundException(FeedbackMessage.VET_OR_PAT_NOT_FOUND));
         User patient = repositoryUser.findById(patId).orElseThrow(
-                () -> new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
+                () -> new ResourceNotFoundException(FeedbackMessage.VET_OR_PAT_NOT_FOUND));
 
 //        5) 리뷰어와 수의사를 리뷰 레코드에 대입한다.
         review.setPatient(patient);
         review.setVeterinarian(veterinarian);
 
 //        6) Review 객체를 DB에 저장한다.
-        repositoryReview.save(review);
+        return repositoryReview.save(review);
     }
 
     @Override
