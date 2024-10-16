@@ -1,9 +1,12 @@
 package com.bumsoap.petcare.service.review;
 
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
+import com.bumsoap.petcare.model.Appointment;
 import com.bumsoap.petcare.model.Review;
 import com.bumsoap.petcare.repository.IRepositoryReview;
+import com.bumsoap.petcare.repository.RepositoryAppointment;
 import com.bumsoap.petcare.utils.FeedbackMessage;
+import com.bumsoap.petcare.utils.StatusAppointment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +20,7 @@ import java.util.Optional;
 public class ServiceReview implements IServiceReview {
 
     private final IRepositoryReview repositoryReview;
+    private final RepositoryAppointment repositoryAppointment;
 
     @Override
     public void saveReview(Long patId, Long vetId, Review review) {
@@ -32,6 +36,14 @@ public class ServiceReview implements IServiceReview {
         }
 
 //        3) 리뷰어가 이 수의사에게 완료된 진료를 받았는지 검사한다.
+        boolean hasCompletedAppointment = repositoryAppointment
+                .existsByPatientIdAndVeterinarianIdAndStatus(
+                        patId, vetId, StatusAppointment.COMPLETED);
+        if (!hasCompletedAppointment) {
+            throw new IllegalStateException(
+                    FeedbackMessage.COMPLETED_APPOINTMENT_REQUIRED);
+        }
+
 //        4) 리뷰어와 수의사 정보를 디비에서 읽어온다.
 //        5) 리뷰어와 수의사를 리뷰 레코드에 대입한다.
 //        6) 리뷰를 저장한다.
