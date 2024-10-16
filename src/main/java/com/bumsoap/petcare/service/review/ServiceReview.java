@@ -31,6 +31,14 @@ public class ServiceReview implements IServiceReview {
 
     @Override
     public void updateReview(Long patId, Review review) {
+        repositoryReview.findById(patId)
+                .ifPresentOrElse(updated -> {
+                    updated.setStars(review.getStars());
+                    updated.setComment(review.getComment());
+                    repositoryReview.save(updated);
+                }, () -> {
+                    throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND);
+                });
     }
 
     @Override
