@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IRepositoryReview extends JpaRepository<Review, Long> {
     @Query("SELECT r FROM Review r " +
@@ -15,4 +16,6 @@ public interface IRepositoryReview extends JpaRepository<Review, Long> {
     Page<Review> findAllByUserId(@Param("userId") Long userId, Pageable pageable);
 
     List<Review> findAllByVeterinarianId(Long vetId);
+
+    Optional<Review> findByPatientIdAndVeterinarianId(Long patId, Long vetId);
 }
