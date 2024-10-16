@@ -31,4 +31,8 @@ public class UrlMapping {
     public static final String UPLOAD = "/upload";
     /*============================ End Photo API ===================================*/
 
+    /*============================ Start Review API ===============================*/
+    public static final String REVIEWS = API + "/reviews";
+    /*============================ End Review API ===============================*/
+
 }
