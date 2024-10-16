@@ -1,10 +1,11 @@
 package com.bumsoap.petcare.service.review;
 
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
-import com.bumsoap.petcare.model.Appointment;
 import com.bumsoap.petcare.model.Review;
+import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.repository.IRepositoryReview;
 import com.bumsoap.petcare.repository.RepositoryAppointment;
+import com.bumsoap.petcare.repository.RepositoryUser;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.StatusAppointment;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class ServiceReview implements IServiceReview {
 
     private final IRepositoryReview repositoryReview;
     private final RepositoryAppointment repositoryAppointment;
+    private final RepositoryUser repositoryUser;
 
     @Override
     public void saveReview(Long patId, Long vetId, Review review) {
@@ -45,9 +47,17 @@ public class ServiceReview implements IServiceReview {
         }
 
 //        4) 리뷰어와 수의사 정보를 디비에서 읽어온다.
-//        5) 리뷰어와 수의사를 리뷰 레코드에 대입한다.
-//        6) 리뷰를 저장한다.
+        User veterinarian = repositoryUser.findById(vetId).orElseThrow(
+                () -> new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
+        User patient = repositoryUser.findById(patId).orElseThrow(
+                () -> new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
 
+//        5) 리뷰어와 수의사를 리뷰 레코드에 대입한다.
+        review.setPatient(patient);
+        review.setVeterinarian(veterinarian);
+
+//        6) Review 객체를 DB에 저장한다.
+        repositoryReview.save(review);
     }
 
     @Override
