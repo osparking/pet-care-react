@@ -7,8 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface IRepositoryReview extends JpaRepository<Review, Long> {
     @Query("SELECT r FROM Review r " +
             "WHERE r.veterinarian.id = :userId OR r.patient.id = :userId")
     Page<Review> findAllByUserId(@Param("userId") Long userId, Pageable pageable);
+
+    List<Review> findAllByVeterinarianId(Long vetId);
 }
