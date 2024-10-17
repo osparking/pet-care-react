@@ -64,6 +64,17 @@ public class ControllerReview {
         }
     }
 
+    @GetMapping(UrlMapping.GET_VET_STAR_AVG)
+    public ResponseEntity<ApiResponse> getAverageRatingForVet(@PathVariable Long vetId) {
+        try {
+            Double avgStar = serviceReview.getAverageRatingForVet(vetId);
+            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, avgStar));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(NOT_FOUND)
+                    .body(new ApiResponse(e.getMessage(), null));
+        }
+    }
+
     @DeleteMapping(UrlMapping.DELETE_BY_ID)
     public ResponseEntity<ApiResponse> deleteReview(@PathVariable Long id) {
         try {

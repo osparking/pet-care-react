@@ -34,6 +34,7 @@ public class UrlMapping {
     /*============================ Start Review API ===============================*/
     public static final String REVIEWS = API + "/reviews";
     public static final String GET_USER_REVIEWS = "/{userId}/get_user_id";
+    public static final String GET_VET_STAR_AVG = "/{vetId}/vet_star_avg";
     /*============================ End Review API ===============================*/
 
 }
