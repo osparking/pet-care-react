@@ -10,4 +10,5 @@ public interface IServiceReview {
     Review updateReview(Long reviewId, RequestUpdateReview review);
 
     Page<Review> getAllReviewsByUserId(Long userId, int page, int size);
+    void deleteReview(Long reviewId);
 }
