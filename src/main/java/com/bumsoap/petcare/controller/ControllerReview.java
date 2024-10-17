@@ -3,6 +3,7 @@ package com.bumsoap.petcare.controller;
 import com.bumsoap.petcare.exception.AlreadyReviewedException;
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.model.Review;
+import com.bumsoap.petcare.request.RequestUpdateReview;
 import com.bumsoap.petcare.response.ApiResponse;
 import com.bumsoap.petcare.service.review.IServiceReview;
 import com.bumsoap.petcare.utils.FeedbackMessage;
@@ -20,6 +21,19 @@ import static org.springframework.http.HttpStatus.*;
 public class ControllerReview {
 
     private final IServiceReview serviceReview;
+
+    @PutMapping(UrlMapping.UPDATE_BY_ID)
+    public ResponseEntity<ApiResponse> updateReview(
+            @PathVariable Long id, @RequestBody RequestUpdateReview request) {
+        try {
+            Review review = serviceReview.updateReview(id, request);
+            return ResponseEntity
+                    .ok(new ApiResponse(FeedbackMessage.RESOURCE_UPDATED, review));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(NOT_FOUND)
+                    .body(new ApiResponse(e.getMessage(), null));
+        }
+    }
 
     @GetMapping(UrlMapping.GET_USER_REVIEWS)
     public ResponseEntity<ApiResponse> getAllReviewsByUserId(
