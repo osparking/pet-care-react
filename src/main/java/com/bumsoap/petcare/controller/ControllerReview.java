@@ -12,8 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.http.HttpStatus.CONFLICT;
-import static org.springframework.http.HttpStatus.NOT_ACCEPTABLE;
+import static org.springframework.http.HttpStatus.*;
 
 @RequiredArgsConstructor
 @RequestMapping(UrlMapping.REVIEWS)
@@ -21,6 +20,15 @@ import static org.springframework.http.HttpStatus.NOT_ACCEPTABLE;
 public class ControllerReview {
 
     private final IServiceReview serviceReview;
+
+    @GetMapping(UrlMapping.GET_USER_REVIEWS)
+    public ResponseEntity<ApiResponse> getAllReviewsByUserId(
+            @PathVariable Long userId,
+            @RequestParam int page, @RequestParam int size) {
+        var reviewPage = serviceReview.getAllReviewsByUserId(userId, page, size);
+        return ResponseEntity.status(FOUND)
+                .body(new ApiResponse(FeedbackMessage.FOUND, reviewPage));
+    }
 
     @PostMapping(UrlMapping.CREATE)
     public ResponseEntity<ApiResponse> saveReview(

@@ -33,6 +33,7 @@ public class UrlMapping {
 
     /*============================ Start Review API ===============================*/
     public static final String REVIEWS = API + "/reviews";
+    public static final String GET_USER_REVIEWS = "/{userId}/get_user_id";
     /*============================ End Review API ===============================*/
 
 }
