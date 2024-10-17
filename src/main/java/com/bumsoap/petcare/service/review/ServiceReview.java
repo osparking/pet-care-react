@@ -84,4 +84,16 @@ public class ServiceReview implements IServiceReview {
         PageRequest request = PageRequest.of(page, size);
         return repositoryReview.findAllByUserId(userId, request);
     }
+
+    @Override
+    public void deleteReview(Long reviewId) throws ResourceNotFoundException  {
+        Review review = repositoryReview.findById(reviewId).orElseThrow(() -> {
+            throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND);
+            });
+        // delete relationship between Review and Users
+        review.getPatient().getReviews().remove(review);
+        review.getVeterinarian().getReviews().remove(review);
+
+        repositoryReview.deleteById(reviewId);
+    }
 }
