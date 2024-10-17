@@ -63,4 +63,34 @@ public class ControllerReview {
                     body(new ApiResponse(e.getMessage(), null));
         }
     }
+
+    @DeleteMapping(UrlMapping.DELETE_BY_ID)
+    public ResponseEntity<ApiResponse> deleteReview(@PathVariable Long id) {
+        try {
+            serviceReview.deleteReview(id);
+            return ResponseEntity.status(OK)
+                    .body(new ApiResponse(FeedbackMessage.RESOURCE_DELETED, null));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(NOT_FOUND)
+                    .body(new ApiResponse(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(e.getMessage(), null));
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
