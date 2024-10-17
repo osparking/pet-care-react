@@ -7,6 +7,7 @@ import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.repository.IRepositoryReview;
 import com.bumsoap.petcare.repository.RepositoryAppointment;
 import com.bumsoap.petcare.repository.RepositoryUser;
+import com.bumsoap.petcare.request.RequestUpdateReview;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.StatusAppointment;
 import lombok.RequiredArgsConstructor;
@@ -69,15 +70,13 @@ public class ServiceReview implements IServiceReview {
     }
 
     @Override
-    public void updateReview(Long patId, Review review) {
-        repositoryReview.findById(patId)
-                .ifPresentOrElse(updated -> {
-                    updated.setStars(review.getStars());
-                    updated.setComment(review.getComment());
-                    repositoryReview.save(updated);
-                }, () -> {
-                    throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND);
-                });
+    public Review updateReview(Long reviewId, RequestUpdateReview review) {
+        var updated = repositoryReview.findById(reviewId).orElseThrow(() -> {
+            throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND);
+            });
+        updated.setStars(review.getStars());
+        updated.setComment(review.getComment());
+        return repositoryReview.save(updated);
     }
 
     @Override
