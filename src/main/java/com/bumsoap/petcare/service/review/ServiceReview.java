@@ -7,6 +7,7 @@ import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.repository.IRepositoryReview;
 import com.bumsoap.petcare.repository.RepositoryAppointment;
 import com.bumsoap.petcare.repository.RepositoryUser;
+import com.bumsoap.petcare.repository.RepositoryVet;
 import com.bumsoap.petcare.request.RequestUpdateReview;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.StatusAppointment;
@@ -25,6 +26,7 @@ public class ServiceReview implements IServiceReview {
     private final IRepositoryReview repositoryReview;
     private final RepositoryAppointment repositoryAppointment;
     private final RepositoryUser repositoryUser;
+    private final RepositoryVet repositoryVet;
 
     @Override
     public Review saveReview(Long patId, Long vetId, Review review) {
@@ -64,6 +66,9 @@ public class ServiceReview implements IServiceReview {
 
     @Override
     public double getAverageRatingForVet(Long vetId) {
+        repositoryVet.findById(vetId).orElseThrow(() ->
+                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
+
         List<Review> reviews = repositoryReview.findAllByVeterinarianId(vetId);
         return reviews.isEmpty() ? 0 :
                 reviews.stream().mapToInt(Review::getStars).average().orElse(0.0);
