@@ -39,7 +39,8 @@ public class ControllerReview {
     @GetMapping(UrlMapping.GET_USER_REVIEWS)
     public ResponseEntity<ApiResponse> getAllReviewsByUserId(
             @PathVariable Long userId,
-            @RequestParam int page, @RequestParam int size) {
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
         var reviewPage = serviceReview.getAllReviewsByUserId(userId, page, size);
         return ResponseEntity.status(FOUND)
                 .body(new ApiResponse(FeedbackMessage.FOUND, reviewPage));
