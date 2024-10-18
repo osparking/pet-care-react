@@ -1,5 +1,6 @@
 package com.bumsoap.petcare.controller;
 
+import com.bumsoap.petcare.dto.DtoReview;
 import com.bumsoap.petcare.exception.AlreadyReviewedException;
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.model.Review;
@@ -9,6 +10,8 @@ import com.bumsoap.petcare.service.review.IServiceReview;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.UrlMapping;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +24,7 @@ import static org.springframework.http.HttpStatus.*;
 public class ControllerReview {
 
     private final IServiceReview serviceReview;
+    private final ModelMapper modelMapper;
 
     @PutMapping(UrlMapping.UPDATE_BY_ID)
     public ResponseEntity<ApiResponse> updateReview(
@@ -42,8 +46,10 @@ public class ControllerReview {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         var reviewPage = serviceReview.getAllReviewsByUserId(userId, page, size);
+        Page<DtoReview> dtoReviews = reviewPage.map(review
+                -> modelMapper.map(review, DtoReview.class));
         return ResponseEntity.status(FOUND)
-                .body(new ApiResponse(FeedbackMessage.FOUND, reviewPage));
+                .body(new ApiResponse(FeedbackMessage.FOUND, dtoReviews));
     }
 
     @PostMapping(UrlMapping.CREATE)
