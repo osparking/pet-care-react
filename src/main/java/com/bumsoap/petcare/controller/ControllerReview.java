@@ -46,10 +46,10 @@ public class ControllerReview {
 
     @PostMapping(UrlMapping.CREATE)
     public ResponseEntity<ApiResponse> saveReview(
-            @RequestParam Long patientId, @RequestParam Long vatId,
+            @RequestParam Long patientId, @RequestParam Long vetId,
                                               @RequestBody Review review) {
         try {
-            Review savedReview = serviceReview.saveReview(patientId, vatId, review);
+            Review savedReview = serviceReview.saveReview(patientId, vetId, review);
             return ResponseEntity.ok(
                     new ApiResponse(FeedbackMessage.CREATED, savedReview.getId()));
         } catch (IllegalArgumentException | IllegalStateException e) {
