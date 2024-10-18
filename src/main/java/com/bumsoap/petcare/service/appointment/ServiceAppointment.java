@@ -10,6 +10,7 @@ import com.bumsoap.petcare.request.AppointmentRequest;
 import com.bumsoap.petcare.request.AppointmentUpdateRequest;
 import com.bumsoap.petcare.service.pet.ServicePet;
 import com.bumsoap.petcare.utils.FeedbackMessage;
+import com.bumsoap.petcare.utils.StatusAppointment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -83,6 +84,14 @@ public class ServiceAppointment implements IServiceAppointment {
         oldAppointment.setReason(request.getReason());
 
         return repositoryAppointment.save(oldAppointment);
+    }
+
+    @Override
+    public Appointment completeAppointment(Long id) {
+        Appointment appo = repositoryAppointment.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
+        appo.setStatus(StatusAppointment.COMPLETED);
+        return repositoryAppointment.save(appo);
     }
 
     @Override
