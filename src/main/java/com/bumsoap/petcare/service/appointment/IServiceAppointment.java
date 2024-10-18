@@ -12,9 +12,10 @@ public interface IServiceAppointment {
 
     List<Appointment> getAllAppointments();
     Appointment updateAppointment(Long id, AppointmentUpdateRequest appointment);
-
     void deleteAppointment(Long id);
 
     Appointment getAppointmentById(Long appointmentId);
     Appointment getByAppointmentNo(String appointmentNo);
+
+    Appointment completeAppointment(Long id);
 }
