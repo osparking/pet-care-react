@@ -28,7 +28,8 @@ public class ControllerReview {
         try {
             Review review = serviceReview.updateReview(id, request);
             return ResponseEntity
-                    .ok(new ApiResponse(FeedbackMessage.RESOURCE_UPDATED, review));
+                    .ok(new ApiResponse(FeedbackMessage.RESOURCE_UPDATED,
+                            review.getId()));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
                     .body(new ApiResponse(e.getMessage(), null));
