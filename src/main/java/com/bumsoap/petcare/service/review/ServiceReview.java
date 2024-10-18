@@ -35,11 +35,11 @@ public class ServiceReview implements IServiceReview {
             throw new IllegalArgumentException(FeedbackMessage.INVALID_VAT_ID);
         }
 //        2) 리뷰어가 이 수의사에 대해 리뷰한 적이 있는지 검사한다.
-        Optional<Review> existingReview =
+/*        Optional<Review> existingReview =
                 repositoryReview.findByPatientIdAndVeterinarianId(patId, vetId);
         if (existingReview.isPresent()) {
             throw new AlreadyReviewedException(FeedbackMessage.ALREADY_REVIEWED);
-        }
+        }*/
 
 //        3) 리뷰어가 이 수의사에게 완료된 진료를 받았는지 검사한다.
         /*boolean hasCompletedAppointment = repositoryAppointment
