@@ -42,13 +42,13 @@ public class ServiceReview implements IServiceReview {
         }
 
 //        3) 리뷰어가 이 수의사에게 완료된 진료를 받았는지 검사한다.
-        boolean hasCompletedAppointment = repositoryAppointment
+        /*boolean hasCompletedAppointment = repositoryAppointment
                 .existsByPatientIdAndVeterinarianIdAndStatus(
                         patId, vetId, StatusAppointment.COMPLETED);
         if (!hasCompletedAppointment) {
             throw new IllegalStateException(
                     FeedbackMessage.COMPLETED_APPOINTMENT_REQUIRED);
-        }
+        }*/
 
 //        4) 리뷰어와 수의사 정보를 디비에서 읽어온다.
         User veterinarian = repositoryUser.findById(vetId).orElseThrow(
