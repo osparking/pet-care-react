@@ -1,5 +1,6 @@
 package com.bumsoap.petcare.service.appointment;
 
+import com.bumsoap.petcare.dto.DtoAppointment;
 import com.bumsoap.petcare.model.Appointment;
 import com.bumsoap.petcare.request.AppointmentRequest;
 import com.bumsoap.petcare.request.AppointmentUpdateRequest;
@@ -18,4 +19,6 @@ public interface IServiceAppointment {
     Appointment getByAppointmentNo(String appointmentNo);
 
     Appointment completeAppointment(Long id);
+
+    List<DtoAppointment> getAllDtoAppointmentsByUserId(Long userId);
 }
