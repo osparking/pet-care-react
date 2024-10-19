@@ -35,3 +35,17 @@ Pet <|-- Fish
 class Appointment
 Appointment *- Pet : have 1+
 @enduml
+
+@startuml
+skinparam class {
+BackgroundColor PaleGreen
+ArrowColor SeaGreen
+BorderColor SpringGreen
+}
+skinparam stereotypeCBackgroundColor YellowGreen
+
+User"0" *-- "1" Photo: contains
+User"0" *-- "n" Appointment: contains
+User"0" *-- "n" Review: contains
+Appointment "1" *-- "n" Pet
+@enduml
