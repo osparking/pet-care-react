@@ -1,7 +1,5 @@
 package com.bumsoap.petcare.dto;
 
-import com.bumsoap.petcare.model.Appointment;
-import com.bumsoap.petcare.model.Review;
 import lombok.Data;
 
 import java.time.LocalDate;
