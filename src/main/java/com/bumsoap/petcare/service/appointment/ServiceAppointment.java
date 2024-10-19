@@ -1,5 +1,6 @@
 package com.bumsoap.petcare.service.appointment;
 
+import com.bumsoap.petcare.dto.DtoAppointment;
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.model.Appointment;
 import com.bumsoap.petcare.model.Pet;
@@ -12,6 +13,7 @@ import com.bumsoap.petcare.service.pet.ServicePet;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.StatusAppointment;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +32,7 @@ public class ServiceAppointment implements IServiceAppointment {
     private final RepositoryAppointment repositoryAppointment;
     private final RepositoryUser repositoryUser;
     private final ServicePet servicePet;
+    private final ModelMapper modelMapper;
 
     /** 두 ID 로 두 관련자를 읽고, 이를 예약 객체에 지정하고,
      * 두 속성 예약번호, 예약 상태도 지정한다. 관련자 중 한 명이라도 없으면, 예외를 던진다.
@@ -116,5 +119,13 @@ public class ServiceAppointment implements IServiceAppointment {
     @Override
     public Appointment getByAppointmentNo(String appointmentNo) {
         return repositoryAppointment.findByAppointmentNo(appointmentNo);
+    }
+
+    public List<DtoAppointment> getAllDtoAppointmentsByUserId(Long userId) {
+        List<Appointment> appointments = repositoryAppointment
+                .findAllByUserId(userId);
+        return appointments.stream()
+                .map((e) -> modelMapper.map(e, DtoAppointment.class))
+                .toList();
     }
 }
