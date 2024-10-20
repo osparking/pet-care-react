@@ -1,17 +1,21 @@
 package com.bumsoap.petcare.service.user;
 
+import com.bumsoap.petcare.dto.DtoReview;
 import com.bumsoap.petcare.dto.DtoUser;
 import com.bumsoap.petcare.dto.EntityConverter;
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.factory.FactoryUser;
+import com.bumsoap.petcare.model.Review;
 import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.repository.RepositoryUser;
 import com.bumsoap.petcare.request.RegistrationRequest;
 import com.bumsoap.petcare.request.UserUpdateRequest;
 import com.bumsoap.petcare.service.appointment.ServiceAppointment;
 import com.bumsoap.petcare.service.photo.IServicePhoto;
+import com.bumsoap.petcare.service.review.IServiceReview;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -26,6 +30,7 @@ public class ServiceUser implements IServiceUser {
     private final EntityConverter<User, DtoUser> entityConverter;
     private final ServiceAppointment serviceAppointment;
     private final IServicePhoto servicePhoto;
+    private final IServiceReview serviceReview;
 
     @Override
     public User register(RegistrationRequest request) {
@@ -66,6 +71,7 @@ public class ServiceUser implements IServiceUser {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public DtoUser getDtoUserById(Long userId) throws SQLException {
         // 1. Find user by id
         User user = findById(userId); // Throw exception if user not found
@@ -86,17 +92,20 @@ public class ServiceUser implements IServiceUser {
         }
 
         // 5. Get reviews for user(as patient or veterinarian)
+        setUserReviews(dtoUser, userId);
 
         return dtoUser;
     }
+
+    private void setUserReviews(DtoUser dtoUser, Long userId) {
+        var reviews = serviceReview.getAllReviewsByUserId(userId, 0, Integer.MAX_VALUE);
+        List<DtoReview> dtoReviews = reviews.getContent().stream()
+                .map(this::mapToDtoReview).toList();
+        if (!dtoReviews.isEmpty()) {
+            double averageRating = serviceReview.getAverageRatingForVet(userId);
+            dtoUser.setAverageRating(averageRating);
+        }
+        dtoUser.setReviews(dtoReviews);
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
