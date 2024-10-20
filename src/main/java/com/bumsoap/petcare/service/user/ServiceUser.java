@@ -97,6 +97,7 @@ public class ServiceUser implements IServiceUser {
         return dtoUser;
     }
 
+    @SneakyThrows
     private void setUserReviews(DtoUser dtoUser, Long userId) {
         var reviews = serviceReview.getAllReviewsByUserId(userId, 0, Integer.MAX_VALUE);
         List<DtoReview> dtoReviews = reviews.getContent().stream()
@@ -129,6 +130,19 @@ public class ServiceUser implements IServiceUser {
                     servicePhoto.getImageData(patient.getPhoto().getId()));
         } else {
             dtoReview.setPatientImage(null);
+        }
+    }
+
+    private void mapVetInfo(DtoReview dtoReview, Review review)
+            throws SQLException {
+        var vet = review.getVeterinarian();
+        dtoReview.setVetId(vet.getId());
+        dtoReview.setVetName(vet.getLastName() + ", " + vet.getFirstName());
+        if (vet.getPhoto() != null) {
+            dtoReview.setVetImage(
+                    servicePhoto.getImageData(vet.getPhoto().getId()));
+        } else {
+            dtoReview.setVetImage(null);
         }
     }
 
