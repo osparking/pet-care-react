@@ -108,4 +108,14 @@ public class ServiceUser implements IServiceUser {
         dtoUser.setReviews(dtoReviews);
     }
 
+    private DtoReview mapToDtoReview(Review review) {
+        DtoReview dtoReview = new DtoReview();
+        dtoReview.setId(review.getId());
+        dtoReview.setStars(review.getStars());
+        dtoReview.setComment(review.getComment());
+        mapVetInfo(dtoReview, review);
+        mapPatientInfo(dtoReview, review);
+        return dtoReview;
+    }
+
 }
