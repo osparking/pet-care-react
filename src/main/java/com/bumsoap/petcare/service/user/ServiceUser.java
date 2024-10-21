@@ -109,7 +109,7 @@ public class ServiceUser implements IServiceUser {
         dtoUser.setReviews(dtoReviews);
     }
 
-    private DtoReview mapToDtoReview(Review review) throws SQLException {
+    private DtoReview mapToDtoReview(Review review) {
         DtoReview dtoReview = new DtoReview();
         dtoReview.setId(review.getId());
         dtoReview.setStars(review.getStars());
@@ -119,8 +119,7 @@ public class ServiceUser implements IServiceUser {
         return dtoReview;
     }
 
-    private void mapPatientInfo(DtoReview dtoReview, Review review)
-            throws SQLException {
+    private void mapPatientInfo(DtoReview dtoReview, Review review) {
         var patient = review.getPatient();
         dtoReview.setPatientId(patient.getId());
         dtoReview.setPatientName(
@@ -137,8 +136,7 @@ public class ServiceUser implements IServiceUser {
         }
     }
 
-    private void mapVetInfo(DtoReview dtoReview, Review review)
-            throws SQLException {
+    private void mapVetInfo(DtoReview dtoReview, Review review) {
         var vet = review.getVeterinarian();
         dtoReview.setVetId(vet.getId());
         dtoReview.setVetName(vet.getLastName() + ", " + vet.getFirstName());
