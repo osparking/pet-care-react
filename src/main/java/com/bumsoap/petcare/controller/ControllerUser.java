@@ -61,8 +61,7 @@ public class ControllerUser {
     public ResponseEntity<ApiResponse> findById(@PathVariable Long userId) {
 
         try {
-            User theUser = serviceUser.findById(userId);
-            DtoUser userDto = userConverter.mapEntityToDto(theUser, DtoUser.class);
+            DtoUser userDto = serviceUser.getDtoUserById(userId);
             return ResponseEntity.status(FOUND).body(new ApiResponse(FeedbackMessage.FOUND, userDto));
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(NOT_FOUND)
