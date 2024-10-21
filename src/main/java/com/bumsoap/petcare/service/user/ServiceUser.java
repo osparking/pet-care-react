@@ -126,8 +126,12 @@ public class ServiceUser implements IServiceUser {
         dtoReview.setPatientName(
                 patient.getLastName() + ", " + patient.getFirstName());
         if (patient.getPhoto() != null) {
-            dtoReview.setPatientImage(
-                    servicePhoto.getImageData(patient.getPhoto().getId()));
+            try {
+                dtoReview.setPatientImage(
+                        servicePhoto.getImageData(patient.getPhoto().getId()));
+            } catch (SQLException e) {
+                throw new RuntimeException(e.getMessage());
+            }
         } else {
             dtoReview.setPatientImage(null);
         }
@@ -139,8 +143,12 @@ public class ServiceUser implements IServiceUser {
         dtoReview.setVetId(vet.getId());
         dtoReview.setVetName(vet.getLastName() + ", " + vet.getFirstName());
         if (vet.getPhoto() != null) {
-            dtoReview.setVetImage(
-                    servicePhoto.getImageData(vet.getPhoto().getId()));
+            try {
+                dtoReview.setVetImage(
+                        servicePhoto.getImageData(vet.getPhoto().getId()));
+            } catch (SQLException e) {
+                throw new RuntimeException(e.getMessage());
+            }
         } else {
             dtoReview.setVetImage(null);
         }
