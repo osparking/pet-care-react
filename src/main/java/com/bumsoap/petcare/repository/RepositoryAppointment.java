@@ -3,6 +3,7 @@ package com.bumsoap.petcare.repository;
 import com.bumsoap.petcare.model.Appointment;
 import com.bumsoap.petcare.utils.StatusAppointment;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -12,5 +13,7 @@ public interface RepositoryAppointment extends JpaRepository<Appointment, Long> 
     boolean existsByPatientIdAndVeterinarianIdAndStatus(
             Long patId, Long vetId, StatusAppointment statusAppointment);
 
+    @Query("SELECT a FROM Appointment a " +
+            "WHERE a.veterinarian.id = :userId OR a.patient.id = :userId")
     List<Appointment> findAllByUserId(Long userId);
 }
