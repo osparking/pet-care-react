@@ -16,7 +16,7 @@ public class DtoAppointment {
     private String reason;
     private StatusAppointment status;
     private String appointmentNo;
-    private DtoUser patient;
-    private DtoUser veterinarian;
+    private DtoUserAppo patient;
+    private DtoUserAppoVet veterinarian;
     private List<DtoPet> pets;
 }
