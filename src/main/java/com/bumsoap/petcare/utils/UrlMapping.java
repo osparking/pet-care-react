@@ -38,4 +38,9 @@ public class UrlMapping {
     public static final String GET_VET_STAR_AVG = "/{vetId}/vet_star_avg";
     /*============================ End Review API ===============================*/
 
+    /*============================ Start VET API ===============================*/
+    public static final String VETS = API + "/vets";
+    public static final String GET_ALL_VETS = "/get_all_vets";
+    /*============================ End VET API ===============================*/
+
 }

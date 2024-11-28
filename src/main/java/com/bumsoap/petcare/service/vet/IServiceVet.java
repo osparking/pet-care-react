@@ -4,6 +4,6 @@ import com.bumsoap.petcare.dto.DtoUser;
 
 import java.util.List;
 
-public interface IVetService {
+public interface IServiceVet {
     List<DtoUser> getAllVetsWithDetails();
 }

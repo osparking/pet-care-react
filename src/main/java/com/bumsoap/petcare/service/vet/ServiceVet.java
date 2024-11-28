@@ -5,7 +5,6 @@ import com.bumsoap.petcare.dto.EntityConverter;
 import com.bumsoap.petcare.model.Veterinarian;
 import com.bumsoap.petcare.repository.IRepositoryReview;
 import com.bumsoap.petcare.repository.RepositoryUser;
-import com.bumsoap.petcare.repository.RepositoryVet;
 import com.bumsoap.petcare.service.photo.IServicePhoto;
 import com.bumsoap.petcare.service.review.IServiceReview;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class VetService implements IVetService {
+public class ServiceVet implements IServiceVet {
     private final EntityConverter<Veterinarian, DtoUser> entityConverter;
     private final IServiceReview serviceReview;
     private final IRepositoryReview repositoryReview;
