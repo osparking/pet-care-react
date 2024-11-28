@@ -18,4 +18,6 @@ public interface IRepositoryReview extends JpaRepository<Review, Long> {
     List<Review> findAllByVeterinarianId(Long vetId);
 
     Optional<Review> findByPatientIdAndVeterinarianId(Long patId, Long vetId);
+
+    Long countByVeterinarianId(long id);
 }
