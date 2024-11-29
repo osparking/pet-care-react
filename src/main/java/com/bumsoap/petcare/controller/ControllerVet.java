@@ -7,6 +7,7 @@ import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.UrlMapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping(UrlMapping.VETS)
 @RequiredArgsConstructor
+@CrossOrigin("http://localhost:5173/")
 public class ControllerVet {
     private final IServiceVet serviceVet;
 
