@@ -7,12 +7,13 @@ import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.UrlMapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestController
 @RequestMapping(UrlMapping.VETS)
@@ -25,5 +26,20 @@ public class ControllerVet {
     public ResponseEntity<ApiResponse> getAllVets() {
         List<DtoUser> allVets = serviceVet.getAllVetsWithDetails();
         return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, allVets));
+    }
+
+    @GetMapping(UrlMapping.GET_AVAILABLE_VETS)
+    public ResponseEntity<ApiResponse> getVetsForAppointment(
+            @RequestParam String speciality,
+            @RequestParam(required = false) LocalDate date,
+            @RequestParam(required = false) LocalTime time) {
+        List<DtoUser> allAvailableVets =
+                serviceVet.getAvailVetsForAppointment(speciality, date, time);
+        if (allAvailableVets.isEmpty()) {
+            return  ResponseEntity.status(NOT_FOUND)
+                    .body(new ApiResponse(FeedbackMessage.NO_VETS_FOUND, null));
+        }
+        return ResponseEntity.ok(
+                new ApiResponse(FeedbackMessage.FOUND, allAvailableVets));
     }
 }
