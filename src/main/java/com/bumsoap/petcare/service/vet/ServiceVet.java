@@ -58,6 +58,13 @@ public class ServiceVet implements IServiceVet {
         return repositoryVet.findVeterinarianBySpecialization(speciality);
     }
 
+    @Override
+    public List<DtoUser> getAvailVetsForAppointment(String speciality,
+                                                    LocalDate date, LocalTime time) {
+        List<Veterinarian> vets = getVetOfSpeciality(speciality, date, time);
+        return vets.stream().map(this::mapVeterinarianToDtoUser).toList();
+    }
+
     private List<Veterinarian> getVetOfSpeciality(String special,
                                                   LocalDate date, LocalTime time) {
         List<Veterinarian> vets = getVeterinarianBySpeciality(special);
