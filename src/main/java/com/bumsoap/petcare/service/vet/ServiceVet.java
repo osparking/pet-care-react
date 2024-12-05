@@ -7,6 +7,7 @@ import com.bumsoap.petcare.model.Veterinarian;
 import com.bumsoap.petcare.repository.IRepositoryReview;
 import com.bumsoap.petcare.repository.RepositoryAppointment;
 import com.bumsoap.petcare.repository.RepositoryUser;
+import com.bumsoap.petcare.repository.RepositoryVet;
 import com.bumsoap.petcare.service.photo.IServicePhoto;
 import com.bumsoap.petcare.service.review.IServiceReview;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ public class ServiceVet implements IServiceVet {
     private final IServicePhoto servicePhoto;
     private final RepositoryUser repositoryUser;
     private final RepositoryAppointment repositoryAppointment;
+    private final RepositoryVet repositoryVet;
 
     @Override
     public List<DtoUser> getAllVetsWithDetails() {
@@ -49,6 +51,10 @@ public class ServiceVet implements IServiceVet {
         LocalTime unavailableEndTime = existingEndTime.plusMinutes(170);
         return !requestedStartTime.isBefore(unavailableStartTime) &&
                 !requestedEndTime.isAfter(unavailableEndTime);
+    }
+
+    public List<Veterinarian> getVeterinarianBySpeciality(String speciality) {
+        return repositoryVet.findVeterinarianBySpecialization(speciality);
     }
 
     private boolean isVetAvailable(Veterinarian vet, LocalDate reqDate, LocalTime reqTime) {
