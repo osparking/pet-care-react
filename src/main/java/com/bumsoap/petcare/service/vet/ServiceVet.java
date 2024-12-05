@@ -5,6 +5,7 @@ import com.bumsoap.petcare.dto.EntityConverter;
 import com.bumsoap.petcare.model.Appointment;
 import com.bumsoap.petcare.model.Veterinarian;
 import com.bumsoap.petcare.repository.IRepositoryReview;
+import com.bumsoap.petcare.repository.RepositoryAppointment;
 import com.bumsoap.petcare.repository.RepositoryUser;
 import com.bumsoap.petcare.service.photo.IServicePhoto;
 import com.bumsoap.petcare.service.review.IServiceReview;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class ServiceVet implements IServiceVet {
     private final IRepositoryReview repositoryReview;
     private final IServicePhoto servicePhoto;
     private final RepositoryUser repositoryUser;
+    private final RepositoryAppointment repositoryAppointment;
 
     @Override
     public List<DtoUser> getAllVetsWithDetails() {
@@ -46,6 +49,16 @@ public class ServiceVet implements IServiceVet {
         LocalTime unavailableEndTime = existingEndTime.plusMinutes(170);
         return !requestedStartTime.isBefore(unavailableStartTime) &&
                 !requestedEndTime.isAfter(unavailableEndTime);
+    }
+
+    private boolean isVetAvailable(Veterinarian vet, LocalDate reqDate, LocalTime reqTime) {
+        if (reqDate != null && reqTime != null) {
+            LocalTime reqEndTime = reqTime.plusHours(2);
+            return repositoryAppointment.findByVeterinarianAndDate(vet, reqDate)
+                    .stream().noneMatch(existingAppointment ->
+                            apposOverlap(existingAppointment, reqTime, reqEndTime));
+        }
+        return true;
     }
 
     private DtoUser mapVeterinarianToDtoUser(Veterinarian veterinarian) {
