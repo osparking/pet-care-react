@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -55,6 +56,14 @@ public class ServiceVet implements IServiceVet {
 
     public List<Veterinarian> getVeterinarianBySpeciality(String speciality) {
         return repositoryVet.findVeterinarianBySpecialization(speciality);
+    }
+
+    private List<Veterinarian> getVetOfSpeciality(String special,
+                                                  LocalDate date, LocalTime time) {
+        List<Veterinarian> vets = getVeterinarianBySpeciality(special);
+        return vets.stream()
+               .filter(vet -> isVetAvailable(vet, date, time))
+               .collect(Collectors.toList());
     }
 
     private boolean isVetAvailable(Veterinarian vet, LocalDate reqDate, LocalTime reqTime) {
