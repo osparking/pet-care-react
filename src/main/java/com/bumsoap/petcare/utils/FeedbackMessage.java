@@ -15,4 +15,5 @@ public class FeedbackMessage {
     public static final String COMPLETED_APPOINTMENT_REQUIRED =
             "진료를 예약하고 완료한 환자만 리뷰할 수 있음";
     public static final String VET_OR_PAT_NOT_FOUND = "수의사 혹은 환자 부재";
+    public static final String NO_VETS_FOUND = "수의사 부재";
 }

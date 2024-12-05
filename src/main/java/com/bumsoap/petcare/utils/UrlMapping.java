@@ -41,6 +41,7 @@ public class UrlMapping {
     /*============================ Start VET API ===============================*/
     public static final String VETS = API + "/vets";
     public static final String GET_ALL_VETS = "/get_all_vets";
+    public static final String GET_AVAILABLE_VETS = "/search_vets" ;
     /*============================ End VET API ===============================*/
 
 }
