@@ -30,11 +30,11 @@ public class ControllerVet {
 
     @GetMapping(UrlMapping.GET_AVAILABLE_VETS)
     public ResponseEntity<ApiResponse> getVetsForAppointment(
-            @RequestParam String speciality,
+            @RequestParam String specialization,
             @RequestParam(required = false) LocalDate date,
             @RequestParam(required = false) LocalTime time) {
         List<DtoUser> allAvailableVets =
-                serviceVet.getAvailVetsForAppointment(speciality, date, time);
+                serviceVet.getAvailVetsForAppointment(specialization, date, time);
         if (allAvailableVets.isEmpty()) {
             return  ResponseEntity.status(NOT_FOUND)
                     .body(new ApiResponse(FeedbackMessage.NO_VETS_FOUND, null));
