@@ -2,6 +2,7 @@ package com.bumsoap.petcare.service.vet;
 
 import com.bumsoap.petcare.dto.DtoUser;
 import com.bumsoap.petcare.dto.EntityConverter;
+import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.model.Appointment;
 import com.bumsoap.petcare.model.Veterinarian;
 import com.bumsoap.petcare.repository.IRepositoryReview;
@@ -55,6 +56,10 @@ public class ServiceVet implements IServiceVet {
     }
 
     public List<Veterinarian> getVeterinarianBySpeciality(String speciality) {
+        if (!repositoryVet.existsBySpecialization(speciality)) {
+            throw new ResourceNotFoundException(
+                    "수의사가 발견되지 않은 전문분야: " + speciality);
+        }
         return repositoryVet.findVeterinarianBySpecialization(speciality);
     }
 
