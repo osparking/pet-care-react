@@ -1,6 +1,7 @@
 package com.bumsoap.petcare.controller;
 
 import com.bumsoap.petcare.dto.DtoUser;
+import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.response.ApiResponse;
 import com.bumsoap.petcare.service.vet.IServiceVet;
 import com.bumsoap.petcare.utils.FeedbackMessage;
@@ -33,13 +34,19 @@ public class ControllerVet {
             @RequestParam String specialization,
             @RequestParam(required = false) LocalDate date,
             @RequestParam(required = false) LocalTime time) {
-        List<DtoUser> allAvailableVets =
-                serviceVet.getAvailVetsForAppointment(specialization, date, time);
-        if (allAvailableVets.isEmpty()) {
-            return  ResponseEntity.status(NOT_FOUND)
-                    .body(new ApiResponse(FeedbackMessage.NO_VETS_FOUND, null));
+        try {
+            List<DtoUser> allAvailableVets =
+                    serviceVet.getAvailVetsForAppointment(specialization, date, time);
+            if (allAvailableVets.isEmpty()) {
+                return  ResponseEntity.status(NOT_FOUND)
+                        .body(new ApiResponse(FeedbackMessage.NO_VETS_FOUND, null));
+            }
+            return ResponseEntity.ok(
+                    new ApiResponse(FeedbackMessage.FOUND, allAvailableVets));
+        } catch (ResourceNotFoundException ex) {
+            return ResponseEntity
+                    .status(NOT_FOUND)
+                    .body(new ApiResponse(ex.getMessage(), null));
         }
-        return ResponseEntity.ok(
-                new ApiResponse(FeedbackMessage.FOUND, allAvailableVets));
     }
 }
