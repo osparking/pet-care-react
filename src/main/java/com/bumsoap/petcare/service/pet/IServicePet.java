@@ -9,4 +9,10 @@ public interface IServicePet {
     Pet updatePet(Pet pet, Long id);
     void deletePet(Long id);
     Pet findById(Long id);
+
+    List<Pet> getPetColors();
+
+    List<Pet> getPetTypess();
+
+    List<Pet> getPetBreeds(String type);
 }

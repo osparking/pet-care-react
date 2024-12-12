@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -47,14 +46,17 @@ public class ServicePet implements IServicePet {
                 new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
     }
 
+    @Override
     public List<Pet> getPetColors() {
         return repositoryPet.getDistinctColors();
     }
 
+    @Override
     public List<Pet> getPetTypess() {
         return repositoryPet.getDistinctTypes();
     }
 
+    @Override
     public List<Pet> getPetBreeds(String type) {
         return repositoryPet.getDistinctBreedsByType(type);
     }
