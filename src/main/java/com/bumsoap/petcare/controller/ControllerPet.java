@@ -85,7 +85,7 @@ public class ControllerPet {
 
     @GetMapping(UrlMapping.GET_PET_COLORS)
     public ResponseEntity<ApiResponse> getPetColors() {
-        return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, servicePet.getPetTypes()));
+        return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, servicePet.getPetColors()));
     }
 
     @GetMapping(UrlMapping.GET_PET_BREEDS)
