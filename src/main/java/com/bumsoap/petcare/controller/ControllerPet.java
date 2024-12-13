@@ -89,7 +89,7 @@ public class ControllerPet {
     }
 
     @GetMapping(UrlMapping.GET_PET_BREEDS)
-    public ResponseEntity<ApiResponse> getPetBreeds(@RequestParam String type) {
+    public ResponseEntity<ApiResponse> getPetBreeds(@RequestParam(required = false) String type) {
         return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, servicePet.getPetBreeds(type)));
     }
 }
