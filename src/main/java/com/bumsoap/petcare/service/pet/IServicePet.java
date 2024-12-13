@@ -12,7 +12,7 @@ public interface IServicePet {
 
     List<Pet> getPetColors();
 
-    List<Pet> getPetTypess();
+    List<Pet> getPetTypes();
 
     List<Pet> getPetBreeds(String type);
 }

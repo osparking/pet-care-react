@@ -52,7 +52,7 @@ public class ServicePet implements IServicePet {
     }
 
     @Override
-    public List<Pet> getPetTypess() {
+    public List<Pet> getPetTypes() {
         return repositoryPet.getDistinctTypes();
     }
 
