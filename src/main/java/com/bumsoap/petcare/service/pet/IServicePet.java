@@ -10,9 +10,9 @@ public interface IServicePet {
     void deletePet(Long id);
     Pet findById(Long id);
 
-    List<Pet> getPetColors();
+    List<String> getPetColors();
 
-    List<Pet> getPetTypes();
+    List<String> getPetTypes();
 
-    List<Pet> getPetBreeds(String type);
+    List<String> getPetBreeds(String type);
 }

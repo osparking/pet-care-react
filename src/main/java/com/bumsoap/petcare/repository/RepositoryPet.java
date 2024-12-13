@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface RepositoryPet extends JpaRepository<Pet, Long> {
     @Query("SELECT DISTINCT p.color FROM Pet p")
-    List<Pet> getDistinctColors(); // Define JPA Repository interface for Pet entity{
+    List<String> getDistinctColors(); // Define JPA Repository interface for Pet entity{
 
     @Query("SELECT DISTINCT p.type FROM Pet p")
-    List<Pet> getDistinctTypes();
+    List<String> getDistinctTypes();
 
     @Query("SELECT DISTINCT p.breed FROM Pet p WHERE p.type = :type")
-    List<Pet> getDistinctBreedsByType(String type);
+    List<String> getDistinctBreedsByType(String type);
 }

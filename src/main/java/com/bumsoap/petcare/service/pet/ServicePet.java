@@ -47,17 +47,17 @@ public class ServicePet implements IServicePet {
     }
 
     @Override
-    public List<Pet> getPetColors() {
+    public List<String> getPetColors() {
         return repositoryPet.getDistinctColors();
     }
 
     @Override
-    public List<Pet> getPetTypes() {
+    public List<String> getPetTypes() {
         return repositoryPet.getDistinctTypes();
     }
 
     @Override
-    public List<Pet> getPetBreeds(String type) {
+    public List<String> getPetBreeds(String type) {
         return repositoryPet.getDistinctBreedsByType(type);
     }
 }
