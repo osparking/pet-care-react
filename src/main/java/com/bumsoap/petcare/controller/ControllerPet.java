@@ -76,4 +76,19 @@ public class ControllerPet {
                     .body(new ApiResponse(e.getMessage(), null));
         }
     }
+
+    @GetMapping(UrlMapping.GET_PET_TYPES)
+    public ResponseEntity<ApiResponse> getPetTypes() {
+        return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, servicePet.getPetTypes()));
+    }
+
+    @GetMapping(UrlMapping.GET_PET_COLORS)
+    public ResponseEntity<ApiResponse> getPetColors() {
+        return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, servicePet.getPetTypes()));
+    }
+
+    @GetMapping(UrlMapping.GET_PET_BREEDS)
+    public ResponseEntity<ApiResponse> getPetBreeds(@RequestParam String type) {
+        return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, servicePet.getPetBreeds(type)));
+    }
 }
