@@ -22,7 +22,6 @@ public class UrlMapping {
     /*========================== Start Appointment API =================================*/
     public static final String APPOINTMENT = API + "/appointments";
     public static final String APPOINTMENT_BY_NO = "/{no}/get_no";
-    public static final String PETS = API + "/pets";
     public static final String ADD_PETS_FOR_APPOINTMENT = "/for_appointment";
     public static final String APPO_COMPLETE = "/{id}/complete";
     /*========================= End Appointment API ================================*/
@@ -43,5 +42,12 @@ public class UrlMapping {
     public static final String GET_ALL_VETS = "/get_all_vets";
     public static final String GET_AVAILABLE_VETS = "/search_vets" ;
     /*============================ End VET API ===============================*/
+
+    /*============================ Start Pet Type API ===============================*/
+    public static final String PETS = API + "/pets";
+    public static final String GET_PET_TYPES = "/get_types";
+    public static final String GET_PET_COLORS = "/get_colors";
+    public static final String GET_PET_BREEDS = "/get_breeds";
+    /*============================ End Pet Type API ===============================*/
 
 }
