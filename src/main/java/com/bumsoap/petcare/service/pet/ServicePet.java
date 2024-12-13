@@ -58,6 +58,10 @@ public class ServicePet implements IServicePet {
 
     @Override
     public List<String> getPetBreeds(String type) {
-        return repositoryPet.getDistinctBreedsByType(type);
+        if (type == null || type == "") {
+            return repositoryPet.getDistinctBreeds();
+        } else {
+            return repositoryPet.getDistinctBreedsByType(type);
+        }
     }
 }
