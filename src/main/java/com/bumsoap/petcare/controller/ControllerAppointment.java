@@ -7,7 +7,6 @@ import com.bumsoap.petcare.request.AppointmentUpdateRequest;
 import com.bumsoap.petcare.response.ApiResponse;
 import com.bumsoap.petcare.service.appointment.ServiceAppointment;
 import com.bumsoap.petcare.utils.FeedbackMessage;
-import com.bumsoap.petcare.utils.StatusAppointment;
 import com.bumsoap.petcare.utils.UrlMapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +16,7 @@ import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequestMapping(UrlMapping.APPOINTMENT)
+@CrossOrigin("http://localhost:5173/")
 @RequiredArgsConstructor
 public class ControllerAppointment {
     private final ServiceAppointment serviceAppointment;
