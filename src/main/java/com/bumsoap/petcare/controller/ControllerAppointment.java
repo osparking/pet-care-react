@@ -99,7 +99,6 @@ public class ControllerAppointment {
         try {
             Appointment savedAppointment = serviceAppointment.createAppointment(
                     appointment, senderId, recipientId);
-            Thread.sleep(10000);
             return ResponseEntity.status(CREATED)
                     .body(new ApiResponse(FeedbackMessage.CREATED, savedAppointment));
         } catch (ResourceNotFoundException e) {
