@@ -63,7 +63,7 @@ public class ControllerUser {
 
         try {
             DtoUser userDto = serviceUser.getDtoUserById(userId);
-            return ResponseEntity.status(FOUND).body(new ApiResponse(FeedbackMessage.FOUND, userDto));
+            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, userDto));
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(NOT_FOUND)
                    .body(new ApiResponse(ex.getMessage(), null));
