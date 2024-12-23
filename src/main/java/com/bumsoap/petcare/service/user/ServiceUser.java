@@ -107,6 +107,7 @@ public class ServiceUser implements IServiceUser {
             dtoUser.setAverageRating(averageRating);
         }
         dtoUser.setReviews(dtoReviews);
+        dtoUser.setTotalReviewers((long)dtoReviews.size());
     }
 
     private DtoReview mapToDtoReview(Review review) {
