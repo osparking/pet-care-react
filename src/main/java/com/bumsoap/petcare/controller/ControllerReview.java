@@ -21,6 +21,7 @@ import static org.springframework.http.HttpStatus.*;
 @RequiredArgsConstructor
 @RequestMapping(UrlMapping.REVIEWS)
 @RestController(value = "reviewController")
+@CrossOrigin("http://localhost:5173")
 public class ControllerReview {
 
     private final IServiceReview serviceReview;
