@@ -32,6 +32,11 @@ public class ServiceVet implements IServiceVet {
     private final RepositoryVet repositoryVet;
 
     @Override
+    public List<String> getSpecialList() {
+        return repositoryVet.getDistinctSpecial();
+    }
+
+    @Override
     public List<DtoUser> getAllVetsWithDetails() {
         List<Veterinarian> veterinarians = repositoryUser.findAllByUserType("VET");
         return veterinarians.stream()

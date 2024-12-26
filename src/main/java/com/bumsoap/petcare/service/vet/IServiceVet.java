@@ -7,6 +7,8 @@ import java.time.LocalTime;
 import java.util.List;
 
 public interface IServiceVet {
+    List<String> getSpecialList();
+
     List<DtoUser> getAllVetsWithDetails();
 
     List<DtoUser> getAvailVetsForAppointment(String speciality,
