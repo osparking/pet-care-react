@@ -24,7 +24,7 @@ public class User {
     private String lastName;
     private String gender;
     @Column(name = "mobile")
-    private String phoneNumber;
+    private String mobile;
     private String email;
     private String password;
     private String userType;

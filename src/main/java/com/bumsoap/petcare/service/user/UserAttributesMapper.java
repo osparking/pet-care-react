@@ -11,7 +11,7 @@ public class UserAttributesMapper {
         target.setFirstName(source.getFirstName());
         target.setLastName(source.getLastName());
         target.setGender(source.getGender());
-        target.setPhoneNumber(source.getPhoneNumber());
+        target.setMobile(source.getMobile());
         target.setEmail(source.getEmail());
         target.setPassword(source.getPassword());
         target.setEnabled(source.isEnabled());

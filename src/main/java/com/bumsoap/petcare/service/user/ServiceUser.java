@@ -41,7 +41,7 @@ public class ServiceUser implements IServiceUser {
     public User update(Long userId, UserUpdateRequest request) {
         User user = findById(userId);
 
-        user.setPhoneNumber(request.getPhoneNumber());
+        user.setMobile(request.getMobile());
         user.setGender(request.getGender());
         user.setSpecialization(request.getSpecialization());
         user.setFirstName(request.getFirstName());

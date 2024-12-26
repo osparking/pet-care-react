@@ -9,7 +9,7 @@ public class RegistrationRequest {
     private String firstName;
     private String lastName;
     private String gender;
-    private String phoneNumber;
+    private String mobile;
     private String email;
     private String password;
     private String userType;
