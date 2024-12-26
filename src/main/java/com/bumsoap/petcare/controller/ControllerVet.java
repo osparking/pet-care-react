@@ -29,6 +29,12 @@ public class ControllerVet {
         return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, allVets));
     }
 
+    @GetMapping(UrlMapping.GET_ALL_SPECIALIZATIONS)
+    public ResponseEntity<ApiResponse> getAllSpecial() {
+        return ResponseEntity.ok(
+                new ApiResponse(FeedbackMessage.FOUND, serviceVet.getSpecialList()));
+    }
+
     @GetMapping(UrlMapping.GET_AVAILABLE_VETS)
     public ResponseEntity<ApiResponse> getVetsForAppointment(
             @RequestParam String specialization,
