@@ -7,6 +7,8 @@ import com.bumsoap.petcare.request.RequestChangePwd;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 @RequiredArgsConstructor
 public class ServicePwdChange implements ServicePwdChangeI {
@@ -22,6 +24,10 @@ public class ServicePwdChange implements ServicePwdChangeI {
 
         if (!request.getCurrentPwd().equals(user.getPassword())) {
             throw new IllegalArgumentException("기존 비밀번호 불일치");
+        }
+
+        if (!Objects.equals(request.getNewPwd(), request.getConfirmPwd())) {
+            throw new IllegalArgumentException("새 비밀번호의 확인 값 불일치");
         }
     }
 
