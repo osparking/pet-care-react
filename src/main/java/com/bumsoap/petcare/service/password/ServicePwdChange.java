@@ -19,6 +19,10 @@ public class ServicePwdChange implements ServicePwdChangeI {
         if (request.getCurrentPwd().equals("") || request.getNewPwd().equals("")) {
             throw new IllegalArgumentException("모든 비밀번호 입력 필수");
         }
+
+        if (!request.getCurrentPwd().equals(user.getPassword())) {
+            throw new IllegalArgumentException("기존 비밀번호 불일치");
+        }
     }
 
 }
