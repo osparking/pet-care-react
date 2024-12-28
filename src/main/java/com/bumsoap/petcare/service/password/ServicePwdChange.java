@@ -15,6 +15,10 @@ public class ServicePwdChange implements ServicePwdChangeI {
     public void changePwd(Long userId, RequestChangePwd request) {
         User user = repositoryUser.findById(userId).orElseThrow(
                 () -> new ResourceNotFoundException("유저 발견 실패"));
+
+        if (request.getCurrentPwd().equals("") || request.getNewPwd().equals("")) {
+            throw new IllegalArgumentException("모든 비밀번호 입력 필수");
+        }
     }
 
 }
