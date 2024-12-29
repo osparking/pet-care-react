@@ -9,6 +9,7 @@ import com.bumsoap.petcare.request.RegistrationRequest;
 import com.bumsoap.petcare.request.RequestChangePwd;
 import com.bumsoap.petcare.request.UserUpdateRequest;
 import com.bumsoap.petcare.response.ApiResponse;
+import com.bumsoap.petcare.service.password.ServicePwdChangeI;
 import com.bumsoap.petcare.service.user.ServiceUser;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.UrlMapping;
@@ -27,11 +28,18 @@ import static org.springframework.http.HttpStatus.*;
 public class ControllerUser {
     private final ServiceUser serviceUser;
     private final EntityConverter<User, DtoUser> userConverter;
+    private final ServicePwdChangeI servicePwdChangeI;
 
     @PutMapping(UrlMapping.CHANGE_PASSWORD)
     public ResponseEntity<ApiResponse> changePassword(
             @PathVariable Long userId, @RequestBody RequestChangePwd request) {
+        try {
+            servicePwdChangeI.changePwd(userId, request);
+            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.CREATED, null));
+        } catch () {
 
+        }
+        return null;
     }
 
     @PostMapping(UrlMapping.REGISTER_USER)
