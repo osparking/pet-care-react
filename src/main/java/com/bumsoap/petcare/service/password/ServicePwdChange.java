@@ -14,6 +14,7 @@ import java.util.Objects;
 public class ServicePwdChange implements ServicePwdChangeI {
     private final RepositoryUser repositoryUser;
 
+    @Override
     public void changePwd(Long userId, RequestChangePwd request) {
         User user = repositoryUser.findById(userId).orElseThrow(
                 () -> new ResourceNotFoundException("유저 발견 실패"));
