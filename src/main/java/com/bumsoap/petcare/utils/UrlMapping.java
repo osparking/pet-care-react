@@ -20,7 +20,7 @@ public class UrlMapping {
     public static final String USER_BY_ID = "/user/{userId}";
     public static final String DELETE_USER = "/delete/{userId}";
     public static final String GET_ALL = "/get_all";
-    public static final String CHANGE_PASSWORD = "/change_pwd";
+    public static final String CHANGE_PASSWORD = "{userId}/change_pwd";
     /*========================== End User API =================================*/
 
     /*========================== Start Appointment API =================================*/
