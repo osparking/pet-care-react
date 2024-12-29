@@ -2,12 +2,6 @@ package com.bumsoap.petcare.utils;
 
 public class UrlMapping {
     public static final String API = "/api/v1";
-    public static final String USERS = API + "/users";
-    public static final String REGISTER_USER = "/register";
-    public static final String UPDATE_USER = "/update/{userId}";
-    public static final String USER_BY_ID = "/user/{userId}";
-    public static final String DELETE_USER = "/delete/{userId}";
-    public static final String GET_ALL = "/get_all";
 
     /*========================== Start Common API =================================*/
     /**
@@ -18,6 +12,16 @@ public class UrlMapping {
     public static final String DELETE_BY_ID = "/{id}/delete";
     public static final String CREATE = "/create";
     /*========================== End Common API =================================*/
+
+    /*========================== Start User API =================================*/
+    public static final String USERS = API + "/users";
+    public static final String REGISTER_USER = "/register";
+    public static final String UPDATE_USER = "/update/{userId}";
+    public static final String USER_BY_ID = "/user/{userId}";
+    public static final String DELETE_USER = "/delete/{userId}";
+    public static final String GET_ALL = "/get_all";
+    public static final String CHANGE_PASSWORD = "/change_pwd";
+    /*========================== End User API =================================*/
 
     /*========================== Start Appointment API =================================*/
     public static final String APPOINTMENT = API + "/appointments";

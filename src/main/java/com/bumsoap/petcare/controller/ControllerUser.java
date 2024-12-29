@@ -6,6 +6,7 @@ import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.exception.UserAlreadyExistsException;
 import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.request.RegistrationRequest;
+import com.bumsoap.petcare.request.RequestChangePwd;
 import com.bumsoap.petcare.request.UserUpdateRequest;
 import com.bumsoap.petcare.response.ApiResponse;
 import com.bumsoap.petcare.service.user.ServiceUser;
@@ -26,6 +27,12 @@ import static org.springframework.http.HttpStatus.*;
 public class ControllerUser {
     private final ServiceUser serviceUser;
     private final EntityConverter<User, DtoUser> userConverter;
+
+    @PutMapping(UrlMapping.CHANGE_PASSWORD)
+    public ResponseEntity<ApiResponse> changePassword(
+            @PathVariable Long userId, @RequestBody RequestChangePwd request) {
+
+    }
 
     @PostMapping(UrlMapping.REGISTER_USER)
     public ResponseEntity<ApiResponse> register(@RequestBody RegistrationRequest request) {
