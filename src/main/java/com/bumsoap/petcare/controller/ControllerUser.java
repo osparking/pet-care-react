@@ -38,6 +38,12 @@ public class ControllerUser {
             return ResponseEntity.ok(new ApiResponse(FeedbackMessage.CREATED, null));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(new ApiResponse(e.getMessage(), null));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(NOT_FOUND)
+                   .body(new ApiResponse(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(e.getMessage(), null));
         }
     }
 
