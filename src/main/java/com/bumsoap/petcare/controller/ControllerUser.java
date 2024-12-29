@@ -36,10 +36,9 @@ public class ControllerUser {
         try {
             servicePwdChangeI.changePwd(userId, request);
             return ResponseEntity.ok(new ApiResponse(FeedbackMessage.CREATED, null));
-        } catch () {
-
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(new ApiResponse(e.getMessage(), null));
         }
-        return null;
     }
 
     @PostMapping(UrlMapping.REGISTER_USER)
