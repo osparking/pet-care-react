@@ -102,7 +102,7 @@ public class ServiceUser implements IServiceUser {
         var reviews = serviceReview.getAllReviewsByUserId(userId, 0, Integer.MAX_VALUE);
         List<DtoReview> dtoReviews = reviews.getContent().stream()
                 .map(this::mapToDtoReview).toList();
-        if (!dtoReviews.isEmpty()) {
+        if (!dtoReviews.isEmpty() && "VET".equals(dtoUser.getUserType())) {
             double averageRating = serviceReview.getAverageRatingForVet(userId);
             dtoUser.setAverageRating(averageRating);
         }
