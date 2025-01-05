@@ -15,6 +15,7 @@ import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.UrlMapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -94,6 +95,7 @@ public class ControllerUser {
     }
 
     @DeleteMapping(UrlMapping.DELETE_USER)
+    @Transactional
     public ResponseEntity<ApiResponse> deleteById(@PathVariable Long userId) {
 
         try {
