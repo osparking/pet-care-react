@@ -11,7 +11,7 @@ public class DtoUser {
     private String lastName;
     private String firstName;
     private String gender;
-    private String phoneNumber;
+    private String mobile;
     private String email;
     private String userType;
     private Boolean enabled;
