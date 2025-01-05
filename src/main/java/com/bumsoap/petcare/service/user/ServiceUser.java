@@ -5,8 +5,11 @@ import com.bumsoap.petcare.dto.DtoUser;
 import com.bumsoap.petcare.dto.EntityConverter;
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.factory.FactoryUser;
+import com.bumsoap.petcare.model.Appointment;
 import com.bumsoap.petcare.model.Review;
 import com.bumsoap.petcare.model.User;
+import com.bumsoap.petcare.repository.IRepositoryReview;
+import com.bumsoap.petcare.repository.RepositoryAppointment;
 import com.bumsoap.petcare.repository.RepositoryUser;
 import com.bumsoap.petcare.request.RegistrationRequest;
 import com.bumsoap.petcare.request.UserUpdateRequest;
@@ -31,6 +34,8 @@ public class ServiceUser implements IServiceUser {
     private final ServiceAppointment serviceAppointment;
     private final IServicePhoto servicePhoto;
     private final IServiceReview serviceReview;
+    private final IRepositoryReview repositoryReview;
+    private final RepositoryAppointment repositoryAppointment;
 
     @Override
     public User register(RegistrationRequest request) {
@@ -52,10 +57,18 @@ public class ServiceUser implements IServiceUser {
 
     @Override
     public void deleteById(Long userId) {
-        repositoryUser.findById(userId).ifPresentOrElse(repositoryUser::delete, ()
-                -> {
-            throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND);
-        });
+        repositoryUser.findById(userId).ifPresentOrElse(
+                user2del -> {
+                    List<Review> reviews = repositoryReview.findAllByUserId(userId);
+                    repositoryReview.deleteAll(reviews);
+                    List<Appointment> appointments =
+                            repositoryAppointment.findAllByUserId(userId);
+                    repositoryAppointment.deleteAll(appointments);
+                    repositoryUser.delete(user2del);
+                },
+                () -> {
+                    throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND);
+                });
     }
 
     @Override
@@ -107,7 +120,7 @@ public class ServiceUser implements IServiceUser {
             dtoUser.setAverageRating(averageRating);
         }
         dtoUser.setReviews(dtoReviews);
-        dtoUser.setTotalReviewers((long)dtoReviews.size());
+        dtoUser.setTotalReviewers((long) dtoReviews.size());
     }
 
     private DtoReview mapToDtoReview(Review review) {
