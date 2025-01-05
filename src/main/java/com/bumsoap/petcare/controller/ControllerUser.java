@@ -95,7 +95,6 @@ public class ControllerUser {
     }
 
     @DeleteMapping(UrlMapping.DELETE_USER)
-    @Transactional
     public ResponseEntity<ApiResponse> deleteById(@PathVariable Long userId) {
 
         try {

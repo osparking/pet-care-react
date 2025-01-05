@@ -20,6 +20,7 @@ import com.bumsoap.petcare.utils.FeedbackMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -56,6 +57,7 @@ public class ServiceUser implements IServiceUser {
     }
 
     @Override
+    @Transactional(rollbackFor = RuntimeException.class)
     public void deleteById(Long userId) {
         repositoryUser.findById(userId).ifPresentOrElse(
                 user2del -> {
