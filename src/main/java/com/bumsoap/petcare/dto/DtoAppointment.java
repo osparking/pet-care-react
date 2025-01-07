@@ -1,6 +1,5 @@
 package com.bumsoap.petcare.dto;
 
-import com.bumsoap.petcare.utils.StatusAppointment;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -14,7 +13,7 @@ public class DtoAppointment {
     private LocalTime time;
     private LocalDate createdDate;
     private String reason;
-    private StatusAppointment status;
+    private String status;
     private String appointmentNo;
     private DtoUserAppo patient;
     private DtoUserAppoVet veterinarian;
