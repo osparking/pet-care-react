@@ -17,4 +17,5 @@ public class FeedbackMessage {
     public static final String VET_OR_PAT_NOT_FOUND = "수의사 혹은 환자 부재";
     public static final String NO_VETS_FOUND = "수의사 부재";
     public static final String APMT_CANNOT_BE_CANCEL = "예약 취소 불가";
+    public static final String APPOINTMENT_CANCELED = "예약 취소 완료";
 }

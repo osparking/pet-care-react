@@ -141,7 +141,7 @@ public class ControllerAppointment {
         try {
             Appointment appointment = serviceAppointment.cancelAppointment(id);
             return ResponseEntity.ok(
-                    new ApiResponse(FeedbackMessage.RESOURCE_UPDATED, appointment));
+                    new ApiResponse(FeedbackMessage.APPOINTMENT_CANCELED, appointment));
         } catch (IllegalStateException e) {
             return ResponseEntity.status(NOT_ACCEPTABLE)
                     .body(new ApiResponse(e.getMessage(), null));
