@@ -28,6 +28,7 @@ public class UrlMapping {
     public static final String APPOINTMENT_BY_NO = "/{no}/get_no";
     public static final String ADD_PETS_FOR_APPOINTMENT = "/for_appointment";
     public static final String APPO_COMPLETE = "/{id}/complete";
+    public static final String APPO_CANCEL = "/{id}/cancel";
     /*========================= End Appointment API ================================*/
 
     /*============================ Start Photo API ===================================*/
