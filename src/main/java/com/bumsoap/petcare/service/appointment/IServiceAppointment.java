@@ -21,4 +21,6 @@ public interface IServiceAppointment {
     Appointment completeAppointment(Long id);
 
     List<DtoAppointment> getAllDtoAppointmentsByUserId(Long userId);
+
+    Appointment cancelAppointment(Long apmtId);
 }
