@@ -139,4 +139,28 @@ public class ServiceAppointment implements IServiceAppointment {
                     return appoDto;
                 }).toList();
     }
+
+    @Override
+    public Appointment cancelAppointment(Long apmtId) {
+        Appointment apmt = repositoryAppointment.findById(apmtId).orElseThrow(() ->
+                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
+        if (apmt.getStatus().equals(APPROVE_WAIT)) {
+            apmt.setStatus(StatusAppointment.CANCELLED);
+            return repositoryAppointment.save(apmt);
+        } else {
+            throw new IllegalStateException(FeedbackMessage.APMT_CANNOT_BE_CANCEL);
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
