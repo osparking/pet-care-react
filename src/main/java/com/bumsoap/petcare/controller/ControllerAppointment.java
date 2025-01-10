@@ -160,4 +160,16 @@ public class ControllerAppointment {
         }
     }
 
+    @PutMapping(UrlMapping.APPO_DECLINE)
+    public ResponseEntity<ApiResponse> declineAppointment(@PathVariable Long id) {
+        try {
+            Appointment appointment = serviceAppointment.declineAppointment(id);
+            return ResponseEntity.ok(
+                    new ApiResponse(FeedbackMessage.APPOINTMENT_DECLINED, appointment));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(NOT_FOUND)
+                    .body(new ApiResponse(e.getMessage(), null));
+        }
+    }
+
 }
