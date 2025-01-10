@@ -148,4 +148,16 @@ public class ControllerAppointment {
         }
     }
 
+    @PutMapping(UrlMapping.APPO_APPROVE)
+    public ResponseEntity<ApiResponse> approveAppointment(@PathVariable Long id) {
+        try {
+            Appointment appointment = serviceAppointment.approveAppointment(id);
+            return ResponseEntity.ok(
+                    new ApiResponse(FeedbackMessage.APPOINTMENT_APPROVED, appointment));
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(NOT_ACCEPTABLE)
+                    .body(new ApiResponse(e.getMessage(), null));
+        }
+    }
+
 }

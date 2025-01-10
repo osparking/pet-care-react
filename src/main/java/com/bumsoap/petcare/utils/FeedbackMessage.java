@@ -19,4 +19,6 @@ public class FeedbackMessage {
     public static final String APMT_CANNOT_BE_CANCEL = "예약 취소 불가";
     public static final String APMT_CANNOT_BE_APPROVED = "예약 승인 불가";
     public static final String APPOINTMENT_CANCELED = "예약 취소 완료";
+    public static final String APPOINTMENT_APPROVED = "예약 승인 완료";
+    public static final String APPOINTMENT_DECLINED = "예약 거부 처리";
 }
