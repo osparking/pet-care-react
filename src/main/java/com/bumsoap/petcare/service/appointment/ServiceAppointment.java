@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static com.bumsoap.petcare.utils.StatusAppointment.APPROVED;
 import static com.bumsoap.petcare.utils.StatusAppointment.APPROVE_WAIT;
 
 @Service
@@ -149,6 +150,18 @@ public class ServiceAppointment implements IServiceAppointment {
             return repositoryAppointment.save(apmt);
         } else {
             throw new IllegalStateException(FeedbackMessage.APMT_CANNOT_BE_CANCEL);
+        }
+    }
+
+    @Override
+    public Appointment approveAppointment(Long apmtId) {
+        return repositoryAppointment.findById(apmtId)
+                .filter(apmt -> !apmt.getStatus().equals(APPROVED))
+                .map(apmt -> {
+                    apmt.setStatus(APPROVED);
+                    return repositoryAppointment.saveAndFlush(apmt);})
+                .orElseThrow(() -> new IllegalStateException(
+                    FeedbackMessage.APMT_CANNOT_BE_APPROVED));
         }
     }
 }
