@@ -25,4 +25,6 @@ public interface IServiceAppointment {
     Appointment cancelAppointment(Long apmtId);
 
     Appointment approveAppointment(Long apmtId);
+
+    Appointment declineAppointment(Long apmtId);
 }

@@ -5,7 +5,7 @@ public enum StatusAppointment {
     ON_GOING,
     UP_COMING,
     APPROVED,
-    REJECTED,
+    DECLINED,
     APPROVE_WAIT,
     PENDING,
     COMPLETED,
@@ -21,8 +21,8 @@ public enum StatusAppointment {
                 return "임박함";
             case APPROVED:
                 return "승인됨";
-            case REJECTED:
-                return "거부됨";
+            case DECLINED:
+                return "거절됨";
             case APPROVE_WAIT:
                 return "승인대기";
             case PENDING:

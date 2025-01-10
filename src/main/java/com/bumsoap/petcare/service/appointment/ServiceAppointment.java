@@ -24,8 +24,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import static com.bumsoap.petcare.utils.StatusAppointment.APPROVED;
-import static com.bumsoap.petcare.utils.StatusAppointment.APPROVE_WAIT;
+import static com.bumsoap.petcare.utils.StatusAppointment.*;
 
 @Service
 @RequiredArgsConstructor
@@ -162,7 +161,16 @@ public class ServiceAppointment implements IServiceAppointment {
                     return repositoryAppointment.saveAndFlush(apmt);})
                 .orElseThrow(() -> new IllegalStateException(
                     FeedbackMessage.APMT_CANNOT_BE_APPROVED));
-        }
+    }
+
+    @Override
+    public Appointment declineAppointment(Long apmtId) {
+        return repositoryAppointment.findById(apmtId)
+                .map(apmt -> {
+                    apmt.setStatus(DECLINED);
+                    return repositoryAppointment.saveAndFlush(apmt);})
+                .orElseThrow(() -> new IllegalStateException(
+                    FeedbackMessage.NOT_FOUND));
     }
 }
 
