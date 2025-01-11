@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class DtoUserAppo {
+    private long id;
     private String lastName;
     private String firstName;
     private String gender;
