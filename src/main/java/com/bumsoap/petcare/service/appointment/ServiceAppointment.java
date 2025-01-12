@@ -111,6 +111,21 @@ public class ServiceAppointment implements IServiceAppointment {
     }
 
     @Override
+    public DtoAppointment getDtoAppointmentById(Long appointmentId) {
+        return repositoryAppointment.findById(appointmentId)
+                .map(appo -> {
+                    DtoAppointment appoDto = appoConverter
+                            .mapEntityToDto(appo, DtoAppointment.class);
+                    var dtoPets = appo.getPets().stream().map(
+                            pet -> petConverter.mapEntityToDto(pet, DtoPet.class)).toList();
+                    appoDto.setPets(dtoPets);
+                    return appoDto;
+                })
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        FeedbackMessage.NOT_FOUND));
+    }
+
+    @Override
     public Appointment getAppointmentById(Long appointmentId) {
         return repositoryAppointment
                 .findById(appointmentId)
