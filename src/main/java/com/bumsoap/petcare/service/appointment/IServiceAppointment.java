@@ -15,6 +15,8 @@ public interface IServiceAppointment {
     Appointment updateAppointment(Long id, AppointmentUpdateRequest appointment);
     void deleteAppointment(Long id);
 
+    DtoAppointment getDtoAppointmentById(Long appointmentId);
+
     Appointment getAppointmentById(Long appointmentId);
     Appointment getByAppointmentNo(String appointmentNo);
 
