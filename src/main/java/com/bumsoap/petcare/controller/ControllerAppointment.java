@@ -73,7 +73,7 @@ public class ControllerAppointment {
         try {
             return ResponseEntity.status(FOUND)
                     .body(new ApiResponse(FeedbackMessage.FOUND,
-                            serviceAppointment.getAppointmentById(id)));
+                            serviceAppointment.getDtoAppointmentById(id)));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
                     .body(new ApiResponse(e.getMessage(), null));
