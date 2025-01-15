@@ -56,6 +56,7 @@ public class UrlMapping {
     public static final String GET_PET_TYPES = "/get_types";
     public static final String GET_PET_COLORS = "/get_colors";
     public static final String GET_PET_BREEDS = "/get_breeds";
+    public static final String ADD_PET_FOR_APPOINTMENT = "/{appointmentId}/insert";
     /*============================ End Pet Type API ===============================*/
 
 }
