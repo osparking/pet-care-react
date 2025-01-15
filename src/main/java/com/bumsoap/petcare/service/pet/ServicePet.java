@@ -2,6 +2,7 @@ package com.bumsoap.petcare.service.pet;
 
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.model.Pet;
+import com.bumsoap.petcare.repository.RepositoryAppointment;
 import com.bumsoap.petcare.repository.RepositoryPet;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 public class ServicePet implements IServicePet {
 
     private final RepositoryPet repositoryPet;
+    private final RepositoryAppointment repositoryAppointment;
 
     @Override
     public List<Pet> addPetsForAppointment(List<Pet> pets) {
@@ -63,5 +65,14 @@ public class ServicePet implements IServicePet {
         } else {
             return repositoryPet.getDistinctBreedsByType(type);
         }
+    }
+
+    @Override
+    public Pet addPetForAppointment(Long appointmentId, Pet pet) {
+        var appointment = repositoryAppointment.findById(appointmentId)
+                .orElseThrow(() ->
+                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
+        pet.setAppointment(appointment);
+        return repositoryPet.save(pet);
     }
 }
