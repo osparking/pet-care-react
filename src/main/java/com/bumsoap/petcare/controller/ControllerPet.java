@@ -78,6 +78,18 @@ public class ControllerPet {
         }
     }
 
+    @PostMapping(UrlMapping.ADD_PET_FOR_APPOINTMENT)
+    public ResponseEntity<ApiResponse> addPetForAppointment(@PathVariable Long appointmentId,
+                                                            @RequestBody Pet pet) {
+        try {
+            Pet addedPet = servicePet.addPetForAppointment(appointmentId, pet);
+            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.CREATED, addedPet));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(e.getMessage(), null));
+        }
+    }
+
     @GetMapping(UrlMapping.GET_PET_TYPES)
     public ResponseEntity<ApiResponse> getPetTypes() {
         return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, servicePet.getPetTypes()));
