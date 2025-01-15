@@ -15,4 +15,6 @@ public interface IServicePet {
     List<String> getPetTypes();
 
     List<String> getPetBreeds(String type);
+
+    Pet addPetForAppointment(Long appointmentId, Pet pet);
 }
