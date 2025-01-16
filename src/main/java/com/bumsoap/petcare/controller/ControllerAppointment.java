@@ -122,6 +122,11 @@ public class ControllerAppointment {
         }
     }
 
+    @GetMapping(UrlMapping.COUNT_ALL)
+    public long countAllAppointments(){
+        return serviceAppointment.countAllAppointments();
+    }
+
     @PutMapping(UrlMapping.APPO_COMPLETE)
     public ResponseEntity<ApiResponse> completeAppointment(
             @PathVariable Long id) {
