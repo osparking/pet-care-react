@@ -115,6 +115,20 @@ public class ControllerUser {
         return ResponseEntity.status(FOUND).body(
                 new ApiResponse(FeedbackMessage.FOUND, theUsers));
     }
+
+    @GetMapping(UrlMapping.COUNT_BY_TYPE)
+    public ResponseEntity<ApiResponse> countByType(@RequestParam String type){
+        long count = serviceUser.countByType(type);
+        return ResponseEntity.status(OK).body(
+                new ApiResponse(FeedbackMessage.FOUND, count));
+    }
+
+    @GetMapping(UrlMapping.COUNT_ALL)
+    public ResponseEntity<ApiResponse> countAllUsers(){
+        long count = serviceUser.countAllUsers();
+        return ResponseEntity.status(OK).body(
+                new ApiResponse(FeedbackMessage.FOUND, count));
+    }
 }
 
 
