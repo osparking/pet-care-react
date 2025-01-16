@@ -168,4 +168,14 @@ public class ServiceUser implements IServiceUser {
         }
     }
 
+    @Override
+    public long countByType(String type) {
+        return repositoryUser.countByUserType(type);
+    }
+
+    @Override
+    public long countAllUsers() {
+        return repositoryUser.count();
+    }
+
 }
