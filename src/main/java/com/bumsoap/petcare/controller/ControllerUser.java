@@ -124,10 +124,8 @@ public class ControllerUser {
     }
 
     @GetMapping(UrlMapping.COUNT_ALL)
-    public ResponseEntity<ApiResponse> countAllUsers(){
-        long count = serviceUser.countAllUsers();
-        return ResponseEntity.status(OK).body(
-                new ApiResponse(FeedbackMessage.FOUND, count));
+    public long countAllUsers(){
+        return serviceUser.countAllUsers();
     }
 }
 
