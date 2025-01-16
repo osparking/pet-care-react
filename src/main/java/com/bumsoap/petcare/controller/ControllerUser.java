@@ -117,7 +117,7 @@ public class ControllerUser {
     }
 
     @GetMapping(UrlMapping.COUNT_BY_TYPE)
-    public ResponseEntity<ApiResponse> countByType(@RequestParam String type){
+    public ResponseEntity<ApiResponse> countByType(@PathVariable String type){
         long count = serviceUser.countByType(type);
         return ResponseEntity.status(OK).body(
                 new ApiResponse(FeedbackMessage.FOUND, count));
