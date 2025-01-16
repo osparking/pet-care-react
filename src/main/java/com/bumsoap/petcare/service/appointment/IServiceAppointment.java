@@ -29,4 +29,6 @@ public interface IServiceAppointment {
     Appointment approveAppointment(Long apmtId);
 
     Appointment declineAppointment(Long apmtId);
+
+    long countAllAppointments();
 }

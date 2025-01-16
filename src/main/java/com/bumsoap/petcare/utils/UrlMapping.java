@@ -11,6 +11,7 @@ public class UrlMapping {
     public static final String GET_BY_ID = "/{id}/get_id";
     public static final String DELETE_BY_ID = "/{id}/delete";
     public static final String CREATE = "/create";
+    public static final String COUNT_ALL = "/count";
     /*========================== End Common API =================================*/
 
     /*========================== Start User API =================================*/
@@ -22,7 +23,6 @@ public class UrlMapping {
     public static final String GET_ALL = "/get_all";
     public static final String CHANGE_PASSWORD = "/{userId}/change_pwd";
     public static final String COUNT_BY_TYPE = "/{type}/count";
-    public static final String COUNT_ALL = "/count";
     /*========================== End User API =================================*/
 
     /*========================== Start Appointment API =================================*/

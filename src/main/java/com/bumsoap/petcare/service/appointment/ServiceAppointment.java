@@ -187,6 +187,11 @@ public class ServiceAppointment implements IServiceAppointment {
                 .orElseThrow(() -> new IllegalStateException(
                     FeedbackMessage.NOT_FOUND));
     }
+
+    @Override
+    public long countAllAppointments() {
+        return repositoryAppointment.count();
+    }
 }
 
 
