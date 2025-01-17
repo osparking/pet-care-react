@@ -7,6 +7,7 @@ import com.bumsoap.petcare.request.UserUpdateRequest;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public interface IServiceUser {
     User register(RegistrationRequest request);
@@ -24,4 +25,6 @@ public interface IServiceUser {
     long countByType(String type);
 
     long countAllUsers();
+
+    Map<String, Map<String, Long>> countUsersByMonthAndType();
 }

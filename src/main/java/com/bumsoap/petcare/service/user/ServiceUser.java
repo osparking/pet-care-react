@@ -23,7 +23,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
+import java.time.Month;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -178,4 +182,14 @@ public class ServiceUser implements IServiceUser {
         return repositoryUser.count();
     }
 
+    @Override
+    public Map<String, Map<String, Long>> countUsersByMonthAndType() {
+        List<User> users = repositoryUser.findAll();
+        var mapMonthType = users.stream().collect(Collectors.groupingBy(user ->
+                Month.of(user.getCreatedAt().getMonthValue())
+                        .getDisplayName(TextStyle.FULL, Locale.KOREAN),
+                Collectors.groupingBy(user -> user.getUserType(),
+                        Collectors.counting())));
+        return mapMonthType;
+    }
 }
