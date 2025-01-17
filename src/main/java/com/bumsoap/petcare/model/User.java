@@ -35,7 +35,8 @@ public class User {
 
     public String createdAtMonth() {
         int monInt = createdAt.getMonthValue();
-        String monStr = String.format("%02d월", monInt);
+        int yearInt = createdAt.getYear();
+        String monStr = String.format("%d-%02d월", yearInt, monInt);
         return monStr;
     }
 
