@@ -123,6 +123,18 @@ public class ControllerUser {
                 new ApiResponse(FeedbackMessage.FOUND, count));
     }
 
+    @GetMapping(UrlMapping.COUNT_BY_MONTH_USER_TYPE)
+    public ResponseEntity<ApiResponse> countUsersByMonthAndType(){
+        try {
+            var userStat = serviceUser.countUsersByMonthAndType();
+            return ResponseEntity.status(OK)
+                    .body(new ApiResponse(FeedbackMessage.FOUND, userStat));
+        } catch (Exception e) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(e.getMessage(), null));
+        }
+    }
+
     @GetMapping(UrlMapping.COUNT_ALL)
     public long countAllUsers(){
         return serviceUser.countAllUsers();
