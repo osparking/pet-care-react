@@ -33,6 +33,12 @@ public class User {
     @CreationTimestamp
     private LocalDate createdAt;
 
+    public String createdAtMonth() {
+        int monInt = createdAt.getMonthValue();
+        String monStr = String.format("%02d월", monInt);
+        return monStr;
+    }
+
     @Transient
     private String specialization;
 
