@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 @Service
@@ -186,6 +187,8 @@ public class ServiceUser implements IServiceUser {
                 User::createdAtMonth,
                 Collectors.groupingBy(user -> user.getUserType(),
                         Collectors.counting())));
-        return mapMonthType;
+        var sorted = new TreeMap<String, Map<String, Long>>();
+        sorted.putAll(mapMonthType);
+        return sorted;
     }
 }
