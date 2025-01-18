@@ -20,9 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 import static com.bumsoap.petcare.utils.StatusAppointment.*;
 
@@ -191,6 +189,20 @@ public class ServiceAppointment implements IServiceAppointment {
     @Override
     public long countAllAppointments() {
         return repositoryAppointment.count();
+    }
+
+    /**
+     * 예약 상태(승인 대기 등)별 건수(count) 맵 반환 메소드
+     * @param status 예약 상태
+     * @param count 예약 건수
+     * @return 상태-키, 건수-값 쌍의 맴 항목을 가지는 맴
+     */
+    private Map<String, Object> createStatusCountMap(
+            StatusAppointment status, Long count) {
+        Map<String, Object> countMap = new HashMap<>();
+        countMap.put("status", status.toString());
+        countMap.put("count", count);
+        return countMap;
     }
 }
 
