@@ -201,8 +201,8 @@ public class ServiceAppointment implements IServiceAppointment {
     private Map<String, Object> createStatusCountMap(
             StatusAppointment status, Long count) {
         Map<String, Object> countMap = new HashMap<>();
-        countMap.put("status", status.toString());
-        countMap.put("count", count);
+        countMap.put("name", status.toString());
+        countMap.put("value", count);
         return countMap;
     }
 
