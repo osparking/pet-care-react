@@ -6,6 +6,7 @@ import com.bumsoap.petcare.request.AppointmentRequest;
 import com.bumsoap.petcare.request.AppointmentUpdateRequest;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IServiceAppointment {
     Appointment createAppointment(
@@ -31,4 +32,6 @@ public interface IServiceAppointment {
     Appointment declineAppointment(Long apmtId);
 
     long countAllAppointments();
+
+    List<Map<String, Object>> getAppointData();
 }

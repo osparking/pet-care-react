@@ -211,6 +211,7 @@ public class ServiceAppointment implements IServiceAppointment {
      * 맵 목록을 게산한다.
      * @return 상태가 키이고, 건수가 값인 맵이 요소인 목록
      */
+    @Override
     public List<Map<String, Object>> getAppointData() {
         var midPoint = getAllAppointments()
                 .stream()
