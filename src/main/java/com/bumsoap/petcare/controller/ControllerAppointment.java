@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
@@ -173,6 +176,18 @@ public class ControllerAppointment {
                     new ApiResponse(FeedbackMessage.APPOINTMENT_DECLINED, appointment));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
+                    .body(new ApiResponse(e.getMessage(), null));
+        }
+    }
+
+    @GetMapping(UrlMapping.APPOINT_DATA)
+    public ResponseEntity<ApiResponse> getAppointData(){
+        try {
+            List<Map<String, Object>> data = serviceAppointment.getAppointData();
+            return ResponseEntity.ok(
+                    new ApiResponse(FeedbackMessage.APPO_STAT_COLLECTED, data));
+        } catch (Exception e) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse(e.getMessage(), null));
         }
     }

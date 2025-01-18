@@ -34,6 +34,7 @@ public class UrlMapping {
     public static final String APPO_CANCEL = "/{id}/cancel";
     public static final String APPO_APPROVE = "/{id}/approve";
     public static final String APPO_DECLINE = "/{id}/decline";
+    public static final String APPOINT_DATA = "/appoint_data";
     /*========================= End Appointment API ================================*/
 
     /*============================ Start Photo API ===================================*/

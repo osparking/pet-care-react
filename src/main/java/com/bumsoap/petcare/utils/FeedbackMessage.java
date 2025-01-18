@@ -21,4 +21,5 @@ public class FeedbackMessage {
     public static final String APPOINTMENT_CANCELED = "예약 취소 완료";
     public static final String APPOINTMENT_APPROVED = "예약 승인 완료";
     public static final String APPOINTMENT_DECLINED = "예약 거부 처리";
+    public static final String APPO_STAT_COLLECTED = "예약상태 건수통계수집 성공";
 }
