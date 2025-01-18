@@ -135,6 +135,18 @@ public class ControllerUser {
         }
     }
 
+    @GetMapping(UrlMapping.COUNT_BY_ACTIVE_STAT)
+    public ResponseEntity<ApiResponse> countUserActiveStatistics(){
+        try {
+            var userStat = serviceUser.serveUserActiveStatistics();
+            return ResponseEntity.ok(
+                    new ApiResponse(FeedbackMessage.FOUND, userStat));
+        } catch (Exception e) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(e.getMessage(), null));
+        }
+    }
+
     @GetMapping(UrlMapping.COUNT_ALL)
     public long countAllUsers(){
         return serviceUser.countAllUsers();

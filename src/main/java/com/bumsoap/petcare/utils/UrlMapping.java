@@ -24,6 +24,7 @@ public class UrlMapping {
     public static final String CHANGE_PASSWORD = "/{userId}/change_pwd";
     public static final String COUNT_BY_TYPE = "/{type}/count";
     public static final String COUNT_BY_MONTH_USER_TYPE = "/count_month_utype";
+    public static final String COUNT_BY_ACTIVE_STAT = "/active_stat";
     /*========================== End User API =================================*/
 
     /*========================== Start Appointment API =================================*/
