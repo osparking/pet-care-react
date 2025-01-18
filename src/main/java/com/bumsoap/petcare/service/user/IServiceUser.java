@@ -27,4 +27,6 @@ public interface IServiceUser {
     long countAllUsers();
 
     Map<String, Map<String, Long>> countUsersByMonthAndType();
+
+    Map<String, Map<String, Long>> serveUserActiveStatistics();
 }

@@ -191,4 +191,14 @@ public class ServiceUser implements IServiceUser {
         sorted.putAll(mapMonthType);
         return sorted;
     }
+
+    @Override
+    public Map<String, Map<String, Long>> serveUserActiveStatistics() {
+        List<User> users = repositoryUser.findAll();
+        var userCountByEnUt = users.stream().collect(Collectors.groupingBy(
+                user -> user.getEnabled() ? "Enabled" : "Disabled",
+                Collectors.groupingBy(User::getUserType,
+                        Collectors.counting())));
+        return userCountByEnUt;
+    }
 }
