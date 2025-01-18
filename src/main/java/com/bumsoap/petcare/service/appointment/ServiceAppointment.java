@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.bumsoap.petcare.utils.StatusAppointment.*;
 
@@ -203,6 +204,26 @@ public class ServiceAppointment implements IServiceAppointment {
         countMap.put("status", status.toString());
         countMap.put("count", count);
         return countMap;
+    }
+
+    /**
+     * 모든 예약을 상태별로 수를 헤아리고, 하나 이상인 상태를 모아 <상태명, 건수>의
+     * 맵 목록을 게산한다.
+     * @return 상태가 키이고, 건수가 값인 맵이 요소인 목록
+     */
+    public List<Map<String, Object>> getAppointData() {
+        var midPoint = getAllAppointments()
+                .stream()
+                .collect(Collectors.groupingBy(
+                        Appointment::getStatus, Collectors.counting()))
+                .entrySet();
+        var result = midPoint
+                .stream()
+                .filter(entry -> entry.getValue() > 0)
+                .map(entry -> createStatusCountMap(
+                        entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
+        return result;
     }
 }
 
