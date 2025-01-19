@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -109,4 +110,13 @@ public class ServiceVet implements IServiceVet {
         }
         return dtoUser;
     }
+
+    public List<Map<String, Object>> countVetBySpecial() {
+        List<Object[]> results = repositoryVet.countVetBySpecial();
+        return results.stream()
+                .map(result ->
+                        Map.of("specialty", result[0], "count", result[1]))
+                .collect(Collectors.toList());
+    }
+
 }
