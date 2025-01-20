@@ -115,8 +115,10 @@ public class ServiceVet implements IServiceVet {
     public List<Map<String, Object>> countVetBySpecial() {
         List<Object[]> results = repositoryVet.countVetBySpecial();
         return results.stream()
-                .map(result ->
-                        Map.of("specialty", result[0], "count", result[1]))
+                .map(result -> Map.of("specialty", result[0],
+                        "count", result[1],
+                        "color", Math.abs(result[0].hashCode() % 360))
+                )
                 .collect(Collectors.toList());
     }
 
