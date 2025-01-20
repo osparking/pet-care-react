@@ -11,4 +11,8 @@ public interface RepositoryVet extends JpaRepository<Veterinarian, Long> {
     boolean existsBySpecialization(String speciality);
     @Query("SELECT DISTINCT v.specialization FROM Veterinarian v")
     List<String> getDistinctSpecial();
+
+    @Query("select distinct v.specialization, count(*) from veterinarian v " +
+            "group by specialization order by count(*) desc")
+    List<Object[]> countVetBySpecial();
 }
