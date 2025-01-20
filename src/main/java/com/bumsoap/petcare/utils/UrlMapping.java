@@ -54,6 +54,7 @@ public class UrlMapping {
     public static final String GET_ALL_VETS = "/get_all_vets";
     public static final String GET_AVAILABLE_VETS = "/search_vets" ;
     public static final String GET_ALL_SPECIALIZATIONS = "/get_all_specializations";
+    public static final String GET_VET_COUNT_BY_SPECIAL = "/get_vet_count_by_special";
     /*============================ End VET API ===============================*/
 
     /*============================ Start Pet Type API ===============================*/

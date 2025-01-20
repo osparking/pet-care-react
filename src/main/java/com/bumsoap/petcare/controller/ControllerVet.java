@@ -55,4 +55,10 @@ public class ControllerVet {
                     .body(new ApiResponse(ex.getMessage(), null));
         }
     }
+
+    @GetMapping(UrlMapping.GET_VET_COUNT_BY_SPECIAL)
+    public ResponseEntity<ApiResponse> getVetCountBySpecial(){
+        var result = serviceVet.countVetBySpecial();
+        return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, result));
+    }
 }

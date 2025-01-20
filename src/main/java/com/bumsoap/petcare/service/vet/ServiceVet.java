@@ -111,6 +111,7 @@ public class ServiceVet implements IServiceVet {
         return dtoUser;
     }
 
+    @Override
     public List<Map<String, Object>> countVetBySpecial() {
         List<Object[]> results = repositoryVet.countVetBySpecial();
         return results.stream()
