@@ -29,4 +29,6 @@ public interface IServiceUser {
     Map<String, Map<String, Long>> countUsersByMonthAndType();
 
     Map<String, Map<String, Long>> serveUserActiveStatistics();
+
+    void updateEnabledStat(boolean flag, String userId);
 }

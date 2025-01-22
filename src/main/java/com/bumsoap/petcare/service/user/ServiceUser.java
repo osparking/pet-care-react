@@ -201,4 +201,9 @@ public class ServiceUser implements IServiceUser {
                         Collectors.counting())));
         return userCountByEnUt;
     }
+
+    @Override
+    public void updateEnabledStat(boolean flag, String userId) {
+        repositoryUser.updateEnabledStat(flag, userId);
+    }
 }
