@@ -19,7 +19,7 @@ public interface RepositoryUser extends JpaRepository<User, Long> {
     long countByUserType(String type);
 
     @Modifying
-    @Query("UPDATE User u SET u.isEnabled = :flag WHERE u.id = :userId")
+    @Query("UPDATE User u SET u.enabled = :flag WHERE u.id = :userId")
     int updateEnabledStat(
             @Param("flag") boolean flag, @Param("userId") Long userId);
 }
