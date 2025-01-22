@@ -30,5 +30,5 @@ public interface IServiceUser {
 
     Map<String, Map<String, Long>> serveUserActiveStatistics();
 
-    void updateEnabledStat(boolean flag, String userId);
+    int updateEnabledStat(boolean flag, String userId);
 }
