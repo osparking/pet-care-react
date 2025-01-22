@@ -151,6 +151,31 @@ public class ControllerUser {
     public long countAllUsers(){
         return serviceUser.countAllUsers();
     }
+
+    @PutMapping(UrlMapping.TOGGLE_ENABLED)
+    public ResponseEntity<ApiResponse> toggleUserEnabledStat(
+            @PathVariable Long userId, @PathVariable String flag) {
+        try {
+            boolean enabled = false;
+            if ("true".equalsIgnoreCase(flag)) {
+                enabled = true;
+            } else if ("false".equalsIgnoreCase(flag)) {
+                enabled = false;
+            } else {
+                throw new RuntimeException("미지의 활성화 값: " + flag);
+            }
+            int count = serviceUser.updateEnabledStat(enabled, userId);
+            if (count == 1) {
+                return ResponseEntity.ok(
+                        new ApiResponse(FeedbackMessage.RESOURCE_UPDATED, null));
+            } else {
+                throw new RuntimeException("갱신된 유저 계정 수 불일치");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(e.getMessage(), null));
+        }
+    }
 }
 
 
