@@ -152,6 +152,7 @@ public class ControllerUser {
         return serviceUser.countAllUsers();
     }
 
+    @Transactional
     @PutMapping(UrlMapping.TOGGLE_ENABLED)
     public ResponseEntity<ApiResponse> toggleUserEnabledStat(
             @PathVariable Long userId, @PathVariable String flag) {
