@@ -25,6 +25,7 @@ public class UrlMapping {
     public static final String COUNT_BY_TYPE = "/{type}/count";
     public static final String COUNT_BY_MONTH_USER_TYPE = "/count_month_utype";
     public static final String COUNT_BY_ACTIVE_STAT = "/active_stat";
+    public static final String TOGGLE_ENABLED = "/toggle/{userId}/{flag}";
     /*========================== End User API =================================*/
 
     /*========================== Start Appointment API =================================*/
