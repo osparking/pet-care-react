@@ -21,5 +21,5 @@ public interface RepositoryUser extends JpaRepository<User, Long> {
     @Modifying
     @Query("UPDATE User u SET u.isEnabled = :flag WHERE u.id = :userId")
     int updateEnabledStat(
-            @Param("flag") boolean flag, @Param("userId") String userId);
+            @Param("flag") boolean flag, @Param("userId") Long userId);
 }

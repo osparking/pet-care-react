@@ -203,7 +203,7 @@ public class ServiceUser implements IServiceUser {
     }
 
     @Override
-    public int updateEnabledStat(boolean flag, String userId) {
+    public int updateEnabledStat(boolean flag, Long userId) {
         return repositoryUser.updateEnabledStat(flag, userId);
     }
 }
