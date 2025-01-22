@@ -41,7 +41,7 @@ public class ControllerUser {
             return ResponseEntity.badRequest().body(new ApiResponse(e.getMessage(), null));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
-                   .body(new ApiResponse(e.getMessage(), null));
+                    .body(new ApiResponse(e.getMessage(), null));
         } catch (Exception e) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse(e.getMessage(), null));
@@ -75,7 +75,7 @@ public class ControllerUser {
                     .body(new ApiResponse(ex.getMessage(), null));
         } catch (Exception ex) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR)
-                   .body(new ApiResponse(ex.getMessage(), null));
+                    .body(new ApiResponse(ex.getMessage(), null));
         }
     }
 
@@ -87,10 +87,10 @@ public class ControllerUser {
             return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, userDto));
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(NOT_FOUND)
-                   .body(new ApiResponse(ex.getMessage(), null));
+                    .body(new ApiResponse(ex.getMessage(), null));
         } catch (Exception ex) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR)
-                   .body(new ApiResponse(ex.getMessage(), null));
+                    .body(new ApiResponse(ex.getMessage(), null));
         }
     }
 
@@ -102,29 +102,29 @@ public class ControllerUser {
             return ResponseEntity.ok(new ApiResponse(FeedbackMessage.RESOURCE_DELETED, null));
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(NOT_FOUND)
-                   .body(new ApiResponse(ex.getMessage(), null));
+                    .body(new ApiResponse(ex.getMessage(), null));
         } catch (Exception ex) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR)
-                   .body(new ApiResponse(ex.getMessage(), null));
+                    .body(new ApiResponse(ex.getMessage(), null));
         }
     }
 
     @GetMapping(UrlMapping.GET_ALL)
-    public ResponseEntity<ApiResponse> getAllUsers(){
+    public ResponseEntity<ApiResponse> getAllUsers() {
         List<DtoUser> theUsers = serviceUser.getAllUsers();
         return ResponseEntity.status(FOUND).body(
                 new ApiResponse(FeedbackMessage.FOUND, theUsers));
     }
 
     @GetMapping(UrlMapping.COUNT_BY_TYPE)
-    public ResponseEntity<ApiResponse> countByType(@PathVariable String type){
+    public ResponseEntity<ApiResponse> countByType(@PathVariable String type) {
         long count = serviceUser.countByType(type);
         return ResponseEntity.status(OK).body(
                 new ApiResponse(FeedbackMessage.FOUND, count));
     }
 
     @GetMapping(UrlMapping.COUNT_BY_MONTH_USER_TYPE)
-    public ResponseEntity<ApiResponse> countUsersByMonthAndType(){
+    public ResponseEntity<ApiResponse> countUsersByMonthAndType() {
         try {
             var userStat = serviceUser.countUsersByMonthAndType();
             return ResponseEntity.status(OK)
@@ -136,7 +136,7 @@ public class ControllerUser {
     }
 
     @GetMapping(UrlMapping.COUNT_BY_ACTIVE_STAT)
-    public ResponseEntity<ApiResponse> countUserActiveStatistics(){
+    public ResponseEntity<ApiResponse> countUserActiveStatistics() {
         try {
             var userStat = serviceUser.serveUserActiveStatistics();
             return ResponseEntity.ok(
@@ -148,7 +148,7 @@ public class ControllerUser {
     }
 
     @GetMapping(UrlMapping.COUNT_ALL)
-    public long countAllUsers(){
+    public long countAllUsers() {
         return serviceUser.countAllUsers();
     }
 
