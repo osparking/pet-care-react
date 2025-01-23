@@ -14,7 +14,7 @@ import java.util.List;
 public interface RepositoryUser extends JpaRepository<User, Long> {
     boolean existsByEmail(String email);
 
-    List<Veterinarian> findAllByUserType(String vet);
+    List<User> findAllByUserType(String vet);
 
     long countByUserType(String type);
 
