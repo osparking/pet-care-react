@@ -39,7 +39,8 @@ public class ServiceVet implements IServiceVet {
 
     @Override
     public List<DtoUser> getAllVetsWithDetails() {
-        List<Veterinarian> veterinarians = repositoryUser.findAllByUserType("VET");
+        var veterinarians = (List<Veterinarian>)
+                (List<?>)repositoryUser.findAllByUserType("VET");
         return veterinarians.stream()
                .map(this::mapVeterinarianToDtoUser)
                .toList();
