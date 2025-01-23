@@ -20,6 +20,8 @@ public interface IServiceUser {
 
     List<DtoUser> getAllUsers();
 
+    List<DtoUser> getAllPatients();
+
     DtoUser getDtoUserById(Long userId) throws SQLException;
 
     long countByType(String type);

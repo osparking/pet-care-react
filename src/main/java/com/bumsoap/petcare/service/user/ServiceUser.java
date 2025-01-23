@@ -206,4 +206,12 @@ public class ServiceUser implements IServiceUser {
     public int updateEnabledStat(boolean flag, Long userId) {
         return repositoryUser.updateEnabledStat(flag, userId);
     }
+
+    @Override
+    public List<DtoUser> getAllPatients() {
+        return repositoryUser.findAllByUserType("PATIENT").stream()
+                .map(user -> entityConverter.mapEntityToDto(user, DtoUser.class))
+                .collect(Collectors.toList());
+    }
+
 }
