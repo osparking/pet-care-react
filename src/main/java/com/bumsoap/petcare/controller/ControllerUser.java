@@ -177,6 +177,13 @@ public class ControllerUser {
                     .body(new ApiResponse(e.getMessage(), null));
         }
     }
+
+    @GetMapping(UrlMapping.GET_ALL_PATIENTS)
+    public ResponseEntity<ApiResponse> getAllPatients() {
+        List<DtoUser> theUsers = serviceUser.getAllPatients();
+        return ResponseEntity.status(FOUND).body(
+                new ApiResponse(FeedbackMessage.FOUND, theUsers));
+    }
 }
 
 
