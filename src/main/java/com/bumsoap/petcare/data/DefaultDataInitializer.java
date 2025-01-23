@@ -20,7 +20,8 @@ public class DefaultDataInitializer
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-
+        createDefaultVetIfNotExits();
+        createDefaultPatientIfNotExits();
     }
 
     private void createDefaultPatientIfNotExits(){
