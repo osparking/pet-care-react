@@ -21,6 +21,7 @@ public class UrlMapping {
     public static final String USER_BY_ID = "/user/{userId}";
     public static final String DELETE_USER = "/delete/{userId}";
     public static final String GET_ALL = "/get_all";
+    public static final String GET_ALL_PATIENTS = "/get_all_patients";
     public static final String CHANGE_PASSWORD = "/{userId}/change_pwd";
     public static final String COUNT_BY_TYPE = "/{type}/count";
     public static final String COUNT_BY_MONTH_USER_TYPE = "/count_month_utype";
