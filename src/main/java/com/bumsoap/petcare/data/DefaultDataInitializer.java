@@ -1,5 +1,6 @@
 package com.bumsoap.petcare.data;
 
+import com.bumsoap.petcare.model.Patient;
 import com.bumsoap.petcare.model.Veterinarian;
 import com.bumsoap.petcare.repository.RepositoryPatient;
 import com.bumsoap.petcare.repository.RepositoryUser;
@@ -20,6 +21,26 @@ public class DefaultDataInitializer
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
 
+    }
+
+    private void createDefaultPatientIfNotExits(){
+        for (int i = 1; i<=10; i++){
+            String defaultEmail = "pat"+i+"@gmail.com";
+            if (userRepository.existsByEmail(defaultEmail)){
+                continue;
+            }
+            Patient pat = new Patient();
+            pat.setFirstName("강호" + i);
+            pat.setLastName("한");
+            pat.setGender("female");
+            pat.setMobile("01045678908");
+            pat.setEmail(defaultEmail);
+            pat.setPassword("password" + i);
+            pat.setUserType("PATIENT");
+            Patient thePatient = patientRepository.save(pat);
+            thePatient.setEnabled(true);
+            System.out.println("제 " + i + " 팻 주인이 만들어 졌습니다.");
+        }
     }
 
     private void createDefaultVetIfNotExits() {
