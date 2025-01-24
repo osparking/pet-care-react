@@ -28,7 +28,7 @@ public class User {
     private String email;
     private String password;
     private String userType;
-    private Boolean enabled;
+    private Boolean enabled = true;
 
     @CreationTimestamp
     private LocalDate createdAt;
