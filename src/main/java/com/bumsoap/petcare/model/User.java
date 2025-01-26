@@ -9,6 +9,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 @Getter @Setter
@@ -32,6 +34,10 @@ public class User {
 
     @CreationTimestamp
     private LocalDate createdAt;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH,
+            CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private Collection<Role> roles = new HashSet<>();
 
     public String createdAtMonth() {
         int monInt = createdAt.getMonthValue();
