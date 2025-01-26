@@ -34,10 +34,14 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                 var userDetails = userDetailsService.loadUserByUsername(email);
                 var authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, userDetails.getAuthorities());
+                authentication.setDetails(new WebAuthenticationDetailsSource()
+                        .buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
             throw new ServletException(e.getMessage());
         }
+        filterChain.doFilter(request, response);
     }
 
     private String getJwtFromRequest(HttpServletRequest request) {
