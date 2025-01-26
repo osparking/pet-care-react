@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface RepositoryUser extends JpaRepository<User, Long> {
@@ -22,4 +23,6 @@ public interface RepositoryUser extends JpaRepository<User, Long> {
     @Query("UPDATE User u SET u.enabled = :flag WHERE u.id = :userId")
     int updateEnabledStat(
             @Param("flag") boolean flag, @Param("userId") Long userId);
+
+    Optional<User> findByEmail(String email);
 }
