@@ -1,6 +1,8 @@
 package com.bumsoap.petcare.security.jwt;
 
 import com.bumsoap.petcare.security.user.PcUserDetails;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
@@ -19,7 +21,13 @@ public class JwtUtil {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority).toList();
 
-        return "";
+        return Jwts.builder().setSubject(userDetails.getUsername())
+                .claim("id", userDetails.getId())
+                .claim("roles", roles)
+                .setIssuedAt(new java.util.Date())
+                .setExpiration(new java.util.Date(expirationMs
+                        + System.currentTimeMillis()))
+                .signWith(key(), SignatureAlgorithm.HS256).compact();
     }
 
     private Key key() {
