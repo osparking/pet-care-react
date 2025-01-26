@@ -1,12 +1,12 @@
 package com.bumsoap.petcare.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
+
+import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 @NoArgsConstructor
@@ -21,4 +21,9 @@ public class Role {
         this.name = name;
     }
 
+    @ManyToMany
+    private Collection<User> users = new HashSet<>();
+    public String getName() {
+        return name == null ? "" : name;
+    }
 }
