@@ -53,6 +53,11 @@ public class AppSecurityConfig {
         return authenticationProvider;
     }
 
+    private static  String[] URLS = {
+            "/api/v1/appointments/book-appointment",
+            "/api/v1/reviews/**"
+    };
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
@@ -62,7 +67,7 @@ public class AppSecurityConfig {
                         -> session.sessionCreationPolicy(
                                 SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth
-                        ->auth.requestMatchers("")
+                        ->auth.requestMatchers(URLS)
                         .authenticated().anyRequest().permitAll());
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(
