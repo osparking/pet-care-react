@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +42,10 @@ public class ControllerAuth {
                     new ApiResponse("계정 인증에 성공하였습니다.", jwtResponse));
         } catch (DisabledException e) {
             return ResponseEntity.status(UNAUTHORIZED).body(
-                    new ApiResponse("계정이 사용 중지 되었습니다.", e.getMessage()));
+                    new ApiResponse("계정이 사용 중지 되었습니다.", null));
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(UNAUTHORIZED).body(
+                    new ApiResponse("계정 인증 실패", "로그인 자격 정보 오류"));
         }
     }
 }
