@@ -14,6 +14,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
@@ -27,6 +28,7 @@ public class ControllerAuth {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
+    @PostMapping("/login")
     public ResponseEntity<ApiResponse> login (@Valid LoginRequest request) {
         try {
             var authentication = authenticationManager.authenticate(
