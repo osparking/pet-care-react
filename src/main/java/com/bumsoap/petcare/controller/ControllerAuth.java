@@ -7,12 +7,17 @@ import com.bumsoap.petcare.security.jwt.JwtUtil;
 import com.bumsoap.petcare.security.user.PcUserDetails;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
+
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @RestController
 @RequestMapping("/auth")
@@ -32,9 +37,11 @@ public class ControllerAuth {
             PcUserDetails userDetails =
                     (PcUserDetails) authentication.getPrincipal();
             JwtResponse jwtResponse = new JwtResponse(userDetails.getId(), jwt);
-        } catch (Exception e) {
-            e.printStackTrace();
+            return ResponseEntity.ok(
+                    new ApiResponse("계정 인증에 성공하였습니다.", jwtResponse));
+        } catch (DisabledException e) {
+            return ResponseEntity.status(UNAUTHORIZED).body(
+                    new ApiResponse("계정이 사용 중지 되었습니다.", e.getMessage()));
         }
-        return null;
     }
 }
