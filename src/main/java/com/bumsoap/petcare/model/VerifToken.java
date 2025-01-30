@@ -20,4 +20,10 @@ public class VerifToken {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public VerifToken(String token, User user) {
+        this.token = token;
+        this.user = user;
+        this.expireDate = new Date();
+    }
+
 }
