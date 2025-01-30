@@ -15,6 +15,7 @@ import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.UrlMapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,7 @@ public class ControllerUser {
     private final ServiceUser serviceUser;
     private final EntityConverter<User, DtoUser> userConverter;
     private final ServicePwdChangeI servicePwdChangeI;
+    private final PasswordEncoder passwordEncoder;
 
     @PutMapping(UrlMapping.CHANGE_PASSWORD)
     public ResponseEntity<ApiResponse> changePassword(
@@ -51,6 +53,8 @@ public class ControllerUser {
     @PostMapping(UrlMapping.REGISTER_USER)
     public ResponseEntity<ApiResponse> register(@RequestBody RegistrationRequest request) {
         try {
+            String encodedPwd = passwordEncoder.encode(request.getPassword());
+            request.setPassword(encodedPwd);
             User userSaved = serviceUser.register(request);
             DtoUser userDto = userConverter.mapEntityToDto(userSaved, DtoUser.class);
             return ResponseEntity.ok(new ApiResponse(FeedbackMessage.CREATED, userDto));
