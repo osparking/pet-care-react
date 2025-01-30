@@ -1,5 +1,6 @@
 package com.bumsoap.petcare.model;
 
+import com.bumsoap.petcare.utils.SystemUtils;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,7 @@ public class VerifToken {
     public VerifToken(String token, User user) {
         this.token = token;
         this.user = user;
-        this.expireDate = new Date();
+        this.expireDate = SystemUtils.getExpireTime();
     }
 
 }
