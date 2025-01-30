@@ -22,4 +22,7 @@ public class FeedbackMessage {
     public static final String APPOINTMENT_APPROVED = "예약 승인 완료";
     public static final String APPOINTMENT_DECLINED = "예약 거부 처리";
     public static final String APPO_STAT_COLLECTED = "예약상태 건수통계수집 성공";
+    public static final String AUTH_SUCCESS = "계정 인증 성공";
+    public static final String DISABLED_USER = "사용 중지된 계정";
+    public static final String BAD_CREDENTIAL = "로그인 자격 정보 오류";
 }

@@ -5,6 +5,7 @@ import com.bumsoap.petcare.response.ApiResponse;
 import com.bumsoap.petcare.response.JwtResponse;
 import com.bumsoap.petcare.security.jwt.JwtUtil;
 import com.bumsoap.petcare.security.user.PcUserDetails;
+import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.UrlMapping;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -38,13 +39,13 @@ public class ControllerAuth {
                     (PcUserDetails) authentication.getPrincipal();
             JwtResponse jwtResponse = new JwtResponse(userDetails.getId(), jwt);
             return ResponseEntity.ok(
-                    new ApiResponse("계정 인증에 성공하였습니다.", jwtResponse));
+                    new ApiResponse(FeedbackMessage.AUTH_SUCCESS, jwtResponse));
         } catch (DisabledException e) {
             return ResponseEntity.status(UNAUTHORIZED).body(
-                    new ApiResponse("계정이 사용 중지 되었습니다.", null));
+                    new ApiResponse(FeedbackMessage.DISABLED_USER, null));
         } catch (AuthenticationException e) {
             return ResponseEntity.status(UNAUTHORIZED).body(
-                    new ApiResponse(e.getMessage(), "로그인 자격 정보 오류"));
+                    new ApiResponse(e.getMessage(), FeedbackMessage.BAD_CREDENTIAL));
         }
     }
 }
