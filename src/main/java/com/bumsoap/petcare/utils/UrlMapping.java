@@ -67,4 +67,9 @@ public class UrlMapping {
     public static final String ADD_PET_FOR_APPOINTMENT = "/{appointmentId}/insert";
     /*============================ End Pet Type API ===============================*/
 
+    /*============================  Start Auth Type API ============================*/
+    public static final String AUTH = API + "/auth";
+    public static final String LOGIN = "/login";
+    /*========================== End AUth type API ============================= */
+
 }

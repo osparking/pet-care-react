@@ -5,9 +5,9 @@ import com.bumsoap.petcare.response.ApiResponse;
 import com.bumsoap.petcare.response.JwtResponse;
 import com.bumsoap.petcare.security.jwt.JwtUtil;
 import com.bumsoap.petcare.security.user.PcUserDetails;
+import com.bumsoap.petcare.utils.UrlMapping;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.DisabledException;
@@ -16,20 +16,20 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpClientErrorException;
 
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping(UrlMapping.AUTH)
 @RequiredArgsConstructor
 public class ControllerAuth {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
-    @PostMapping("/login")
-    public ResponseEntity<ApiResponse> login (@Valid LoginRequest request) {
+    @PostMapping(UrlMapping.LOGIN)
+    public ResponseEntity<ApiResponse> login (@Valid @RequestParam LoginRequest request) {
         try {
             var authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
