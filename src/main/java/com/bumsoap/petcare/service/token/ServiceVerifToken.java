@@ -2,10 +2,17 @@ package com.bumsoap.petcare.service.token;
 
 import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.model.VerifToken;
+import com.bumsoap.petcare.repository.RepositoryUser;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
+@RequiredArgsConstructor
 public class ServiceVerifToken implements  IServiceVerifToken{
+    private final RepositoryUser userRepository;
+
     @Override
     public String validateToken(String token) {
         return "";
