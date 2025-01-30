@@ -1,11 +1,10 @@
 package com.bumsoap.petcare.request;
 
-import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data
 public class RegistrationRequest {
-    private  Long id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String gender;
@@ -13,6 +12,6 @@ public class RegistrationRequest {
     private String email;
     private String password;
     private String userType;
-    private boolean isEnabled;
+    private boolean enabled = true;
     private String specialization;
 }
