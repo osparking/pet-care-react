@@ -11,5 +11,5 @@ public interface IServiceVerifToken {
     VerifToken makeNewToken(String oldToken);
     Optional<VerifToken> findByToken(String token);
     void deleteTokenById(Long id);
-
+    boolean tokenHasExipred(String token);
 }
