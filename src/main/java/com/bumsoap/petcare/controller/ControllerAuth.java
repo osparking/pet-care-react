@@ -44,7 +44,7 @@ public class ControllerAuth {
                     new ApiResponse("계정이 사용 중지 되었습니다.", null));
         } catch (AuthenticationException e) {
             return ResponseEntity.status(UNAUTHORIZED).body(
-                    new ApiResponse("계정 인증 실패", "로그인 자격 정보 오류"));
+                    new ApiResponse(e.getMessage(), "로그인 자격 정보 오류"));
         }
     }
 }
