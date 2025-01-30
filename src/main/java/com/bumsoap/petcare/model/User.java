@@ -37,6 +37,9 @@ public class User {
     @CreationTimestamp
     private LocalDate createdAt;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<VerifToken> verifTokens = new ArrayList<>();
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH,
             CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "user_roles",
