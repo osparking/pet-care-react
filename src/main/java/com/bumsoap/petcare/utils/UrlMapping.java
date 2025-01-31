@@ -72,4 +72,8 @@ public class UrlMapping {
     public static final String LOGIN = "/login";
     /*========================== End AUth type API ============================= */
 
+    /*============================  Start Verification Type API ====================*/
+    public static final String VERIFY_TOKEN = API + "/verify" ;
+    /*========================== End Verification type API ======================= */
+
 }
