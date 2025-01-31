@@ -57,7 +57,7 @@ public class ServiceVerifToken implements  IServiceVerifToken{
 
     @Override
     public Optional<VerifToken> findByToken(String token) {
-        return Optional.empty();
+        return tokenRepository.findByToken(token);
     }
 
     @Override
