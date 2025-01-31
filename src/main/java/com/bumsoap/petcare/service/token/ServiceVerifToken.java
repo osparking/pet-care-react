@@ -36,7 +36,8 @@ public class ServiceVerifToken implements  IServiceVerifToken{
 
     @Override
     public void saveUserVerifToken(String token, User user) {
-
+        var verifToken = new VerifToken(token, user);
+        tokenRepository.save(verifToken);
     }
 
     @Override
