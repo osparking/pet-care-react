@@ -4,10 +4,12 @@ import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.model.VerifToken;
 import com.bumsoap.petcare.repository.RepositoryUser;
 import com.bumsoap.petcare.repository.RepositoryVerifToken;
+import com.bumsoap.petcare.utils.SystemUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -42,7 +44,15 @@ public class ServiceVerifToken implements  IServiceVerifToken{
 
     @Override
     public VerifToken makeNewToken(String oldToken) {
-        return null;
+        var optionalToken = findByToken(oldToken);
+        if (optionalToken.isPresent()) {
+            VerifToken verifToken = optionalToken.get();
+            verifToken.setToken(UUID.randomUUID().toString());
+            verifToken.setExpireDate(SystemUtils.getExpireTime());
+
+            return tokenRepository.save(verifToken);
+        }
+        throw new IllegalStateException("잘못된 토큰: " + oldToken);
     }
 
     @Override
