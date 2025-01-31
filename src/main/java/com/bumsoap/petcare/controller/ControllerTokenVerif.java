@@ -63,4 +63,11 @@ public class ControllerTokenVerif {
         VerifToken newToken = serviceVerifToken.makeNewToken(oldToken);
         return ResponseEntity.ok(new ApiResponse("", newToken));
     }
+
+    @DeleteMapping(UrlMapping.DELETE_TOKEN)
+    public ResponseEntity<ApiResponse> deleteUserToken(@RequestParam Long userId) {
+        serviceVerifToken.deleteTokenById(userId);
+        return ResponseEntity.ok(
+                new ApiResponse(FeedbackMessage.TOKEN_DELETED, null));
+    }
 }

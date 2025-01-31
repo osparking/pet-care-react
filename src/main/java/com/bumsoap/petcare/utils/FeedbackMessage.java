@@ -34,4 +34,5 @@ public class FeedbackMessage {
     public static final String TOKEN_IS_VALID = "토큰 아직 유용함";
     public static final String USER_NOT_FOUND = "존재하지 않는 유저";
     public static final String TOKEN_SAVED = "토큰 저장 성공";
+    public static final String TOKEN_DELETED = "토큰 삭제 성공";
 }
