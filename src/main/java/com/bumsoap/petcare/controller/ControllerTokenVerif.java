@@ -1,6 +1,7 @@
 package com.bumsoap.petcare.controller;
 
 import com.bumsoap.petcare.model.User;
+import com.bumsoap.petcare.model.VerifToken;
 import com.bumsoap.petcare.repository.RepositoryUser;
 import com.bumsoap.petcare.request.ReqTokenVerif;
 import com.bumsoap.petcare.response.ApiResponse;
@@ -54,5 +55,12 @@ public class ControllerTokenVerif {
                         new RuntimeException(FeedbackMessage.USER_NOT_FOUND));
         serviceVerifToken.saveUserVerifToken(request.getToken(), user);
         return ResponseEntity.ok(new ApiResponse(FeedbackMessage.TOKEN_SAVED, null));
+    }
+
+    @PutMapping(UrlMapping.GENERATE_NEW_TOKEN)
+    public ResponseEntity<ApiResponse> generateNewVerifToken(
+            @RequestParam String oldToken) {
+        VerifToken newToken = serviceVerifToken.makeNewToken(oldToken);
+        return ResponseEntity.ok(new ApiResponse("", newToken));
     }
 }
