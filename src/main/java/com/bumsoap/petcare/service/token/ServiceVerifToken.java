@@ -17,7 +17,21 @@ public class ServiceVerifToken implements  IServiceVerifToken{
 
     @Override
     public String validateToken(String token) {
-        return "";
+        Optional<VerifToken> optionalVeriTok = findByToken(token);
+        if (optionalVeriTok.isEmpty()) {
+            return "INVALID";
+        }
+        User user = optionalVeriTok.get().getUser();
+        if (user.getEnabled()) {
+            return "VERIFIED";
+        }
+        if (tokenHasExipred(token)) {
+            return "EXPIRED";
+        }
+        user.setEnabled(true);
+        userRepository.save(user);
+
+        return "VALID";
     }
 
     @Override
