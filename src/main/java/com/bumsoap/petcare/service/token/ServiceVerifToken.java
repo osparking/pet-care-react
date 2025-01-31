@@ -4,6 +4,7 @@ import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.model.VerifToken;
 import com.bumsoap.petcare.repository.RepositoryUser;
 import com.bumsoap.petcare.repository.RepositoryVerifToken;
+import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.SystemUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,19 +22,19 @@ public class ServiceVerifToken implements  IServiceVerifToken{
     public String validateToken(String token) {
         Optional<VerifToken> optionalVeriTok = findByToken(token);
         if (optionalVeriTok.isEmpty()) {
-            return "INVALID";
+            return FeedbackMessage.INVALID_TOKEN;
         }
         User user = optionalVeriTok.get().getUser();
         if (user.getEnabled()) {
-            return "VERIFIED";
+            return FeedbackMessage.VERIFIED_TOKEN;
         }
         if (tokenHasExipred(token)) {
-            return "EXPIRED";
+            return FeedbackMessage.EXPIRED_TOKEN;
         }
         user.setEnabled(true);
         userRepository.save(user);
 
-        return "VALID";
+        return FeedbackMessage.VALIDATED;
     }
 
     @Override

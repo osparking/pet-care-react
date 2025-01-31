@@ -25,4 +25,8 @@ public class FeedbackMessage {
     public static final String AUTH_SUCCESS = "계정 인증 성공";
     public static final String DISABLED_USER = "사용 중지된 계정";
     public static final String BAD_CREDENTIAL = "로그인 자격 정보 오류";
+    public static final String INVALID_TOKEN = "잘못된 토큰";
+    public static final String VERIFIED_TOKEN = "검증된 토큰";
+    public static final String EXPIRED_TOKEN = "만료된 토큰";
+    public static final String VALIDATED = "계정 활성화됨";
 }
