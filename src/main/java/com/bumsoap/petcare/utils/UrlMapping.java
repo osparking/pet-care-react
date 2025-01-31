@@ -75,6 +75,7 @@ public class UrlMapping {
     /*============================  Start Verification Type API ====================*/
     public static final String VERIFY_TOKEN = API + "/verify" ;
     public static final String VALIDATE_TOKEN = "/validate_token" ;
+    public static final String TOKEN_EXIRED = "/is_token_expired";
     /*========================== End Verification type API ======================= */
 
 }

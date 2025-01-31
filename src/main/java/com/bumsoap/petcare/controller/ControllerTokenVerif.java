@@ -35,4 +35,13 @@ public class ControllerTokenVerif {
         };
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping(UrlMapping.TOKEN_EXIRED)
+    public ResponseEntity<ApiResponse> checkIfTokenExpired(String token) {
+        boolean isExpired = serviceVerifToken.tokenHasExipred(token);
+        ApiResponse response = new ApiResponse(isExpired?
+                FeedbackMessage.TOKEN_EXPIRED :
+                FeedbackMessage.TOKEN_IS_VALID, null);
+        return ResponseEntity.ok(response);
+    }
 }

@@ -30,4 +30,6 @@ public class FeedbackMessage {
     public static final String EXPIRED_TOKEN = "만료된 토큰";
     public static final String VALIDATED = "계정 활성화됨";
     public static final String TOKEN_VALI_ERROR = "토큰 검증 오류";
+    public static final String TOKEN_EXPIRED = "토큰 기한 만료";
+    public static final String TOKEN_IS_VALID = "토큰 아직 유용함";
 }
