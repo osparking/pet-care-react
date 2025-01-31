@@ -67,6 +67,12 @@ public class ServiceVerifToken implements  IServiceVerifToken{
 
     @Override
     public boolean tokenHasExipred(String token) {
-        return false;
+        var verifToken = tokenRepository.findByToken(token);
+        if (verifToken.isEmpty()) {
+            return true;
+        } else {
+            var expireDate = verifToken.get().getExpireDate();
+            return System.currentTimeMillis() > expireDate.getTime();
+        }
     }
 }
