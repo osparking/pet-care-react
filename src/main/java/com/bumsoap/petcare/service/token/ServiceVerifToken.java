@@ -62,7 +62,7 @@ public class ServiceVerifToken implements  IServiceVerifToken{
 
     @Override
     public void deleteTokenById(Long id) {
-
+        tokenRepository.deleteById(id);
     }
 
     @Override
