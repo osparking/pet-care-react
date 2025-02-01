@@ -17,7 +17,7 @@ public class EmailComponent {
     public void sendEmail(String to, String subject, String senderName,
                           String mailContent) throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = mailSender.createMimeMessage();
-        var messageHelper = new MimeMessageHelper(message);
+        var messageHelper = new MimeMessageHelper(message, false, "UTF-8");
         messageHelper.setFrom(EmailProperties.DEFAULT_USERNAME, senderName);
         messageHelper.setTo(to);
         messageHelper.setSubject(subject);
