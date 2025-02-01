@@ -1,5 +1,6 @@
 package com.bumsoap.petcare.controller;
 
+import com.bumsoap.petcare.event.AppointmentBooked;
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.model.Appointment;
 import com.bumsoap.petcare.request.AppointmentRequest;
@@ -9,6 +10,7 @@ import com.bumsoap.petcare.service.appointment.ServiceAppointment;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.UrlMapping;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +25,7 @@ import static org.springframework.http.HttpStatus.*;
 @RequiredArgsConstructor
 public class ControllerAppointment {
     private final ServiceAppointment serviceAppointment;
+    private final ApplicationEventPublisher eventPublisher;
 
     @PutMapping(UrlMapping.UPDATE_BY_ID)
     public ResponseEntity<ApiResponse> updateAppointment(
@@ -102,6 +105,7 @@ public class ControllerAppointment {
         try {
             Appointment savedAppointment = serviceAppointment.createAppointment(
                     appointment, senderId, recipientId);
+            eventPublisher.publishEvent(new AppointmentBooked(savedAppointment));
             return ResponseEntity.status(CREATED)
                     .body(new ApiResponse(FeedbackMessage.CREATED, savedAppointment));
         } catch (ResourceNotFoundException e) {
