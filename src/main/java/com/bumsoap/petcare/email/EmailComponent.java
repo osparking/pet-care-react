@@ -17,6 +17,8 @@ public class EmailComponent {
         var messageHelper = new MimeMessageHelper(message);
         messageHelper.setFrom(EmailProperties.DEFAULT_USERNAME, senderName);
         messageHelper.setTo(to);
-
+        messageHelper.setSubject(subject);
+        messageHelper.setText(mailContent, true);
+        mailSender.send(message);
     }
 }
