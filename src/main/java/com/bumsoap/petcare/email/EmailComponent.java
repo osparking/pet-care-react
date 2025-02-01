@@ -8,6 +8,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Properties;
 
 @Component
 public class EmailComponent {
@@ -28,7 +29,10 @@ public class EmailComponent {
         mailSenderImpl.setHost(EmailProperties.DEFAULT_HOST);
         mailSenderImpl.setPort(EmailProperties.DEFAULT_PORT);
         mailSenderImpl.setUsername(EmailProperties.DEFAULT_USERNAME);
-
+        mailSenderImpl.setPassword(EmailProperties.DEFAULT_PASSWORD);
+        Properties props = mailSenderImpl.getJavaMailProperties();
+        props.put("mail.smtp.auth", EmailProperties.DEFAULT_AUTH);
+        props.put("mail.smtp.starttls.enable", EmailProperties.DEFAULT_STARTTLS);
         return mailSenderImpl;
     }
 }
