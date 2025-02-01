@@ -2,6 +2,7 @@ package com.bumsoap.petcare.controller;
 
 import com.bumsoap.petcare.dto.DtoUser;
 import com.bumsoap.petcare.dto.EntityConverter;
+import com.bumsoap.petcare.event.UserRegisteredEvent;
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.exception.UserAlreadyExistsException;
 import com.bumsoap.petcare.model.User;
@@ -14,6 +15,7 @@ import com.bumsoap.petcare.service.user.ServiceUser;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.UrlMapping;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +34,7 @@ public class ControllerUser {
     private final EntityConverter<User, DtoUser> userConverter;
     private final ServicePwdChangeI servicePwdChangeI;
     private final PasswordEncoder passwordEncoder;
+    private final ApplicationEventPublisher publisher;
 
     @PutMapping(UrlMapping.CHANGE_PASSWORD)
     public ResponseEntity<ApiResponse> changePassword(
@@ -56,6 +59,7 @@ public class ControllerUser {
             String encodedPwd = passwordEncoder.encode(request.getPassword());
             request.setPassword(encodedPwd);
             User userSaved = serviceUser.register(request);
+            publisher.publishEvent(new UserRegisteredEvent(userSaved));
             DtoUser userDto = userConverter.mapEntityToDto(userSaved, DtoUser.class);
             return ResponseEntity.ok(new ApiResponse(FeedbackMessage.CREATED, userDto));
         } catch (UserAlreadyExistsException exEx) {
