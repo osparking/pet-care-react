@@ -1,12 +1,18 @@
 package com.bumsoap.petcare.event.listener;
 
 import com.bumsoap.petcare.email.EmailComponent;
+import com.bumsoap.petcare.event.UserRegisteredEvent;
+import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.service.token.IServiceVerifToken;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
+
+import java.io.UnsupportedEncodingException;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -19,6 +25,18 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
     @Override
     public void onApplicationEvent(ApplicationEvent event) {
 
+    }
+
+    private void handleSendVerifEmail(UserRegisteredEvent event) {
+        User user = event.getUser();
+        String vToken = UUID.randomUUID().toString();
+        serviceToken.saveUserVerifToken(vToken, user);
+        String verifUrl = frontendBaseUrl + "/email_verify?token=" + vToken;
+        try {
+            sendVerifEmail(user, verifUrl);
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void sendVerifEmail(User user, String verifUrl)
