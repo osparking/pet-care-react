@@ -24,7 +24,11 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
 
     @Override
     public void onApplicationEvent(ApplicationEvent event) {
-
+        Object source = event.getSource();
+        if (source instanceof User) {
+            UserRegisteredEvent usrRegEvent = (UserRegisteredEvent) event;
+            handleSendVerifEmail(usrRegEvent);
+        }
     }
 
     private void handleSendVerifEmail(UserRegisteredEvent event) {
