@@ -71,7 +71,7 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
         content.append("<a href=\"");
         content.append(verifUrl);
         content.append("\">이메일 확인</a>");
-        content.append("<p>고맙습니다.<br> 팻 케어 이메일 서비스");
+        content.append("<p>고맙습니다.<br> 팻 케어 서비스");
         emailComponent.sendEmail(user.getEmail(), subject, senderName,
                 content.toString());
     }
@@ -88,7 +88,7 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
         content.append("<a href=\"");
         content.append(url);
         content.append("\">자세한 내용은 병원 포털에 접속하여 열람하십시오.</a><br/>");
-        content.append("<p>행운을 빕니다.<br> 팻 케어 이메일 서비스");
+        content.append("<p>행운을 빕니다.<br> 팻 케어 서비스");
         emailComponent.sendEmail(user.getEmail(), subject, senderName,
                 content.toString());
     }
@@ -98,5 +98,23 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
         Appointment appointment = apoBooked.getAppointment();
         User vet = appointment.getVeterinarian();
         newAppointmentBooked(vet, frontendBaseUrl);
+    }
+
+    private void sendAppointApprovedNoti(User user, String url)
+            throws MessagingException, UnsupportedEncodingException {
+        String subject = "진료 예약 승인 통지";
+        String senderName = "팻 돌봄이";
+        StringBuffer content = new StringBuffer("<p>안녕하세요? '");
+        content.append(user.getLastName());
+        content.append(user.getFirstName());
+        content.append("' 고객님</p>");
+        content.append("<p>신청하신 진료 예약이 승인되었습니다:</p>");
+        content.append("<a href=\"");
+        content.append(url);
+        content.append("\">자세한 내용 및 수의사 정보</a>");
+        content.append("는 병원 포털에 접속하여 열람하실 수 있습니다.<br/>");
+        content.append("<p>행운을 빕니다.<br> 팻 케어 서비스");
+        emailComponent.sendEmail(user.getEmail(), subject, senderName,
+                content.toString());
     }
 }
