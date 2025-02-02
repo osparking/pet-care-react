@@ -129,4 +129,23 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
         User patient = appointment.getPatient();
         sendAppointApprovedNoti(patient, frontendBaseUrl);
     }
+
+    private void sendAppointDeclinedNoti(User user, String url)
+            throws MessagingException, UnsupportedEncodingException {
+        String subject = "진료 예약 거절 통지";
+        String senderName = "팻 돌봄이";
+        StringBuffer content = new StringBuffer("<p>안녕하세요? '");
+        content.append(user.getLastName());
+        content.append(user.getFirstName());
+        content.append("' 고객님</p>");
+        content.append("<p>죄송스럽게도 진료 예약이 거절되었음을 알려드립니다.<br/> ");
+        content.append("불편하시더라도 다른 일정을 잡아 재 예약해 주십시오.</p>");
+        content.append("<a href=\"");
+        content.append(url);
+        content.append("\">자세한 내용 및 수의사 정보</a>");
+        content.append("는 병원 포털에 접속하여 열람하실 수 있습니다.<br/>");
+        content.append("<p>행운을 빕니다.<br> 팻 케어 서비스");
+        emailComponent.sendEmail(user.getEmail(), subject, senderName,
+                content.toString());
+    }
 }
