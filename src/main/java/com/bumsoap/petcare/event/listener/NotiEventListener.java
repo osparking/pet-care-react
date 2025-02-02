@@ -48,8 +48,7 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
                 }
             }
             default ->  {
-                throw new IllegalArgumentException(
-                        "알 수 없는 사건 근원 클래스: " + source.getClass());
+                break;
             }
         }
     }
