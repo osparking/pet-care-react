@@ -27,9 +27,22 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
     @Override
     public void onApplicationEvent(ApplicationEvent event) {
         Object source = event.getSource();
-        if (source instanceof User) {
-            UserRegisteredEvent usrRegEvent = (UserRegisteredEvent) event;
-            handleSendVerifEmail(usrRegEvent);
+
+        switch (source) {
+            case User u -> {
+                handleSendVerifEmail((UserRegisteredEvent) event);
+            }
+            case Appointment a -> {
+                try {
+                    handleAppointBookedNoti((AppointmentBooked) event);
+                } catch (MessagingException | UnsupportedEncodingException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            default ->  {
+                throw new IllegalArgumentException(
+                        "알 수 없는 사건 근원 클래스: " + source.getClass());
+            }
         }
     }
 
