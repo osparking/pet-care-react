@@ -27,11 +27,9 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
 
     @Override
     public void onApplicationEvent(ApplicationEvent event) {
-//        Object source = event.getSource();
-
         switch (event) {
-            case UserRegisteredEvent regied -> {
-                handleSendVerifEmail( regied);
+            case UserRegisteredEvent registerE -> {
+                handleSendVerifEmail( registerE);
             }
             case AppointmentBooked booked-> {
                 try {
@@ -40,9 +38,9 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
                     throw new RuntimeException(e);
                 }
             }
-            case AppointApprovedE appved -> {
+            case AppointApprovedE approveE -> {
                 try {
-                    handleAppointApprovedNoti(appved);
+                    handleAppointApprovedNoti(approveE);
                 } catch (MessagingException | UnsupportedEncodingException e) {
                     throw new RuntimeException(e);
                 }
