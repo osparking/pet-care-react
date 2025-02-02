@@ -40,6 +40,13 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
                     throw new RuntimeException(e);
                 }
             }
+            case AppointApprovedE a -> {
+                try {
+                    handleAppointApprovedNoti((AppointApprovedE) event);
+                } catch (MessagingException | UnsupportedEncodingException e) {
+                    throw new RuntimeException(e);
+                }
+            }
             default ->  {
                 throw new IllegalArgumentException(
                         "알 수 없는 사건 근원 클래스: " + source.getClass());
