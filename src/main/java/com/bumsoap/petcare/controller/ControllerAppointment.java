@@ -1,6 +1,7 @@
 package com.bumsoap.petcare.controller;
 
 import com.bumsoap.petcare.event.AppointApprovedE;
+import com.bumsoap.petcare.event.AppointDeclinedE;
 import com.bumsoap.petcare.event.AppointmentBooked;
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.model.Appointment;
@@ -178,6 +179,7 @@ public class ControllerAppointment {
     public ResponseEntity<ApiResponse> declineAppointment(@PathVariable Long id) {
         try {
             Appointment appointment = serviceAppointment.declineAppointment(id);
+            eventPublisher.publishEvent(new AppointDeclinedE(appointment));
             return ResponseEntity.ok(
                     new ApiResponse(FeedbackMessage.APPOINTMENT_DECLINED, appointment));
         } catch (ResourceNotFoundException e) {
