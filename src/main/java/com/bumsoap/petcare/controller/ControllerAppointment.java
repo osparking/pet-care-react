@@ -1,5 +1,6 @@
 package com.bumsoap.petcare.controller;
 
+import com.bumsoap.petcare.event.AppointApprovedE;
 import com.bumsoap.petcare.event.AppointmentBooked;
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.model.Appointment;
@@ -164,6 +165,7 @@ public class ControllerAppointment {
     public ResponseEntity<ApiResponse> approveAppointment(@PathVariable Long id) {
         try {
             Appointment appointment = serviceAppointment.approveAppointment(id);
+            eventPublisher.publishEvent(new AppointApprovedE(appointment));
             return ResponseEntity.ok(
                     new ApiResponse(FeedbackMessage.APPOINTMENT_APPROVED, appointment));
         } catch (IllegalStateException e) {
