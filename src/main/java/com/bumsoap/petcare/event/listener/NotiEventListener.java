@@ -46,6 +46,13 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
                     throw new RuntimeException(e);
                 }
             }
+            case AppointDeclinedE declineE -> {
+                try {
+                    handleAppointDeclinedNoti(declineE);
+                } catch (MessagingException | UnsupportedEncodingException e) {
+                    throw new RuntimeException(e);
+                }
+            }
             default ->  {
                 break;
             }
