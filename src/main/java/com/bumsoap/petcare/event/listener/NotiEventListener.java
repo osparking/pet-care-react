@@ -2,6 +2,7 @@ package com.bumsoap.petcare.event.listener;
 
 import com.bumsoap.petcare.email.EmailComponent;
 import com.bumsoap.petcare.event.AppointApprovedE;
+import com.bumsoap.petcare.event.AppointDeclinedE;
 import com.bumsoap.petcare.event.AppointmentBooked;
 import com.bumsoap.petcare.event.UserRegisteredEvent;
 import com.bumsoap.petcare.model.Appointment;
@@ -148,4 +149,12 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
         emailComponent.sendEmail(user.getEmail(), subject, senderName,
                 content.toString());
     }
+
+    private void handleAppointDeclinedNoti(AppointDeclinedE declined)
+            throws MessagingException, UnsupportedEncodingException {
+        Appointment appointment = declined.getAppointment();
+        User patient = appointment.getPatient();
+        sendAppointDeclinedNoti(patient, frontendBaseUrl);
+    }
+
 }
