@@ -62,7 +62,7 @@ public class ControllerPhoto {
             photoOwner.setPhoto(null);
             servicePhoto.deleteById(photo.getId());
             return ResponseEntity.ok()
-                    .body(new ApiResponse(FeedbackMessage.RESOURCE_DELETED, null));
+                    .body(new ApiResponse(FeedbackMessage.DELETED_PHOTO, null));
         }  catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ApiResponse(e.getMessage(), null));

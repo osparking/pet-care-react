@@ -47,7 +47,12 @@ public class FeedbackMessage {
     public static final String UPDATED_PHOTO = "사진 갱신 완료";
     public static final String UPDATED_APPOINT = "예약 갱신 완료";
 
-    public static final String RESOURCE_DELETED = "자원 삭제 성공!";
+    public static final String DELETED_PET = "팻 삭제 완료";
+    public static final String DELETED_PHOTO = "사진 삭제 완료";
+    public static final String DELETED_REVIEW = "리뷰 삭제 완료";
+    public static final String DELETED_USER = "유저 삭제 완료";
+    public static final String DELETED_APPOINT = "예약 삭제 완료";
+
     public static final String TOKEN_DELETED = "토큰 삭제 성공";
     public static final String PATIENT_OR_VETERINARIAN_NOT_FOUND
             = "동물 주인 혹은 수의사 부재!";

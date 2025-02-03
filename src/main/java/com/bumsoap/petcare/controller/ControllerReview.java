@@ -90,7 +90,7 @@ public class ControllerReview {
         try {
             serviceReview.deleteReview(id);
             return ResponseEntity.status(OK)
-                    .body(new ApiResponse(FeedbackMessage.RESOURCE_DELETED, null));
+                    .body(new ApiResponse(FeedbackMessage.DELETED_REVIEW, null));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
                     .body(new ApiResponse(e.getMessage(), null));

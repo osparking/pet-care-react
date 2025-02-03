@@ -51,7 +51,7 @@ public class ControllerAppointment {
         try {
             serviceAppointment.deleteAppointment(id);
             return ResponseEntity.ok().body(
-                    new ApiResponse(FeedbackMessage.RESOURCE_DELETED, null));
+                    new ApiResponse(FeedbackMessage.DELETED_APPOINT, null));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
                     .body(new ApiResponse(e.getMessage(), null));

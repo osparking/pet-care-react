@@ -27,7 +27,7 @@ public class ControllerPet {
         try {
             servicePet.deletePet(id);
             return ResponseEntity
-                    .ok(new ApiResponse(FeedbackMessage.RESOURCE_DELETED, null));
+                    .ok(new ApiResponse(FeedbackMessage.DELETED_PET, null));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
                     .body(new ApiResponse(e.getMessage(), null));
