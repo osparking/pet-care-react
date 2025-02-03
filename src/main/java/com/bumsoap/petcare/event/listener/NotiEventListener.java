@@ -89,20 +89,20 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
                 content.toString());
     }
 
-    private void newAppointmentBooked(User user, String url)
+    private void newAppointmentBooked(User vet, String url)
             throws MessagingException, UnsupportedEncodingException {
         String subject = "새 진료 예약 등록";
         String senderName = "팻 돌봄이";
         StringBuffer content = new StringBuffer("<p>안녕하세요? '");
-        content.append(user.getLastName());
-        content.append(user.getFirstName());
-        content.append("' 유저님</p>");
+        content.append(vet.getLastName());
+        content.append(vet.getFirstName());
+        content.append("' 수의사님</p>");
         content.append("<p>당신에게 새 예약 일정이 잡혔습니다:</p>");
         content.append("<a href=\"");
         content.append(url);
         content.append("\">자세한 내용은 병원 포털에 접속하여 열람하십시오.</a><br/>");
         content.append("<p>행운을 빕니다.<br> 팻 케어 서비스");
-        emailComponent.sendEmail(user.getEmail(), subject, senderName,
+        emailComponent.sendEmail(vet.getEmail(), subject, senderName,
                 content.toString());
     }
 
