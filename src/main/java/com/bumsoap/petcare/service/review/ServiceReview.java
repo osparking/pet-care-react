@@ -67,7 +67,7 @@ public class ServiceReview implements IServiceReview {
     @Override
     public double getAverageRatingForVet(Long vetId) {
         repositoryVet.findById(vetId).orElseThrow(() ->
-                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
+                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_VET_ID));
 
         List<Review> reviews = repositoryReview.findAllByVeterinarianId(vetId);
         return reviews.isEmpty() ? 0 :
@@ -77,7 +77,7 @@ public class ServiceReview implements IServiceReview {
     @Override
     public Review updateReview(Long reviewId, RequestUpdateReview review) {
         var updated = repositoryReview.findById(reviewId).orElseThrow(() -> {
-            throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND);
+            throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_REVIEW_ID);
             });
         updated.setStars(review.getStars());
         updated.setComment(review.getComment());
@@ -93,7 +93,7 @@ public class ServiceReview implements IServiceReview {
     @Override
     public void deleteReview(Long reviewId) throws ResourceNotFoundException  {
         Review review = repositoryReview.findById(reviewId).orElseThrow(() -> {
-            throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND);
+            throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_REVIEW_ID);
             });
         // delete relationship between Review and Users
         review.getPatient().getReviews().remove(review);

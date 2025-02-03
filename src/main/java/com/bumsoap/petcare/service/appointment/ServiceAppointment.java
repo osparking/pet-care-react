@@ -93,7 +93,7 @@ public class ServiceAppointment implements IServiceAppointment {
     @Override
     public Appointment completeAppointment(Long id) {
         Appointment appo = repositoryAppointment.findById(id).orElseThrow(() ->
-                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
+                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_APPOINT_ID));
         appo.setStatus(StatusAppointment.COMPLETED);
         return repositoryAppointment.save(appo);
     }
@@ -105,7 +105,7 @@ public class ServiceAppointment implements IServiceAppointment {
                 .ifPresentOrElse(repositoryAppointment::delete,
                         () -> {
                     throw new ResourceNotFoundException(
-                            FeedbackMessage.NOT_FOUND);
+                            FeedbackMessage.NOT_FOUND_APPOINT_ID);
         });
     }
 
@@ -121,7 +121,7 @@ public class ServiceAppointment implements IServiceAppointment {
                     return appoDto;
                 })
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        FeedbackMessage.NOT_FOUND));
+                        FeedbackMessage.NOT_FOUND_APPOINT_ID));
     }
 
     @Override
@@ -129,7 +129,7 @@ public class ServiceAppointment implements IServiceAppointment {
         return repositoryAppointment
                 .findById(appointmentId)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        FeedbackMessage.NOT_FOUND));
+                        FeedbackMessage.NOT_FOUND_APPOINT_ID));
     }
 
     @Override
@@ -157,7 +157,7 @@ public class ServiceAppointment implements IServiceAppointment {
     @Override
     public Appointment cancelAppointment(Long apmtId) {
         Appointment apmt = repositoryAppointment.findById(apmtId).orElseThrow(() ->
-                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
+                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_APPOINT_ID));
         if (apmt.getStatus().equals(APPROVE_WAIT)) {
             apmt.setStatus(StatusAppointment.CANCELLED);
             return repositoryAppointment.save(apmt);
@@ -185,7 +185,7 @@ public class ServiceAppointment implements IServiceAppointment {
                     apmt.setStatus(DECLINED);
                     return repositoryAppointment.saveAndFlush(apmt);})
                 .orElseThrow(() -> new IllegalStateException(
-                    FeedbackMessage.NOT_FOUND));
+                    FeedbackMessage.NOT_FOUND_APPOINT_ID));
     }
 
     @Override

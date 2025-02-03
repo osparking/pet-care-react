@@ -38,14 +38,14 @@ public class ServicePet implements IServicePet {
     @Override
     public void deletePet(Long id) {
         repositoryPet.findById(id).ifPresentOrElse(repositoryPet::delete,
-                () -> {throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND);
+                () -> {throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_PET_ID);
                 });
     }
 
     @Override
     public Pet findById(Long id) {
         return repositoryPet.findById(id).orElseThrow(() ->
-                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
+                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_PET_ID));
     }
 
     @Override
@@ -71,7 +71,7 @@ public class ServicePet implements IServicePet {
     public Pet addPetForAppointment(Long appointmentId, Pet pet) {
         var appointment = repositoryAppointment.findById(appointmentId)
                 .orElseThrow(() ->
-                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
+                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_APPOINT_ID));
         pet.setAppointment(appointment);
         return repositoryPet.save(pet);
     }

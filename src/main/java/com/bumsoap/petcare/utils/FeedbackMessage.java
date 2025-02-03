@@ -31,7 +31,15 @@ public class FeedbackMessage {
     public static final String FOUND_PATIENTS = "모든 팻 주인 목록 채취";
     public static final String FOUND_ALL_APPOINT = "모든 예약 목록 채취";
 
-    public static final String NOT_FOUND = "존재하지 않는 자원!";
+    public static final String NOT_FOUND_USER_ID = "존재하지 않는 유저 ID";
+    public static final String NOT_FOUND_PHOTO_ID = "존재하지 않는 사진 ID";
+    public static final String NOT_FOUND_APPOINT_ID = "존재하지 않는 예약 ID";
+    public static final String NOT_FOUND_VET_ID = "존재하지 않는 수의사 ID";
+    public static final String NOT_FOUND_PHOTO = "사진 비 등록 유저";
+    public static final String NOT_FOUND_REVIEW_ID = "존재하지 않는 리뷰 ID";
+    public static final String NOT_FOUND_PET_ID = "존재하지 않는 팻 ID";
+    public static final String NOT_FOUND_USER_EMAIL = "존재하지 않는 유저 이메일";
+    
     public static final String RESOURCE_UPDATED = "자원 갱신 성공!";
     public static final String RESOURCE_DELETED = "자원 삭제 성공!";
     public static final String PATIENT_OR_VETERINARIAN_NOT_FOUND
@@ -63,5 +71,5 @@ public class FeedbackMessage {
     public static final String USER_NOT_FOUND = "존재하지 않는 유저";
     public static final String TOKEN_SAVED = "토큰 저장 성공";
     public static final String TOKEN_DELETED = "토큰 삭제 성공";
-    public static final String UPDATED_PWD = "비밀번호 갱신 성공!";
+    public static final String UPDATED_PWD = "비밀번호 갱신 성공";
 }

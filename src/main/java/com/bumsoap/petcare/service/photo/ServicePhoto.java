@@ -36,7 +36,7 @@ public class ServicePhoto implements IServicePhoto  {
         Optional<User> theUser = repositoryUser.findById(userId);
         theUser.ifPresentOrElse(user -> { user.setPhoto(savedPhoto);},
                 ()-> {
-            throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND);
+            throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_USER_ID);
         });
         repositoryUser.save(theUser.get());
         return savedPhoto;
@@ -45,7 +45,7 @@ public class ServicePhoto implements IServicePhoto  {
     @Override
     public Photo findById(Long id) throws ResourceNotFoundException {
         return repositoryPhoto.findById(id).orElseThrow(() ->
-                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND));
+                new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_PHOTO_ID));
     }
 
     @Override
@@ -53,7 +53,8 @@ public class ServicePhoto implements IServicePhoto  {
         repositoryPhoto.findById(id)
                 .ifPresentOrElse(repositoryPhoto::delete,
                         () -> {
-                    throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND);
+                    throw new ResourceNotFoundException(
+                            FeedbackMessage.NOT_FOUND_PHOTO_ID);
                 });
     }
 

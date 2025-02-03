@@ -39,7 +39,7 @@ public class ControllerPhoto {
             }
         } catch (ResourceNotFoundException | SQLException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ApiResponse(FeedbackMessage.NOT_FOUND, null));
+                    .body(new ApiResponse(FeedbackMessage.NOT_FOUND_PHOTO_ID, null));
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ApiResponse(FeedbackMessage.SERVER_ERROR, null));
@@ -57,7 +57,7 @@ public class ControllerPhoto {
             User photoOwner = serviceUser.findById(id);
             Photo photo = photoOwner.getPhoto();
             if (photo == null) {
-                throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND);
+                throw new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_PHOTO);
             }
             photoOwner.setPhoto(null);
             servicePhoto.deleteById(photo.getId());
@@ -65,7 +65,7 @@ public class ControllerPhoto {
                     .body(new ApiResponse(FeedbackMessage.RESOURCE_DELETED, null));
         }  catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ApiResponse(FeedbackMessage.NOT_FOUND, null));
+                    .body(new ApiResponse(e.getMessage(), null));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse(FeedbackMessage.SERVER_ERROR, null));
@@ -88,7 +88,7 @@ public class ControllerPhoto {
                             FeedbackMessage.RESOURCE_UPDATED, updatedPhoto.getId()));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ApiResponse(FeedbackMessage.NOT_FOUND, null));
+                    .body(new ApiResponse(e.getMessage(), null));
         } catch (SQLException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse(FeedbackMessage.SERVER_ERROR, null));
@@ -105,7 +105,7 @@ public class ControllerPhoto {
                             savedPhoto.getId()));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ApiResponse(FeedbackMessage.NOT_FOUND, null));
+                    .body(new ApiResponse(e.getMessage(), null));
         } catch (IOException | SQLException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse(FeedbackMessage.SERVER_ERROR, null));

@@ -18,7 +18,7 @@ public class PcUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
         User user = repositoryUser.findByEmail(email).orElseThrow(
-                () -> new UsernameNotFoundException(FeedbackMessage.NOT_FOUND));
+                () -> new UsernameNotFoundException(FeedbackMessage.NOT_FOUND_USER_EMAIL));
         return PcUserDetails.buildUserDetails(user);
     }
 }
