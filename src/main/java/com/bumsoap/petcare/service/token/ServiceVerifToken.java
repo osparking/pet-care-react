@@ -22,19 +22,19 @@ public class ServiceVerifToken implements  IServiceVerifToken{
     public String validateToken(String token) {
         Optional<VerifToken> optionalVeriTok = findByToken(token);
         if (optionalVeriTok.isEmpty()) {
-            return FeedbackMessage.INVALID_TOKEN;
+            return FeedbackMessage.NOT_FOUND_VERIF_TOKEN;
         }
         User user = optionalVeriTok.get().getUser();
         if (user.getEnabled()) {
             return FeedbackMessage.VERIFIED_TOKEN;
         }
         if (tokenHasExipred(token)) {
-            return FeedbackMessage.EXPIRED_TOKEN;
+            return FeedbackMessage.TOKEN_EXPIRED;
         }
         user.setEnabled(true);
         userRepository.save(user);
 
-        return FeedbackMessage.VALIDATED;
+        return FeedbackMessage.TOKEN_VALIDATED;
     }
 
     @Override

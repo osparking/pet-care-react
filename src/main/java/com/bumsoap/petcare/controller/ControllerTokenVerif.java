@@ -23,14 +23,14 @@ public class ControllerTokenVerif {
     public ResponseEntity<ApiResponse> validateToken(String token) {
         String result = serviceVerifToken.validateToken(token);
         ApiResponse response = switch (result) {
-            case FeedbackMessage.INVALID_TOKEN
+            case FeedbackMessage.NOT_FOUND_VERIF_TOKEN
                     -> new ApiResponse(FeedbackMessage.INVALID_TOKEN, null);
             case FeedbackMessage.VERIFIED_TOKEN
                     -> new ApiResponse(FeedbackMessage.VERIFIED_TOKEN, null);
-            case FeedbackMessage.EXPIRED_TOKEN
-                    -> new ApiResponse(FeedbackMessage.EXPIRED_TOKEN, null);
-            case FeedbackMessage.VALIDATED
-                    -> new ApiResponse(FeedbackMessage.VALIDATED, null);
+            case FeedbackMessage.TOKEN_EXPIRED
+                    -> new ApiResponse(FeedbackMessage.TOKEN_EXPIRED, null);
+            case FeedbackMessage.TOKEN_VALIDATED
+                    -> new ApiResponse(FeedbackMessage.TOKEN_VALIDATED, null);
             default
                     -> new ApiResponse(FeedbackMessage.TOKEN_VALI_ERROR, null);
         };
@@ -52,7 +52,7 @@ public class ControllerTokenVerif {
             @RequestBody ReqTokenVerif request) {
         User user = repositoryUser.findById(request.getUser().getId())
                 .orElseThrow(() ->
-                        new RuntimeException(FeedbackMessage.USER_NOT_FOUND));
+                        new RuntimeException(FeedbackMessage.NOT_FOUND_USER_ID));
         serviceVerifToken.saveUserVerifToken(request.getToken(), user);
         return ResponseEntity.ok(new ApiResponse(FeedbackMessage.TOKEN_SAVED, null));
     }
@@ -68,6 +68,6 @@ public class ControllerTokenVerif {
     public ResponseEntity<ApiResponse> deleteUserToken(@RequestParam Long userId) {
         serviceVerifToken.deleteTokenById(userId);
         return ResponseEntity.ok(
-                new ApiResponse(FeedbackMessage.TOKEN_DELETED, null));
+                new ApiResponse(FeedbackMessage.DELETED_TOKEN, null));
     }
 }

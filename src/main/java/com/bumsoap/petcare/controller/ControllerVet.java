@@ -45,7 +45,7 @@ public class ControllerVet {
                     .getAvailVetsForAppointment(specialization, date, time);
             if (allAvailableVets.isEmpty()) {
                 return  ResponseEntity.status(NOT_FOUND).body(
-                        new ApiResponse(FeedbackMessage.NO_VETS_FOUND, null));
+                        new ApiResponse(FeedbackMessage.NOT_FOUND_VET_SPECIAL, null));
             }
             return ResponseEntity.ok(new ApiResponse(
                     FeedbackMessage.FOUND_ALL_AVAIL_VETS, allAvailableVets));

@@ -52,9 +52,9 @@ public class ServiceReview implements IServiceReview {
 
 //        4) 리뷰어와 수의사 정보를 디비에서 읽어온다.
         User veterinarian = repositoryUser.findById(vetId).orElseThrow(
-                () -> new ResourceNotFoundException(FeedbackMessage.VET_OR_PAT_NOT_FOUND));
+                () -> new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_VET_OR_PAT));
         User patient = repositoryUser.findById(patId).orElseThrow(
-                () -> new ResourceNotFoundException(FeedbackMessage.VET_OR_PAT_NOT_FOUND));
+                () -> new ResourceNotFoundException(FeedbackMessage.NOT_FOUND_VET_OR_PAT));
 
 //        5) 리뷰어와 수의사를 리뷰 레코드에 대입한다.
         review.setPatient(patient);

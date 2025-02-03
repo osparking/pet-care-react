@@ -67,7 +67,7 @@ public class ServiceAppointment implements IServiceAppointment {
             return repositoryAppointment.save(appointment);
         } else {
             throw new ResourceNotFoundException(
-                    FeedbackMessage.PATIENT_OR_VETERINARIAN_NOT_FOUND);
+                    FeedbackMessage.NOT_FOUND_VET_OR_PAT);
         }
     }
 

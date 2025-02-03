@@ -35,6 +35,8 @@ public class FeedbackMessage {
     public static final String NOT_FOUND_PHOTO_ID = "존재하지 않는 사진 ID";
     public static final String NOT_FOUND_APPOINT_ID = "존재하지 않는 예약 ID";
     public static final String NOT_FOUND_VET_ID = "존재하지 않는 수의사 ID";
+    public static final String NOT_FOUND_VET_OR_PAT = "수의사 혹은 환자 부재";
+    public static final String NOT_FOUND_VET_SPECIAL = "전문분야 수의사 부재";
     public static final String NOT_FOUND_PHOTO = "사진 비 등록 유저";
     public static final String NOT_FOUND_REVIEW_ID = "존재하지 않는 리뷰 ID";
     public static final String NOT_FOUND_PET_ID = "존재하지 않는 팻 ID";
@@ -52,18 +54,15 @@ public class FeedbackMessage {
     public static final String DELETED_REVIEW = "리뷰 삭제 완료";
     public static final String DELETED_USER = "유저 삭제 완료";
     public static final String DELETED_APPOINT = "예약 삭제 완료";
+    public static final String DELETED_TOKEN = "토큰 삭제 완료";
 
-    public static final String TOKEN_DELETED = "토큰 삭제 성공";
-    public static final String PATIENT_OR_VETERINARIAN_NOT_FOUND
-            = "동물 주인 혹은 수의사 부재!";
+    public static final String INVALID_TOKEN = "잘못된 토큰";
     public static final String ILLEGAL_APPOINTMENT_UPDATE = "예약의 불법적인 갱신";
     public static final String SERVER_ERROR = "팻 응용 서버 내부 오류";
     public static final String INVALID_VAT_ID = "수의사는 자신을 리뷰할 수 없음";
     public static final String ALREADY_REVIEWED = "당신은 이 수의사를 리뷰한 적이 있음";
     public static final String COMPLETED_APPOINTMENT_REQUIRED =
             "진료를 예약하고 완료한 환자만 리뷰할 수 있음";
-    public static final String VET_OR_PAT_NOT_FOUND = "수의사 혹은 환자 부재";
-    public static final String NO_VETS_FOUND = "수의사 부재";
     public static final String APMT_CANNOT_BE_CANCEL = "예약 취소 불가";
     public static final String APMT_CANNOT_BE_APPROVED = "예약 승인 불가";
     public static final String APPOINTMENT_CANCELED = "예약 취소 완료";
@@ -73,16 +72,15 @@ public class FeedbackMessage {
     public static final String AUTH_SUCCESS = "계정 인증 성공";
     public static final String DISABLED_USER = "사용 중지된 계정";
     public static final String BAD_CREDENTIAL = "로그인 자격 정보 오류";
-    public static final String INVALID_TOKEN = "잘못된 토큰";
+
     public static final String VERIFIED_TOKEN = "검증된 토큰";
-    public static final String EXPIRED_TOKEN = "만료된 토큰";
-    public static final String VALIDATED = "계정 활성화됨";
+    public static final String TOKEN_VALIDATED = "계정 활성화됨";
     public static final String TOKEN_VALI_ERROR = "토큰 검증 오류";
     public static final String TOKEN_EXPIRED = "토큰 기한 만료";
     public static final String TOKEN_IS_VALID = "토큰 아직 유용함";
-    public static final String USER_NOT_FOUND = "존재하지 않는 유저";
     public static final String TOKEN_SAVED = "토큰 저장 성공";
 
     public static final String APPOINT_COMPLETED = "예약 완료 처리됨";
     public static final String USER_ENABLED_TOGGLED = "유저 활성화 토글됨";
+    public static final String NOT_FOUND_VERIF_TOKEN = "검증 토큰 부재 오류";
 }
