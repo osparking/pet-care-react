@@ -77,7 +77,7 @@ public class ControllerUser {
             User theUser = serviceUser.update(userId, request);
             DtoUser updatedUser = userConverter.mapEntityToDto(theUser, DtoUser.class);
             return ResponseEntity.ok(
-                    new ApiResponse(FeedbackMessage.RESOURCE_UPDATED, updatedUser));
+                    new ApiResponse(FeedbackMessage.UPDATED_USER, updatedUser));
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(NOT_FOUND)
                     .body(new ApiResponse(ex.getMessage(), null));
@@ -177,7 +177,7 @@ public class ControllerUser {
             int count = serviceUser.updateEnabledStat(enabled, userId);
             if (count == 1) {
                 return ResponseEntity.ok(
-                        new ApiResponse(FeedbackMessage.RESOURCE_UPDATED, null));
+                        new ApiResponse(FeedbackMessage.USER_ENABLED_TOGGLED, null));
             } else {
                 throw new RuntimeException("갱신된 유저 계정 수 불일치");
             }

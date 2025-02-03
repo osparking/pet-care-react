@@ -35,7 +35,7 @@ public class ControllerAppointment {
             @RequestBody AppointmentUpdateRequest appointment) {
         try {
             return ResponseEntity.ok().body(
-                    new ApiResponse(FeedbackMessage.RESOURCE_UPDATED,
+                    new ApiResponse(FeedbackMessage.UPDATED_APPOINT,
                             serviceAppointment.updateAppointment(id, appointment)));
         } catch (IllegalStateException e) {
             return ResponseEntity.status(NOT_ACCEPTABLE)
@@ -142,7 +142,7 @@ public class ControllerAppointment {
         try {
             var appo = serviceAppointment.completeAppointment(id);
             return ResponseEntity.status(OK)
-                    .body(new ApiResponse(FeedbackMessage.RESOURCE_UPDATED,
+                    .body(new ApiResponse(FeedbackMessage.APPOINT_COMPLETED,
                             appo.getStatus()));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)

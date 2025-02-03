@@ -43,7 +43,7 @@ public class ControllerPet {
         try {
             Pet petUpdated = servicePet.updatePet(pet, id);
             return ResponseEntity.ok(
-                    new ApiResponse(FeedbackMessage.RESOURCE_UPDATED, petUpdated));
+                    new ApiResponse(FeedbackMessage.UPDATED_PET, petUpdated));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
                     .body(new ApiResponse(e.getMessage(), null));

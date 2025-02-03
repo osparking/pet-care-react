@@ -85,7 +85,7 @@ public class ControllerPhoto {
             Photo updatedPhoto = servicePhoto.update(id, file);
             return ResponseEntity.ok()
                     .body(new ApiResponse(
-                            FeedbackMessage.RESOURCE_UPDATED, updatedPhoto.getId()));
+                            FeedbackMessage.UPDATED_PHOTO, updatedPhoto.getId()));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ApiResponse(e.getMessage(), null));

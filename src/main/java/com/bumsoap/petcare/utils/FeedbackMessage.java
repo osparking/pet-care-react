@@ -39,9 +39,16 @@ public class FeedbackMessage {
     public static final String NOT_FOUND_REVIEW_ID = "존재하지 않는 리뷰 ID";
     public static final String NOT_FOUND_PET_ID = "존재하지 않는 팻 ID";
     public static final String NOT_FOUND_USER_EMAIL = "존재하지 않는 유저 이메일";
-    
-    public static final String RESOURCE_UPDATED = "자원 갱신 성공!";
+
+    public static final String UPDATED_PWD = "비밀번호 갱신 성공";
+    public static final String UPDATED_PET = "팻 갱신 완료";
+    public static final String UPDATED_USER = "유저 갱신 완료";
+    public static final String UPDATED_REVIEW = "리뷰 갱신 완료";
+    public static final String UPDATED_PHOTO = "사진 갱신 완료";
+    public static final String UPDATED_APPOINT = "예약 갱신 완료";
+
     public static final String RESOURCE_DELETED = "자원 삭제 성공!";
+    public static final String TOKEN_DELETED = "토큰 삭제 성공";
     public static final String PATIENT_OR_VETERINARIAN_NOT_FOUND
             = "동물 주인 혹은 수의사 부재!";
     public static final String ILLEGAL_APPOINTMENT_UPDATE = "예약의 불법적인 갱신";
@@ -70,6 +77,7 @@ public class FeedbackMessage {
     public static final String TOKEN_IS_VALID = "토큰 아직 유용함";
     public static final String USER_NOT_FOUND = "존재하지 않는 유저";
     public static final String TOKEN_SAVED = "토큰 저장 성공";
-    public static final String TOKEN_DELETED = "토큰 삭제 성공";
-    public static final String UPDATED_PWD = "비밀번호 갱신 성공";
+
+    public static final String APPOINT_COMPLETED = "예약 완료 처리됨";
+    public static final String USER_ENABLED_TOGGLED = "유저 활성화 토글됨";
 }
