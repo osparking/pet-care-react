@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(UrlMapping.VERIFY_TOKEN)
@@ -22,19 +25,17 @@ public class ControllerTokenVerif {
     @GetMapping(UrlMapping.VALIDATE_TOKEN)
     public ResponseEntity<ApiResponse> validateToken(String token) {
         String result = serviceVerifToken.validateToken(token);
-        ApiResponse response = switch (result) {
-            case FeedbackMessage.NOT_FOUND_VERIF_TOKEN
-                    -> new ApiResponse(FeedbackMessage.INVALID_TOKEN, null);
-            case FeedbackMessage.VERIFIED_TOKEN
-                    -> new ApiResponse(FeedbackMessage.VERIFIED_TOKEN, null);
-            case FeedbackMessage.TOKEN_EXPIRED
-                    -> new ApiResponse(FeedbackMessage.TOKEN_EXPIRED, null);
-            case FeedbackMessage.TOKEN_VALIDATED
-                    -> new ApiResponse(FeedbackMessage.TOKEN_VALIDATED, null);
-            default
-                    -> new ApiResponse(FeedbackMessage.TOKEN_VALI_ERROR, null);
-        };
-        return ResponseEntity.ok(response);
+        List<String> feedbacks = new ArrayList<>();
+
+        feedbacks.add(FeedbackMessage.NOT_FOUND_VERIF_TOKEN);
+        feedbacks.add(FeedbackMessage.VERIFIED_TOKEN);
+        feedbacks.add(FeedbackMessage.TOKEN_EXPIRED);
+        feedbacks.add(FeedbackMessage.TOKEN_VALIDATED);
+
+        if (!feedbacks.contains(result)) {
+            result = FeedbackMessage.TOKEN_VALI_ERROR;
+        }
+        return ResponseEntity.ok(new ApiResponse(result, null));
     }
 
     @GetMapping(UrlMapping.TOKEN_EXPIRED)
