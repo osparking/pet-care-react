@@ -35,7 +35,7 @@ public class ControllerPhoto {
             if (photo != null) {
                 byte[] photoBytes = servicePhoto.getImageData(photo.getId());
                 return ResponseEntity.ok(
-                        new ApiResponse(FeedbackMessage.FOUND, photoBytes));
+                        new ApiResponse(FeedbackMessage.FOUND_PHOTO_BY_ID, photoBytes));
             }
         } catch (ResourceNotFoundException | SQLException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -101,7 +101,7 @@ public class ControllerPhoto {
         try {
             Photo savedPhoto = servicePhoto.save(userId, file);
             return ResponseEntity.ok()
-                    .body(new ApiResponse(FeedbackMessage.CREATED,
+                    .body(new ApiResponse(FeedbackMessage.CREATED_PHOTO,
                             savedPhoto.getId()));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)

@@ -41,7 +41,7 @@ public class Appointment {
     private StatusAppointment status;
 
     @JoinColumn(name = "sender_id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User patient;
 
     @JoinColumn(name = "recipient_id")

@@ -41,7 +41,7 @@ public class ControllerUser {
             @PathVariable Long userId, @RequestBody RequestChangePwd request) {
         try {
             servicePwdChangeI.changePwd(userId, request);
-            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.CREATED, null));
+            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.UPDATED_PWD, null));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(new ApiResponse(e.getMessage(), null));
         } catch (ResourceNotFoundException e) {
@@ -61,7 +61,7 @@ public class ControllerUser {
             User userSaved = serviceUser.register(request);
             publisher.publishEvent(new UserRegisteredEvent(userSaved));
             DtoUser userDto = userConverter.mapEntityToDto(userSaved, DtoUser.class);
-            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.CREATED, userDto));
+            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.CREATED_USER, userDto));
         } catch (UserAlreadyExistsException exEx) {
             return ResponseEntity.status(CONFLICT).body(new ApiResponse(exEx.getMessage(), null));
         } catch (Exception ex) {
@@ -92,7 +92,7 @@ public class ControllerUser {
 
         try {
             DtoUser userDto = serviceUser.getDtoUserById(userId);
-            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, userDto));
+            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND_USER_BY_ID, userDto));
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity.status(NOT_FOUND)
                     .body(new ApiResponse(ex.getMessage(), null));
@@ -121,14 +121,14 @@ public class ControllerUser {
     public ResponseEntity<ApiResponse> getAllUsers() {
         List<DtoUser> theUsers = serviceUser.getAllUsers();
         return ResponseEntity.status(FOUND).body(
-                new ApiResponse(FeedbackMessage.FOUND, theUsers));
+                new ApiResponse(FeedbackMessage.FOUND_ALL_USERS, theUsers));
     }
 
     @GetMapping(UrlMapping.COUNT_BY_TYPE)
     public ResponseEntity<ApiResponse> countByType(@PathVariable String type) {
         long count = serviceUser.countByType(type);
         return ResponseEntity.status(OK).body(
-                new ApiResponse(FeedbackMessage.FOUND, count));
+                new ApiResponse(FeedbackMessage.FOUND_USER_COUNT_BY_TYPE, count));
     }
 
     @GetMapping(UrlMapping.COUNT_BY_MONTH_USER_TYPE)
@@ -136,7 +136,8 @@ public class ControllerUser {
         try {
             var userStat = serviceUser.countUsersByMonthAndType();
             return ResponseEntity.status(OK)
-                    .body(new ApiResponse(FeedbackMessage.FOUND, userStat));
+                    .body(new ApiResponse(
+                            FeedbackMessage.FOUND_USER_COUNT_BY_MO_TYPE, userStat));
         } catch (Exception e) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse(e.getMessage(), null));
@@ -147,8 +148,8 @@ public class ControllerUser {
     public ResponseEntity<ApiResponse> countUserActiveStatistics() {
         try {
             var userStat = serviceUser.serveUserActiveStatistics();
-            return ResponseEntity.ok(
-                    new ApiResponse(FeedbackMessage.FOUND, userStat));
+            return ResponseEntity.ok(new ApiResponse(
+                    FeedbackMessage.FOUND_USER_COUNT_BY_ACT_TYPE, userStat));
         } catch (Exception e) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse(e.getMessage(), null));
@@ -190,7 +191,7 @@ public class ControllerUser {
     public ResponseEntity<ApiResponse> getAllPatients() {
         List<DtoUser> theUsers = serviceUser.getAllPatients();
         return ResponseEntity.status(FOUND).body(
-                new ApiResponse(FeedbackMessage.FOUND, theUsers));
+                new ApiResponse(FeedbackMessage.FOUND_PATIENTS, theUsers));
     }
 }
 

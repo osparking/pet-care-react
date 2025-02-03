@@ -50,7 +50,7 @@ public class ControllerReview {
         Page<DtoReview> dtoReviews = reviewPage.map(review
                 -> modelMapper.map(review, DtoReview.class));
         return ResponseEntity.status(FOUND)
-                .body(new ApiResponse(FeedbackMessage.FOUND, dtoReviews));
+                .body(new ApiResponse(FeedbackMessage.FOUND_USER_REVIEWS, dtoReviews));
     }
 
     @PostMapping(UrlMapping.CREATE)
@@ -60,7 +60,7 @@ public class ControllerReview {
         try {
             Review savedReview = serviceReview.saveReview(patientId, vetId, review);
             return ResponseEntity.ok(
-                    new ApiResponse(FeedbackMessage.CREATED, savedReview.getId()));
+                    new ApiResponse(FeedbackMessage.CREATED_REVIEW, savedReview.getId()));
         } catch (IllegalArgumentException | IllegalStateException e) {
             return ResponseEntity.status(NOT_ACCEPTABLE).
                     body(new ApiResponse(e.getMessage(), null));
@@ -77,7 +77,8 @@ public class ControllerReview {
     public ResponseEntity<ApiResponse> getAverageRatingForVet(@PathVariable Long vetId) {
         try {
             Double avgStar = serviceReview.getAverageRatingForVet(vetId);
-            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, avgStar));
+            return ResponseEntity.ok(new ApiResponse(
+                    FeedbackMessage.FOUND_VET_AGV_RATING_BY_ID, avgStar));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
                     .body(new ApiResponse(e.getMessage(), null));

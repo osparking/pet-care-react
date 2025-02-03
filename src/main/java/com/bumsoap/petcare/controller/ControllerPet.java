@@ -57,7 +57,7 @@ public class ControllerPet {
     public ResponseEntity<ApiResponse> findById(@PathVariable Long id) {
         try {
             Pet pet = servicePet.findById(id);
-            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, pet));
+            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND_PET_BY_ID, pet));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
                     .body(new ApiResponse(e.getMessage(), null));
@@ -71,7 +71,7 @@ public class ControllerPet {
     public ResponseEntity<ApiResponse> addPetsForAppointment(@RequestBody List<Pet> pets) {
         try {
             List<Pet> addedPets = servicePet.addPetsForAppointment(pets);
-            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.CREATED, addedPets));
+            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.CREATED_PETS, addedPets));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse(e.getMessage(), null));
@@ -83,7 +83,7 @@ public class ControllerPet {
                                                             @RequestBody Pet pet) {
         try {
             Pet addedPet = servicePet.addPetForAppointment(appointmentId, pet);
-            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.CREATED, addedPet));
+            return ResponseEntity.ok(new ApiResponse(FeedbackMessage.CREATED_PET, addedPet));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse(e.getMessage(), null));
@@ -92,16 +92,18 @@ public class ControllerPet {
 
     @GetMapping(UrlMapping.GET_PET_TYPES)
     public ResponseEntity<ApiResponse> getPetTypes() {
-        return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, servicePet.getPetTypes()));
+        return ResponseEntity.ok(new ApiResponse(
+                FeedbackMessage.FOUND_PET_TYPES, servicePet.getPetTypes()));
     }
 
     @GetMapping(UrlMapping.GET_PET_COLORS)
     public ResponseEntity<ApiResponse> getPetColors() {
-        return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, servicePet.getPetColors()));
+        return ResponseEntity.ok(new ApiResponse(
+                FeedbackMessage.FOUND_PET_COLORS, servicePet.getPetColors()));
     }
 
     @GetMapping(UrlMapping.GET_PET_BREEDS)
     public ResponseEntity<ApiResponse> getPetBreeds(@RequestParam(required = false) String type) {
-        return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, servicePet.getPetBreeds(type)));
+        return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND_PET_BREEDS, servicePet.getPetBreeds(type)));
     }
 }

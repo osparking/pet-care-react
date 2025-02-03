@@ -179,6 +179,7 @@ public class ServiceAppointment implements IServiceAppointment {
 
     @Override
     public Appointment declineAppointment(Long apmtId) {
+        var result = repositoryAppointment.findById(apmtId);
         return repositoryAppointment.findById(apmtId)
                 .map(apmt -> {
                     apmt.setStatus(DECLINED);

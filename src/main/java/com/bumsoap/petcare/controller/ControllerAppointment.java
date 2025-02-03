@@ -65,7 +65,7 @@ public class ControllerAppointment {
     public ResponseEntity<ApiResponse> getByAppointmentNo(@PathVariable String no) {
         try {
             return ResponseEntity.status(FOUND)
-                    .body(new ApiResponse(FeedbackMessage.FOUND,
+                    .body(new ApiResponse(FeedbackMessage.FOUND_APPOINT_BY_NO,
                             serviceAppointment.getByAppointmentNo(no)));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
@@ -80,7 +80,7 @@ public class ControllerAppointment {
     public ResponseEntity<ApiResponse> getAppointmentById(@PathVariable Long id) {
         try {
             return ResponseEntity.status(FOUND)
-                    .body(new ApiResponse(FeedbackMessage.FOUND,
+                    .body(new ApiResponse(FeedbackMessage.FOUND_APPOINT_DTO_BY_ID,
                             serviceAppointment.getDtoAppointmentById(id)));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
@@ -109,7 +109,7 @@ public class ControllerAppointment {
                     appointment, senderId, recipientId);
             eventPublisher.publishEvent(new AppointmentBooked(savedAppointment));
             return ResponseEntity.status(CREATED)
-                    .body(new ApiResponse(FeedbackMessage.CREATED, savedAppointment));
+                    .body(new ApiResponse(FeedbackMessage.CREATED_APPOINT, savedAppointment));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
                     .body(new ApiResponse(e.getMessage(), null));
@@ -123,7 +123,7 @@ public class ControllerAppointment {
     public ResponseEntity<ApiResponse> getAllAppointments() {
         try {
             return ResponseEntity.status(FOUND)
-                    .body(new ApiResponse(FeedbackMessage.FOUND,
+                    .body(new ApiResponse(FeedbackMessage.FOUND_ALL_APPOINT,
                             serviceAppointment.getAllAppointments()));
         } catch (Exception e) {
             return ResponseEntity.status(INTERNAL_SERVER_ERROR)

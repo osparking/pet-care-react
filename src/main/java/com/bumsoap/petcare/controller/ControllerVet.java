@@ -26,13 +26,13 @@ public class ControllerVet {
     @GetMapping(UrlMapping.GET_ALL_VETS)
     public ResponseEntity<ApiResponse> getAllVets() {
         List<DtoUser> allVets = serviceVet.getAllVetsWithDetails();
-        return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, allVets));
+        return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND_ALL_VETS, allVets));
     }
 
     @GetMapping(UrlMapping.GET_ALL_SPECIALIZATIONS)
     public ResponseEntity<ApiResponse> getAllSpecial() {
-        return ResponseEntity.ok(
-                new ApiResponse(FeedbackMessage.FOUND, serviceVet.getSpecialList()));
+        return ResponseEntity.ok(new ApiResponse(
+                FeedbackMessage.FOUND_ALL_SPECIAL, serviceVet.getSpecialList()));
     }
 
     @GetMapping(UrlMapping.GET_AVAILABLE_VETS)
@@ -41,14 +41,14 @@ public class ControllerVet {
             @RequestParam(required = false) LocalDate date,
             @RequestParam(required = false) LocalTime time) {
         try {
-            List<DtoUser> allAvailableVets =
-                    serviceVet.getAvailVetsForAppointment(specialization, date, time);
+            List<DtoUser> allAvailableVets = serviceVet
+                    .getAvailVetsForAppointment(specialization, date, time);
             if (allAvailableVets.isEmpty()) {
-                return  ResponseEntity.status(NOT_FOUND)
-                        .body(new ApiResponse(FeedbackMessage.NO_VETS_FOUND, null));
+                return  ResponseEntity.status(NOT_FOUND).body(
+                        new ApiResponse(FeedbackMessage.NO_VETS_FOUND, null));
             }
-            return ResponseEntity.ok(
-                    new ApiResponse(FeedbackMessage.FOUND, allAvailableVets));
+            return ResponseEntity.ok(new ApiResponse(
+                    FeedbackMessage.FOUND_ALL_AVAIL_VETS, allAvailableVets));
         } catch (ResourceNotFoundException ex) {
             return ResponseEntity
                     .status(NOT_FOUND)
@@ -59,6 +59,7 @@ public class ControllerVet {
     @GetMapping(UrlMapping.GET_VET_COUNT_BY_SPECIAL)
     public ResponseEntity<ApiResponse> getVetCountBySpecial(){
         var result = serviceVet.countVetBySpecial();
-        return ResponseEntity.ok(new ApiResponse(FeedbackMessage.FOUND, result));
+        return ResponseEntity.ok(new ApiResponse(
+                FeedbackMessage.FOUND_VET_COUNTS_BY_SPECIAL, result));
     }
 }
