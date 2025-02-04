@@ -169,7 +169,7 @@ public class ServiceAppointment implements IServiceAppointment {
     @Override
     public Appointment approveAppointment(Long apmtId) {
         return repositoryAppointment.findById(apmtId)
-                .filter(apmt -> !apmt.getStatus().equals(APPROVED))
+                .filter(apmt -> apmt.getStatus().equals(APPROVE_WAIT))
                 .map(apmt -> {
                     apmt.setStatus(APPROVED);
                     return repositoryAppointment.saveAndFlush(apmt);})
@@ -179,8 +179,8 @@ public class ServiceAppointment implements IServiceAppointment {
 
     @Override
     public Appointment declineAppointment(Long apmtId) {
-        var result = repositoryAppointment.findById(apmtId);
         return repositoryAppointment.findById(apmtId)
+                .filter(apmt -> apmt.getStatus().equals(APPROVE_WAIT))
                 .map(apmt -> {
                     apmt.setStatus(DECLINED);
                     return repositoryAppointment.saveAndFlush(apmt);})
