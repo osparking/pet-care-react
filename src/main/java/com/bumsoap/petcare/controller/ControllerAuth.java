@@ -25,6 +25,7 @@ import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 @RestController
 @RequestMapping(UrlMapping.AUTH)
 @RequiredArgsConstructor
+@CrossOrigin("http://localhost:5173/")
 public class ControllerAuth {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
