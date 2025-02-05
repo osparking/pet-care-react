@@ -5,6 +5,7 @@ import com.bumsoap.petcare.response.ApiResponse;
 import com.bumsoap.petcare.response.JwtResponse;
 import com.bumsoap.petcare.security.jwt.JwtUtil;
 import com.bumsoap.petcare.security.user.PcUserDetails;
+import com.bumsoap.petcare.service.token.IServiceVerifToken;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.UrlMapping;
 import jakarta.validation.Valid;
@@ -25,6 +26,12 @@ import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 public class ControllerAuth {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+    private final IServiceVerifToken serviceVerifToken;
+
+    public ResponseEntity<ApiResponse> verifyEmailToken(@RequestParam("token") String token) {
+        String result =  serviceVerifToken.validateToken(token);
+        return null;
+    }
 
     @PostMapping(UrlMapping.LOGIN)
     public ResponseEntity<ApiResponse> login (@Valid @RequestBody LoginRequest request) {
