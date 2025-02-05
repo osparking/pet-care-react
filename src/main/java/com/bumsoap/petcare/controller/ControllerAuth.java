@@ -7,9 +7,11 @@ import com.bumsoap.petcare.security.jwt.JwtUtil;
 import com.bumsoap.petcare.security.user.PcUserDetails;
 import com.bumsoap.petcare.service.token.IServiceVerifToken;
 import com.bumsoap.petcare.utils.FeedbackMessage;
+import com.bumsoap.petcare.utils.SystemUtils;
 import com.bumsoap.petcare.utils.UrlMapping;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.DisabledException;
@@ -28,9 +30,23 @@ public class ControllerAuth {
     private final JwtUtil jwtUtil;
     private final IServiceVerifToken serviceVerifToken;
 
-    public ResponseEntity<ApiResponse> verifyEmailToken(@RequestParam("token") String token) {
+    public ResponseEntity<ApiResponse> verifyEmailToken(
+            @RequestParam("token") String token) {
+
         String result =  serviceVerifToken.validateToken(token);
-        return null;
+        var response = ResponseEntity.internalServerError()
+                .body(new ApiResponse(FeedbackMessage.TOKEN_VALI_ERROR, null));
+
+        if (SystemUtils.isValidateFeedback(result)) {
+            HttpStatus status = HttpStatus.OK;
+            if (result.equals(FeedbackMessage.TOKEN_EXPIRED) ||
+            result.equals(FeedbackMessage.INVALID_TOKEN)) {
+                status = HttpStatus.GONE;
+            }
+            response = ResponseEntity.status(status)
+                    .body(new ApiResponse(result, null));
+        }
+        return response;
     }
 
     @PostMapping(UrlMapping.LOGIN)
