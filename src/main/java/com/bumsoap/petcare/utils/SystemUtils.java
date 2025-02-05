@@ -23,10 +23,6 @@ public class SystemUtils {
         tokenValidationFeedback.add(FeedbackMessage.TOKEN_EXPIRED);
         tokenValidationFeedback.add(FeedbackMessage.TOKEN_VALIDATED);
 
-        if (!tokenValidationFeedback.contains(token)) {
-            return true;
-        } else {
-            return false;
-        }
+        return tokenValidationFeedback.contains(token);
     }
 }
