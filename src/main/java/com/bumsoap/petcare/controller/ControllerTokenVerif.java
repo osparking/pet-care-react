@@ -7,6 +7,7 @@ import com.bumsoap.petcare.request.ReqTokenVerif;
 import com.bumsoap.petcare.response.ApiResponse;
 import com.bumsoap.petcare.service.token.IServiceVerifToken;
 import com.bumsoap.petcare.utils.FeedbackMessage;
+import com.bumsoap.petcare.utils.SystemUtils;
 import com.bumsoap.petcare.utils.UrlMapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +28,7 @@ public class ControllerTokenVerif {
         String result = serviceVerifToken.validateToken(token);
         List<String> feedbacks = new ArrayList<>();
 
-        feedbacks.add(FeedbackMessage.NOT_FOUND_VERIF_TOKEN);
-        feedbacks.add(FeedbackMessage.VERIFIED_TOKEN);
-        feedbacks.add(FeedbackMessage.TOKEN_EXPIRED);
-        feedbacks.add(FeedbackMessage.TOKEN_VALIDATED);
-
-        if (!feedbacks.contains(result)) {
+        if (!SystemUtils.isValidateFeedback(result)) {
             result = FeedbackMessage.TOKEN_VALI_ERROR;
         }
         return ResponseEntity.ok(new ApiResponse(result, null));
