@@ -79,6 +79,7 @@ public class UrlMapping {
     public static final String SAVE_TOKEN = "/save_token";
     public static final String GENERATE_NEW_TOKEN = "/generate_new_token";
     public static final String DELETE_TOKEN = "/delete_token";
+    public static final String VERIFY_EMAIL = "/verify_email";
     /*========================== End Verification type API ======================= */
 
 }

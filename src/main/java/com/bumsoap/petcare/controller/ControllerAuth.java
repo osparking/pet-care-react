@@ -30,6 +30,7 @@ public class ControllerAuth {
     private final JwtUtil jwtUtil;
     private final IServiceVerifToken serviceVerifToken;
 
+    @GetMapping(UrlMapping.VERIFY_EMAIL)
     public ResponseEntity<ApiResponse> verifyEmailToken(
             @RequestParam("token") String token) {
 
