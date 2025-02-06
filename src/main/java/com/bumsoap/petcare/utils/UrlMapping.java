@@ -84,6 +84,7 @@ public class UrlMapping {
 
     /*============================  Start Role API ============================*/
     public static final String ROLES = API + "/roles";
+    public static final String GET_ALL_ROLES = "get_all";
     /*============================== End ROLE API =============================*/
 
 }
