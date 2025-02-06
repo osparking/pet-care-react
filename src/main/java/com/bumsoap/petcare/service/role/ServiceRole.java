@@ -30,11 +30,12 @@ public class ServiceRole implements ServiceRoleI {
 
     @Override
     public void saveRole(Role role) {
-
+        roleRepository.save(role);
     }
 
     @Override
     public Collection<Role> setUserRoles(List<String> roleNames) {
-        return List.of();
+        return roleNames.stream().map(roleName ->
+                roleRepository.findByName("ROLE_" + roleName)).toList();
     }
 }
