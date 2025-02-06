@@ -82,4 +82,8 @@ public class UrlMapping {
     public static final String DELETE_TOKEN = "/delete_token";
     /*========================== End Verification type API ======================= */
 
+    /*============================  Start Role API ============================*/
+    public static final String ROLES = API + "/roles";
+    /*============================== End ROLE API =============================*/
+
 }
