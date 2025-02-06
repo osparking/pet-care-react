@@ -69,6 +69,7 @@ public class UrlMapping {
 
     /*============================  Start Auth Type API ============================*/
     public static final String AUTH = API + "/auth";
+    public static final String VERIFY_EMAIL = "/verify_email";
     public static final String LOGIN = "/login";
     /*========================== End AUth type API ============================= */
 
@@ -79,7 +80,6 @@ public class UrlMapping {
     public static final String SAVE_TOKEN = "/save_token";
     public static final String GENERATE_NEW_TOKEN = "/generate_new_token";
     public static final String DELETE_TOKEN = "/delete_token";
-    public static final String VERIFY_EMAIL = "/verify_email";
     /*========================== End Verification type API ======================= */
 
 }

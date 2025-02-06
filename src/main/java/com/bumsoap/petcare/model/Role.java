@@ -26,4 +26,9 @@ public class Role {
     public String getName() {
         return name == null ? "" : name;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
