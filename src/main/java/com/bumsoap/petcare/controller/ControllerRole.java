@@ -25,4 +25,9 @@ public class ControllerRole {
     public Role findRoleById(Long id) {
         return roleService.findById(id);
     }
+
+    @GetMapping(UrlMapping.GET_ROLE_BY_NAME)
+    public Role findRoleByName(String name) {
+        return roleService.findByName(name);
+    }
 }
