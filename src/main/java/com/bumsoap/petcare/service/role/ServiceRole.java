@@ -15,17 +15,17 @@ public class ServiceRole implements ServiceRoleI {
 
     @Override
     public List<Role> getRoles() {
-        return List.of();
+        return roleRepository.findAll();
     }
 
     @Override
     public Role findByName(String name) {
-        return null;
+        return roleRepository.findByName(name);
     }
 
     @Override
     public Role findById(Long id) {
-        return null;
+        return roleRepository.findById(id).orElse(null);
     }
 
     @Override
