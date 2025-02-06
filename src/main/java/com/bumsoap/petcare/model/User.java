@@ -32,7 +32,7 @@ public class User {
     private String email;
     private String password;
     private String userType;
-    private Boolean enabled = true;
+    private Boolean enabled;
 
     @CreationTimestamp
     private LocalDate createdAt;
