@@ -54,6 +54,11 @@ public class DefaultDataInitializer
         admin.setMobile("01012345678");
         admin.setEmail(defaultEmail);
         admin.setPassword(passwordEncoder.encode("1234"));
+        admin.setUserType("ADMIN");
+        admin.setRoles(Set.of(adminRole));
+        Admin theAdmin = adminRepository.save(admin);
+        theAdmin.setEnabled(true);
+        System.out.println("관리자가 만들어 졌습니다.");
     }
 
     private void createDefaultPatientIfNotExits(){
