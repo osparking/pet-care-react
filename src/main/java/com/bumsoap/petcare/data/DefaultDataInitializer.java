@@ -37,6 +37,13 @@ public class DefaultDataInitializer
                 .map(Role::new).forEach(roleRepository::save);
     }
 
+    private void createAdminIfNotExists() {
+        final String defaultEmail = "jbpark03@gmail.com";
+        if (userRepository.existsByEmail(defaultEmail)) {
+            return;
+        }
+    }
+
     private void createDefaultPatientIfNotExits(){
         for (int i = 1; i<=10; i++){
             String defaultEmail = "pat"+i+"@gmail.com";
