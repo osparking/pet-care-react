@@ -3,13 +3,11 @@ package com.bumsoap.petcare.data;
 import com.bumsoap.petcare.model.Patient;
 import com.bumsoap.petcare.model.Role;
 import com.bumsoap.petcare.model.Veterinarian;
-import com.bumsoap.petcare.repository.RepositoryPatient;
-import com.bumsoap.petcare.repository.RepositoryRole;
-import com.bumsoap.petcare.repository.RepositoryUser;
-import com.bumsoap.petcare.repository.RepositoryVet;
+import com.bumsoap.petcare.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
@@ -22,6 +20,8 @@ public class DefaultDataInitializer
     private final RepositoryVet veterinarianRepository;
     private final RepositoryPatient patientRepository;
     private final RepositoryRole roleRepository;
+    private final RepositoryAdmin adminRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
