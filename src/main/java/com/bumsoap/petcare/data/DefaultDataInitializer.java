@@ -85,6 +85,8 @@ public class DefaultDataInitializer
     }
 
     private void createDefaultVetIfNotExits() {
+        Role vetRole = roleService.findByName("ROLE_VET");
+
         for (int i = 1; i <= 10; i++) {
             String defaultEmail = "vet" + i + "@gmail.com";
             if (userRepository.existsByEmail(defaultEmail)) {
@@ -96,8 +98,9 @@ public class DefaultDataInitializer
             vet.setGender("male");
             vet.setMobile("01094567890");
             vet.setEmail(defaultEmail);
-            vet.setPassword("password" + i);
+            vet.setPassword(passwordEncoder.encode("password" + i));
             vet.setUserType("VET");
+            vet.setRoles(Set.of(vetRole));
             vet.setSpecialization("피부과");
             Veterinarian theVet = veterinarianRepository.save(vet);
             theVet.setEnabled(true);
