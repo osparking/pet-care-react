@@ -40,8 +40,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<VerifToken> verifTokens = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH,
-            CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns
                     = @JoinColumn(name = "user_id", referencedColumnName = "id"),
