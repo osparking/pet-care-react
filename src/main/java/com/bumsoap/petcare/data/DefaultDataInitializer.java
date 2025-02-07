@@ -62,6 +62,8 @@ public class DefaultDataInitializer
     }
 
     private void createDefaultPatientIfNotExits(){
+        Role patientRole = roleService.findByName("ROLE_PATIENT");
+
         for (int i = 1; i<=10; i++){
             String defaultEmail = "pat"+i+"@gmail.com";
             if (userRepository.existsByEmail(defaultEmail)){
@@ -73,8 +75,9 @@ public class DefaultDataInitializer
             pat.setGender("female");
             pat.setMobile("01045678908");
             pat.setEmail(defaultEmail);
-            pat.setPassword("password" + i);
+            pat.setPassword(passwordEncoder.encode("password" + i));
             pat.setUserType("PATIENT");
+            pat.setRoles(Set.of(patientRole));
             Patient thePatient = patientRepository.save(pat);
             thePatient.setEnabled(true);
             System.out.println("제 " + i + " 팻 주인이 만들어 졌습니다.");
