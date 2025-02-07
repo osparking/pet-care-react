@@ -20,7 +20,7 @@ public class ServiceRole implements ServiceRoleI {
 
     @Override
     public Role findByName(String name) {
-        return roleRepository.findByName(name);
+        return roleRepository.findByName(name).orElse(null);
     }
 
     @Override
