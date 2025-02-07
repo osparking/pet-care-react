@@ -1,14 +1,18 @@
 package com.bumsoap.petcare.data;
 
 import com.bumsoap.petcare.model.Patient;
+import com.bumsoap.petcare.model.Role;
 import com.bumsoap.petcare.model.Veterinarian;
 import com.bumsoap.petcare.repository.RepositoryPatient;
+import com.bumsoap.petcare.repository.RepositoryRole;
 import com.bumsoap.petcare.repository.RepositoryUser;
 import com.bumsoap.petcare.repository.RepositoryVet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -17,11 +21,18 @@ public class DefaultDataInitializer
     private final RepositoryUser userRepository;
     private final RepositoryVet veterinarianRepository;
     private final RepositoryPatient patientRepository;
+    private final RepositoryRole roleRepository;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         createDefaultVetIfNotExits();
         createDefaultPatientIfNotExits();
+    }
+
+    private void createDefaultRolesIfNotExits(Set<String> roles) {
+        roles.stream()
+                .filter(role -> roleRepository.findByName(role).isEmpty())
+                .map(Role::new).forEach(roleRepository::save);
     }
 
     private void createDefaultPatientIfNotExits(){
