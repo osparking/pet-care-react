@@ -27,8 +27,8 @@ public class DefaultDataInitializer
     public void onApplicationEvent(ApplicationReadyEvent event) {
         Set<String> defaultRoles = Set.of("ROLE_ADMIN", "ROLE_PATIENT", "ROLE_VET");
         createDefaultRolesIfNotExits(defaultRoles);
-        createDefaultVetIfNotExits();
-        createDefaultPatientIfNotExits();
+//        createDefaultVetIfNotExits();
+//        createDefaultPatientIfNotExits();
     }
 
     private void createDefaultRolesIfNotExits(Set<String> roles) {
