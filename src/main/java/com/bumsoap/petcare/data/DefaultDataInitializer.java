@@ -1,9 +1,11 @@
 package com.bumsoap.petcare.data;
 
+import com.bumsoap.petcare.model.Admin;
 import com.bumsoap.petcare.model.Patient;
 import com.bumsoap.petcare.model.Role;
 import com.bumsoap.petcare.model.Veterinarian;
 import com.bumsoap.petcare.repository.*;
+import com.bumsoap.petcare.service.role.ServiceRoleI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -22,6 +24,7 @@ public class DefaultDataInitializer
     private final RepositoryRole roleRepository;
     private final RepositoryAdmin adminRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ServiceRoleI roleService;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
@@ -42,6 +45,15 @@ public class DefaultDataInitializer
         if (userRepository.existsByEmail(defaultEmail)) {
             return;
         }
+        Role adminRole = roleService.findByName("ROLE_ADMIN");
+
+        Admin admin = new Admin();
+        admin.setLastName("관");
+        admin.setFirstName("리자");
+        admin.setGender("female");
+        admin.setMobile("01012345678");
+        admin.setEmail(defaultEmail);
+        admin.setPassword(passwordEncoder.encode("1234"));
     }
 
     private void createDefaultPatientIfNotExits(){
