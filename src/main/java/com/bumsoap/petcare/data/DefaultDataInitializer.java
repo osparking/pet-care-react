@@ -54,6 +54,7 @@ public class DefaultDataInitializer
         admin.setGender("female");
         admin.setMobile("01012345678");
         admin.setEmail(defaultEmail);
+        admin.setEnabled(false);
         admin.setPassword(passwordEncoder.encode("1234"));
         admin.setUserType("ADMIN");
         admin.setRoles(Set.of(adminRole));
@@ -76,6 +77,7 @@ public class DefaultDataInitializer
             pat.setGender("female");
             pat.setMobile("01045678908");
             pat.setEmail(defaultEmail);
+            pat.setEnabled(false);
             pat.setPassword(passwordEncoder.encode("password" + i));
             pat.setUserType("PATIENT");
             pat.setRoles(Set.of(patientRole));
@@ -99,6 +101,7 @@ public class DefaultDataInitializer
             vet.setGender("male");
             vet.setMobile("01094567890");
             vet.setEmail(defaultEmail);
+            vet.setEnabled(false);
             vet.setPassword(passwordEncoder.encode("password" + i));
             vet.setUserType("VET");
             vet.setRoles(Set.of(vetRole));
