@@ -35,7 +35,8 @@ public class ServiceRole implements ServiceRoleI {
 
     @Override
     public Collection<Role> setUserRoles(List<String> roleNames) {
-        return roleNames.stream().map(roleName ->
-                roleRepository.findByName("ROLE_" + roleName)).toList();
+//        return roleNames.stream().map(roleName ->
+//                roleRepository.findByName("ROLE_" + roleName)).toList();
+        return null;
     }
 }
