@@ -21,7 +21,7 @@ public class Role {
         this.name = name;
     }
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "roles")
     private Collection<User> users = new HashSet<>();
     public String getName() {
         return name == null ? "" : name;
