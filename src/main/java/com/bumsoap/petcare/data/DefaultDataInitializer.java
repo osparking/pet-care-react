@@ -54,12 +54,11 @@ public class DefaultDataInitializer
         admin.setGender("female");
         admin.setMobile("01012345678");
         admin.setEmail(defaultEmail);
-        admin.setEnabled(false);
+        admin.setEnabled(true);
         admin.setPassword(passwordEncoder.encode("1234"));
         admin.setUserType("ADMIN");
         admin.setRoles(Set.of(adminRole));
         Admin theAdmin = adminRepository.save(admin);
-        theAdmin.setEnabled(true);
         System.out.println("관리자가 만들어 졌습니다.");
     }
 
@@ -77,12 +76,11 @@ public class DefaultDataInitializer
             pat.setGender("female");
             pat.setMobile("01045678908");
             pat.setEmail(defaultEmail);
-            pat.setEnabled(false);
+            pat.setEnabled(true);
             pat.setPassword(passwordEncoder.encode("password" + i));
             pat.setUserType("PATIENT");
             pat.setRoles(Set.of(patientRole));
             Patient thePatient = patientRepository.save(pat);
-            thePatient.setEnabled(true);
             System.out.println("제 " + i + " 팻 주인이 만들어 졌습니다.");
         }
     }
@@ -101,13 +99,12 @@ public class DefaultDataInitializer
             vet.setGender("male");
             vet.setMobile("01094567890");
             vet.setEmail(defaultEmail);
-            vet.setEnabled(false);
+            vet.setEnabled(true);
             vet.setPassword(passwordEncoder.encode("password" + i));
             vet.setUserType("VET");
             vet.setRoles(Set.of(vetRole));
             vet.setSpecialization("피부과");
             Veterinarian theVet = veterinarianRepository.save(vet);
-            theVet.setEnabled(true);
             System.out.println("제 " + i + " 기본 사용자가 만들어 졌습니다.");
         }
     }
