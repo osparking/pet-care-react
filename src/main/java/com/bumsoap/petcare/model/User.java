@@ -45,7 +45,11 @@ public class User {
             joinColumns
                     = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns
-                    = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+                    = @JoinColumn(name = "role_id", referencedColumnName = "id"),
+            uniqueConstraints
+                    = @UniqueConstraint(name="unique_user_role",
+                                        columnNames = {"user_id", "role_id"})
+    )
     private Collection<Role> roles = new HashSet<>();
 
     public String createdAtMonth() {
