@@ -42,7 +42,6 @@ public class ControllerAuth {
         if (SystemUtils.isValidateFeedback(result)) {
             HttpStatus status = HttpStatus.OK;
             if (result.equals(FeedbackMessage.TOKEN_EXPIRED) ||
-                result.equals(FeedbackMessage.INVALID_TOKEN) ||
                 result.equals(FeedbackMessage.NOT_FOUND_VERIF_TOKEN)) {
                 status = HttpStatus.GONE;
             }
