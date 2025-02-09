@@ -25,11 +25,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class AppSecurityConfig {
     private final PcUserDetailsService userDetailsService;
     private final JwtAuthEntryPt authEntryPt;
-
-    @Bean
-    public AuthTokenFilter authTokenFilter() {
-        return new AuthTokenFilter();
-    }
+    private final AuthTokenFilter authTokenFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -69,7 +65,7 @@ public class AppSecurityConfig {
                         .authenticated().anyRequest().permitAll());
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(
-                authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+                authTokenFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }
