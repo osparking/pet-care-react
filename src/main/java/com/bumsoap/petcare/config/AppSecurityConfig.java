@@ -48,7 +48,7 @@ public class AppSecurityConfig {
     }
 
     private static  String[] URLS = {
-//            "/api/v1/appointments/create",
+            "/api/v1/appointments/create",
             "/api/v1/reviews/**"
     };
 
