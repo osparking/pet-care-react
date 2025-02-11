@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +22,9 @@ import java.io.IOException;
 @NoArgsConstructor
 @Component
 public class AuthTokenFilter extends OncePerRequestFilter {
+    @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
     PcUserDetailsService userDetailsService;
 
     @Override
