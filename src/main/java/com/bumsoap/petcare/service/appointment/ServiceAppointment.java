@@ -244,6 +244,16 @@ public class ServiceAppointment implements IServiceAppointment {
                     apmt.setStatus(ON_GOING);
                 }
                 break;
+            case ON_GOING :
+                /**
+                 * '진행 중' 예약 건을 완료 상태로 변경.
+                 */
+                if (today.isAfter(apmt.getDate()) ||
+                        (today.equals(apmt.getDate()) &&
+                                thisTm.isAfter(treatEndTm))) {
+                    apmt.setStatus(COMPLETED);
+                }
+                break;
         }
 
 
