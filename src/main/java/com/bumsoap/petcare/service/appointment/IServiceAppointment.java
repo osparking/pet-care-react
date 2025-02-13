@@ -33,5 +33,9 @@ public interface IServiceAppointment {
 
     long countAllAppointments();
 
+    void setAppointStatus(Long appointId);
+
+    List<Long> appointIds();
+
     List<Map<String, Object>> getAppointData();
 }

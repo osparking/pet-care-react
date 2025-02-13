@@ -208,6 +208,7 @@ public class ServiceAppointment implements IServiceAppointment {
         return countMap;
     }
 
+    @Override
     public void setAppointStatus(Long appointId) {
         Appointment apmt = repositoryAppointment.findById(appointId)
                .orElseThrow(() -> new ResourceNotFoundException(
@@ -266,6 +267,13 @@ public class ServiceAppointment implements IServiceAppointment {
                 break;
         }
         repositoryAppointment.save(apmt);
+    }
+
+    @Override
+    public List<Long> appointIds() {
+        return repositoryAppointment.findAll().stream()
+               .map(Appointment::getId)
+               .collect(Collectors.toList());
     }
 
     /**
