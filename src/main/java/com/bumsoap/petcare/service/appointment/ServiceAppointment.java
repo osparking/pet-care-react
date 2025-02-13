@@ -254,6 +254,16 @@ public class ServiceAppointment implements IServiceAppointment {
                     apmt.setStatus(COMPLETED);
                 }
                 break;
+            case APPROVE_WAIT :
+                /**
+                 * '승인 대기' 예약 건을 "승인 거절" 상태로 변경.
+                 */
+                if (today.isAfter(apmt.getDate()) ||
+                        (today.equals(apmt.getDate()) &&
+                                thisTm.isAfter(treatEndTm))) {
+                    apmt.setStatus(DECLINED);
+                }
+                break;
         }
 
 
