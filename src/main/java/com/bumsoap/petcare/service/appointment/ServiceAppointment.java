@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -212,6 +213,12 @@ public class ServiceAppointment implements IServiceAppointment {
                .orElseThrow(() -> new ResourceNotFoundException(
                         FeedbackMessage.NOT_FOUND_APPOINT_ID));
         LocalDate today = LocalDate.now();
+        LocalTime thisTm = LocalTime.now();
+        /**
+         * 예약건 진료(treatment)가 종료되었을 것으로 예측되는 시각.
+         */
+        LocalTime treatEndTm = apmt.getTime().plusMinutes(2)
+                .truncatedTo(ChronoUnit.MINUTES);
 
     }
 
