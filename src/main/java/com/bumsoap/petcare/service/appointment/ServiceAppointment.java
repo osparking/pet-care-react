@@ -220,6 +220,23 @@ public class ServiceAppointment implements IServiceAppointment {
         LocalTime treatEndTm = apmt.getTime().plusMinutes(2)
                 .truncatedTo(ChronoUnit.MINUTES);
 
+        /**
+         * 예약의 현 상태에 따라 자동 변경할 조건 판단 및 변경 시행
+         */
+        switch (apmt.getStatus()) {
+            case APPROVED :
+                /**
+                 * 예약일 전 이거나 예약일이고 예약 시간 전이면, 다가오는 건.
+                 */
+                if (today.isBefore(apmt.getDate()) ||
+                        (today.equals(apmt.getDate()) &&
+                                thisTm.isBefore(apmt.getTime()))) {
+                    apmt.setStatus(UP_COMING);
+                }
+                break;
+        }
+
+
     }
 
     /**
