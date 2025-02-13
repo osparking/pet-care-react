@@ -207,6 +207,14 @@ public class ServiceAppointment implements IServiceAppointment {
         return countMap;
     }
 
+    public void setAppointStatus(Long appointId) {
+        Appointment apmt = repositoryAppointment.findById(appointId)
+               .orElseThrow(() -> new ResourceNotFoundException(
+                        FeedbackMessage.NOT_FOUND_APPOINT_ID));
+        LocalDate today = LocalDate.now();
+
+    }
+
     /**
      * 모든 예약을 상태별로 수를 헤아리고, 하나 이상인 상태를 모아 <상태명, 건수>의
      * 맵 목록을 게산한다.
