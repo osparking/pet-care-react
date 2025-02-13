@@ -265,8 +265,7 @@ public class ServiceAppointment implements IServiceAppointment {
                 }
                 break;
         }
-
-
+        repositoryAppointment.save(apmt);
     }
 
     /**
