@@ -42,7 +42,7 @@ public class DefaultDataInitializer
     }
 
     private void createAdminIfNotExists() {
-        final String defaultEmail = "jbpark03@gmail.com";
+        final String defaultEmail = "admin@gmail.com";
         if (userRepository.existsByEmail(defaultEmail)) {
             return;
         }
