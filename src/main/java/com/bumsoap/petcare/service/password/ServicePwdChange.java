@@ -5,6 +5,7 @@ import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.repository.RepositoryUser;
 import com.bumsoap.petcare.request.RequestChangePwd;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -13,6 +14,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class ServicePwdChange implements ServicePwdChangeI {
     private final RepositoryUser repositoryUser;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void changePwd(Long userId, RequestChangePwd request) {
@@ -22,8 +24,8 @@ public class ServicePwdChange implements ServicePwdChangeI {
         if (request.getCurrentPwd().equals("") || request.getNewPwd().equals("")) {
             throw new IllegalArgumentException("모든 비밀번호 입력 필수");
         }
-
-        if (!request.getCurrentPwd().equals(user.getPassword())) {
+        String currEncd = passwordEncoder.encode(request.getCurrentPwd());
+        if (!currEncd.equals(user.getPassword())) {
             throw new IllegalArgumentException("기존 비밀번호 불일치");
         }
 
