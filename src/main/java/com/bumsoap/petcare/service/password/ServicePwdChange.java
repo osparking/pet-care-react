@@ -34,7 +34,7 @@ public class ServicePwdChange implements ServicePwdChangeI {
             throw new IllegalArgumentException("새 비밀번호의 확인 값 불일치");
         }
 
-        user.setPassword(request.getNewPwd());
+        user.setPassword(passwordEncoder.encode(request.getNewPwd()));
         repositoryUser.save(user);
     }
 
