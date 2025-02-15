@@ -51,7 +51,7 @@ public class DefaultDataInitializer
         Admin admin = new Admin();
         admin.setLastName("관");
         admin.setFirstName("리자");
-        admin.setGender("female");
+        admin.setGender("남성");
         admin.setMobile("01012345678");
         admin.setEmail(defaultEmail);
         admin.setEnabled(true);
@@ -73,7 +73,7 @@ public class DefaultDataInitializer
             Patient pat = new Patient();
             pat.setFirstName("강호" + i);
             pat.setLastName("한");
-            pat.setGender("female");
+            pat.setGender("여성");
             pat.setMobile("01045678908");
             pat.setEmail(defaultEmail);
             pat.setEnabled(true);
@@ -96,7 +96,7 @@ public class DefaultDataInitializer
             Veterinarian vet = new Veterinarian();
             vet.setLastName("정" + i);
             vet.setFirstName("진심");
-            vet.setGender("male");
+            vet.setGender("남성");
             vet.setMobile("01094567890");
             vet.setEmail(defaultEmail);
             vet.setEnabled(true);
