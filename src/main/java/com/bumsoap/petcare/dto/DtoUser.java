@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Data
 public class DtoUser {
@@ -19,6 +20,7 @@ public class DtoUser {
     private LocalDate createdAt;
     private List<DtoAppointment> appointments;
     private List<DtoReview> reviews;
+    private Set<String> roles;
     private long photoId;
     private byte[] photo;
     private double averageRating;
