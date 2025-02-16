@@ -35,18 +35,23 @@ public class ControllerAuth {
     public ResponseEntity<ApiResponse> verifyEmailToken(
             @RequestParam("token") String token) {
 
-        String result =  serviceVerifToken.validateToken(token);
+        StringBuffer emailBuf = new StringBuffer();
+        String result =  serviceVerifToken.validateToken(token, emailBuf);
         var response = ResponseEntity.internalServerError()
                 .body(new ApiResponse(FeedbackMessage.TOKEN_VALI_ERROR, null));
 
         if (SystemUtils.isValidateFeedback(result)) {
             HttpStatus status = HttpStatus.OK;
-            if (result.equals(FeedbackMessage.TOKEN_EXPIRED) ||
-                result.equals(FeedbackMessage.NOT_FOUND_VERIF_TOKEN)) {
+            String data = null;
+            if (result.equals(FeedbackMessage.TOKEN_EXPIRED)) {
+                status = HttpStatus.GONE;
+                data = emailBuf.toString();
+            }
+            if (result.equals(FeedbackMessage.NOT_FOUND_VERIF_TOKEN)) {
                 status = HttpStatus.GONE;
             }
             response = ResponseEntity.status(status)
-                    .body(new ApiResponse(result, null));
+                    .body(new ApiResponse(result, data));
         }
         return response;
     }

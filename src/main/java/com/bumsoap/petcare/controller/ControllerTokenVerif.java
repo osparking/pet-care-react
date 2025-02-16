@@ -25,7 +25,7 @@ public class ControllerTokenVerif {
 
     @GetMapping(UrlMapping.VALIDATE_TOKEN)
     public ResponseEntity<ApiResponse> validateToken(String token) {
-        String result = serviceVerifToken.validateToken(token);
+        String result = serviceVerifToken.validateToken(token, null);
         List<String> feedbacks = new ArrayList<>();
 
         if (!SystemUtils.isValidateFeedback(result)) {
