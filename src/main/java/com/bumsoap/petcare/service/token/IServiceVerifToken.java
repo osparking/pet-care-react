@@ -6,7 +6,7 @@ import com.bumsoap.petcare.model.VerifToken;
 import java.util.Optional;
 
 public interface IServiceVerifToken {
-    String validateToken(String token);
+    String validateToken(String token, StringBuffer emailBuf);
     void saveUserVerifToken(String token, User user);
     VerifToken makeNewToken(String oldToken);
     Optional<VerifToken> findByToken(String token);

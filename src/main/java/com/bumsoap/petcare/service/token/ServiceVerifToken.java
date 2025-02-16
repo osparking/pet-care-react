@@ -19,7 +19,7 @@ public class ServiceVerifToken implements  IServiceVerifToken{
     private final RepositoryVerifToken tokenRepository;
 
     @Override
-    public String validateToken(String token) {
+    public String validateToken(String token, StringBuffer emailBuf) {
         Optional<VerifToken> optionalVeriTok = findByToken(token);
         if (optionalVeriTok.isEmpty()) {
             return FeedbackMessage.NOT_FOUND_VERIF_TOKEN;
@@ -29,6 +29,7 @@ public class ServiceVerifToken implements  IServiceVerifToken{
             return FeedbackMessage.VERIFIED_TOKEN;
         }
         if (tokenHasExipred(token)) {
+            emailBuf.append(user.getEmail());
             return FeedbackMessage.TOKEN_EXPIRED;
         }
         user.setEnabled(true);
