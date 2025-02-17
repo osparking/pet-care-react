@@ -78,4 +78,9 @@ public class ServiceVerifToken implements  IServiceVerifToken{
             return System.currentTimeMillis() > expireDate.getTime();
         }
     }
+
+    @Override
+    public void deleteVeToken(Long vtId, Long id) {
+        tokenRepository.deleteVeToken(vtId, id);
+    }
 }
