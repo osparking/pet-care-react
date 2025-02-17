@@ -10,10 +10,12 @@ public interface IServiceVerifToken {
 
     /**
      * 한 유저에게 할당된 토큰을 소멸 시점과 함께 DB 에 저장한다.
+     *
      * @param token
      * @param user
+     * @return
      */
-    void saveUserVerifToken(String token, User user);
+    Long saveUserVerifToken(String token, User user);
     VerifToken makeNewToken(String oldToken);
     Optional<VerifToken> findByToken(String token);
     void deleteTokenById(Long id);

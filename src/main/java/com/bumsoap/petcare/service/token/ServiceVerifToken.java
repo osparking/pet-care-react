@@ -39,9 +39,10 @@ public class ServiceVerifToken implements  IServiceVerifToken{
     }
 
     @Override
-    public void saveUserVerifToken(String token, User user) {
+    public Long saveUserVerifToken(String token, User user) {
         var verifToken = new VerifToken(token, user);
-        tokenRepository.save(verifToken);
+        var savedToken = tokenRepository.save(verifToken);
+        return savedToken.getId();
     }
 
     @Override
