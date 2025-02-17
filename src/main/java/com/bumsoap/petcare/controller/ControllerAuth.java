@@ -20,6 +20,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLOutput;
+
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @RestController
@@ -30,6 +32,17 @@ public class ControllerAuth {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
     private final IServiceVerifToken serviceVerifToken;
+
+    @PostMapping(UrlMapping.RESEND_EMAIL)
+    public ResponseEntity<ApiResponse> resendEmail(@RequestParam String email) {
+        /*
+        계정 등록 때, 그 유저 등록 사건을 경청하는 메소드가 실행했던 작업을 수행한다.
+        즉, verif_token 테이블에 새 레코드를 저장한다. 따라서, 이메일 재전송 요구
+        연산은 POST 방식이 적합하다.
+         */
+        return ResponseEntity.ok(
+                new ApiResponse(FeedbackMessage.EMAIL_RESENT, null));
+    }
 
     @GetMapping(UrlMapping.VERIFY_EMAIL)
     public ResponseEntity<ApiResponse> verifyEmailToken(
