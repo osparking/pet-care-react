@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface RepositoryVerifToken extends JpaRepository<VerifToken, Long> {
     Optional<VerifToken> findByToken(String token);
 
-    @Query(value =
-            "DELETE FROM verif_token WHERE id != :vtId AND user_id = :userId")
+    @Query(value = "DELETE FROM verif_token WHERE id != :vtId AND user_id = :userId",
+            nativeQuery = true)
     void deleteVeToken(@Param("vtId") Long vtId, @Param("userId") Long userId);
 }
