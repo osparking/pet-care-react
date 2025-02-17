@@ -21,6 +21,11 @@ public class VerifToken {
     @JoinColumn(name = "user_id")
     private User user;
 
+    /**
+     * 유저에게 할당된 토큰에 대한 소멸 시점을 지정한다.
+     * @param token 할당된 토큰
+     * @param user 할당 받는 유저
+     */
     public VerifToken(String token, User user) {
         this.token = token;
         this.user = user;
