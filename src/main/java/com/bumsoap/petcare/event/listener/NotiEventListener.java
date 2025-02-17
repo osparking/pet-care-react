@@ -60,7 +60,15 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
     }
 
     private void handleSendVerifEmail(UserRegisteredEvent event) {
-        User user = event.getUser();
+        saveToken_sendEmail(event.getUser());
+    }
+
+    /**
+     * 유저에게 만료 시점이 지정된 토큰을 부여하고 그 정보를 DB에 저장하고,
+     * 유저가 등록한 이메일을 검증할 수 있도록, 부여된 토큰을 이메일로 보낸다.
+     * @param user 토큰을 부여받을 유저
+     */
+    public void saveToken_sendEmail(User user) {
         String vToken = UUID.randomUUID().toString();
         serviceToken.saveUserVerifToken(vToken, user);
         String verifUrl = frontendBaseUrl + "/email_verify?token=" + vToken;
