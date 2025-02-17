@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
@@ -68,9 +69,11 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
      * 유저가 등록한 이메일을 검증할 수 있도록, 부여된 토큰을 이메일로 보낸다.
      * @param user 토큰을 부여받을 유저
      */
+    @Transactional
     public void saveToken_sendEmail(User user) {
         String vToken = UUID.randomUUID().toString();
-        serviceToken.saveUserVerifToken(vToken, user);
+        Long vtId = serviceToken.saveUserVerifToken(vToken, user);
+        serviceToken.deleteVeToken(vtId, user.getId());
         String verifUrl = frontendBaseUrl + "/email_verify?token=" + vToken;
         try {
             sendVerifEmail(user, verifUrl);
