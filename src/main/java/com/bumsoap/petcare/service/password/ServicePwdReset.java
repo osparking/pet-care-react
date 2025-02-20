@@ -1,10 +1,13 @@
 package com.bumsoap.petcare.service.password;
 
+import com.bumsoap.petcare.event.PasswordResetE;
+import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.model.VerifToken;
 import com.bumsoap.petcare.repository.RepositoryUser;
 import com.bumsoap.petcare.repository.RepositoryVerifToken;
 import com.bumsoap.petcare.service.token.ServiceVerifToken;
+import com.bumsoap.petcare.utils.FeedbackMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,7 +32,17 @@ public class ServicePwdReset implements  ServicePwdResetI{
 
     @Override
     public void passwordResetRequest(String email) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
 
+        userOptional.ifPresentOrElse((user) -> {
+                var event = new PasswordResetE(this, user);
+                eventPublisher.publishEvent(event);
+            },
+            () -> {
+                throw new ResourceNotFoundException(
+                    FeedbackMessage.NOT_FOUND_USER_EMAIL);
+            }
+        );
     }
 
     @Override
