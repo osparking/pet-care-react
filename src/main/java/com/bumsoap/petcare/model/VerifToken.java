@@ -10,6 +10,9 @@ import java.util.Date;
 @Entity
 @Data
 @NoArgsConstructor
+/**
+ * 멥버로 토큰, 만기일, 유저를 가진다. 토큰 대 유저는 다대일 관계이다.
+ */
 public class VerifToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,7 @@
 package com.bumsoap.petcare.service.password;
 
 import com.bumsoap.petcare.model.User;
+import com.bumsoap.petcare.model.VerifToken;
 import com.bumsoap.petcare.repository.RepositoryUser;
 import com.bumsoap.petcare.repository.RepositoryVerifToken;
 import com.bumsoap.petcare.service.token.ServiceVerifToken;
@@ -22,7 +23,8 @@ public class ServicePwdReset implements  ServicePwdResetI{
 
     @Override
     public Optional<User> findUserByResetToken(String token) {
-        return Optional.empty();
+        return verifTokenRepository
+                .findByToken(token).map(VerifToken::getUser);
     }
 
     @Override
