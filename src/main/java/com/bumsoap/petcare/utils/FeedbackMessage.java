@@ -85,4 +85,5 @@ public class FeedbackMessage {
     public static final String APPOINT_COMPLETED = "예약 완료 처리됨";
     public static final String USER_ENABLED_TOGGLED = "유저 활성화 토글됨";
     public static final String NOT_FOUND_VERIF_TOKEN = "검증 토큰 부재 오류";
+    public static final String PASSWORD_RESET_SUCCESSFUL = "패스워드 변경 성공";
 }

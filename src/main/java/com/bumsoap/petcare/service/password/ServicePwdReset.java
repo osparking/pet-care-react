@@ -47,6 +47,12 @@ public class ServicePwdReset implements  ServicePwdResetI{
 
     @Override
     public String resetPassword(String password, User user) {
-        return "";
+        try {
+            user.setPassword(passwordEncoder.encode(password));
+            userRepository.save(user);
+            return FeedbackMessage.PASSWORD_RESET_SUCCESSFUL;
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }
