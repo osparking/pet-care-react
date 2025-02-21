@@ -1,13 +1,11 @@
 package com.bumsoap.petcare.event.listener;
 
 import com.bumsoap.petcare.email.EmailComponent;
-import com.bumsoap.petcare.event.AppointApprovedE;
-import com.bumsoap.petcare.event.AppointDeclinedE;
-import com.bumsoap.petcare.event.AppointmentBooked;
-import com.bumsoap.petcare.event.UserRegisteredEvent;
+import com.bumsoap.petcare.event.*;
 import com.bumsoap.petcare.model.Appointment;
 import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.service.token.IServiceVerifToken;
+import com.bumsoap.petcare.utils.FeedbackMessage;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -175,4 +173,22 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
         sendAppointDeclinedNoti(patient, frontendBaseUrl);
     }
 
+    private void sendPwdResetEmail(User user, String url) throws
+            MessagingException, UnsupportedEncodingException {
+        String subject = "비밀번호 리셋 요청 인증";
+        String senderName = "팻 돌봄이";
+        StringBuffer content = new StringBuffer("<p>안녕하세요? '");
+        content.append(user.getLastName());
+        content.append(user.getFirstName());
+        content.append("' 유저님</p>");
+        content.append("<p>유저님은 자기의 비밀번호를 재설정해 달라고 요구하셨습니다.");
+        content.append("<br/>이를 진행하려면, 아래 링크를 클릭하십시오.</p>");
+        content.append("<a href=\"");
+        content.append(url);
+        content.append("\">패스워드 재설정</a>");
+        content.append(". 만일 재설정을 요청하지 않았으면 이 메일은 무시하세요.<br/>");
+        content.append("<p>당신 애완동물의 후원자.<br> 팻 케어 서비스 올림.");
+        emailComponent.sendEmail(user.getEmail(), subject, senderName,
+                content.toString());
+    }
 }
