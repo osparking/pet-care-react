@@ -173,6 +173,18 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
         sendAppointDeclinedNoti(patient, frontendBaseUrl);
     }
 
+    private void handlePwdResetRequest(PasswordResetE event) {
+        User user = event.getUser();
+        String token = UUID.randomUUID().toString();
+        Long vtId = serviceToken.saveUserVerifToken(token, user);
+        String resetUrl = frontendBaseUrl + "/reset_password?token=" + token;
+        try {
+            sendPwdResetEmail(user, resetUrl);
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            throw new RuntimeException(FeedbackMessage.PWD_RESET_EMAIL_FAIL, e);
+        }
+    }
+
     private void sendPwdResetEmail(User user, String url) throws
             MessagingException, UnsupportedEncodingException {
         String subject = "비밀번호 리셋 요청 인증";
