@@ -52,8 +52,10 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
                     throw new RuntimeException(e);
                 }
             }
+            case PasswordResetE pwdRstE -> {
+                handlePwdResetRequest(pwdRstE);
+            }
             default ->  {
-                break;
             }
         }
     }
