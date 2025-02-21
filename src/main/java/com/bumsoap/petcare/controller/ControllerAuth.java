@@ -25,6 +25,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLOutput;
+import java.util.Map;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
@@ -78,6 +79,17 @@ public class ControllerAuth {
                     .body(new ApiResponse(result, data));
         }
         return response;
+    }
+
+    public ResponseEntity<ApiResponse>
+                    handlePasswordResetRequest(Map<String, String> request) {
+        String email = request.get("email");
+
+        if (email == null || email.trim().isEmpty()) {
+            return ResponseEntity.badRequest().body(
+                    new ApiResponse(FeedbackMessage.NO_EMAIL_PWD_RESET_REQ, null));
+        }
+        return null;
     }
 
     @PostMapping(UrlMapping.LOGIN)
