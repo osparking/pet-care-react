@@ -5,6 +5,7 @@ import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.repository.RepositoryUser;
 import com.bumsoap.petcare.request.LoginRequest;
+import com.bumsoap.petcare.request.PasswordResetReq;
 import com.bumsoap.petcare.response.ApiResponse;
 import com.bumsoap.petcare.response.JwtResponse;
 import com.bumsoap.petcare.security.jwt.JwtUtil;
@@ -101,6 +102,18 @@ public class ControllerAuth {
             return ResponseEntity.status(NOT_FOUND).body(
                     new ApiResponse(e.getMessage(), null));
         }
+    }
+
+    public ResponseEntity<ApiResponse> resetPassword(@RequestBody
+                                                     PasswordResetReq request) {
+        String token = request.getToken();
+        String newPassword = request.getNewPassword();
+        if (token == null || token.trim().isEmpty() ||
+                newPassword == null || newPassword.trim().isEmpty()) {
+            return ResponseEntity.badRequest().body(new ApiResponse(
+                    FeedbackMessage.PWD_RESET_INFO_MISSING, null));
+        }
+        return null;
     }
 
     @PostMapping(UrlMapping.LOGIN)

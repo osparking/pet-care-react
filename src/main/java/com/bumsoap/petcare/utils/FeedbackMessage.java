@@ -88,4 +88,5 @@ public class FeedbackMessage {
     public static final String PASSWORD_RESET_SUCCESSFUL = "패스워드 변경 성공";
     public static final String NO_EMAIL_PWD_RESET_REQ = "계정 이메일 제출 필요";
     public static final String PWD_RESET_LINK_SENT = "패스워드 리셋 이메일 발송됨";
+    public static final String PWD_RESET_INFO_MISSING = "패스워드 리셋 정보 부족";
 }
