@@ -12,5 +12,12 @@ public interface ServicePwdResetI {
      * @throws ResourceNotFoundException
      */
     void passwordResetRequest(String email);
+
+    /**
+     * 비밀번호를 암호화하여 유저의 새 패스워드로 저장
+     * @param password 비밀번호
+     * @param user 유저
+     * @return 패스워드 리셋 성공 메시지
+     */
     String resetPassword(String password, User user);
 }

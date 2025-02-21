@@ -119,7 +119,9 @@ public class ControllerAuth {
             return ResponseEntity.badRequest().body(
                     new ApiResponse(FeedbackMessage.INVALID_TOKEN, null));
         }
-        return null;
+        User foundUser = user.get();
+        String message = pwdResetService.resetPassword(newPassword, foundUser);
+        return ResponseEntity.ok(new ApiResponse(message, null));
     }
 
     @PostMapping(UrlMapping.LOGIN)
