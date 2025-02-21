@@ -72,6 +72,8 @@ public class UrlMapping {
     public static final String VERIFY_EMAIL = "/verify_email";
     public static final String LOGIN = "/login";
     public static final String RESEND_EMAIL = "/resend_email";
+    public static final String REQUEST_PASSWORD_RESET = "/req_password_reset";
+    public static final String RESET_PASSWORD = "/reset_password";
     /*========================== End AUth type API ============================= */
 
     /*============================  Start Verification Type API ====================*/

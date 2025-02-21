@@ -87,6 +87,7 @@ public class ControllerAuth {
         return response;
     }
 
+    @PostMapping(UrlMapping.REQUEST_PASSWORD_RESET)
     public ResponseEntity<ApiResponse>
                     handlePasswordResetRequest(Map<String, String> request) {
         String email = request.get("email");
@@ -105,6 +106,7 @@ public class ControllerAuth {
         }
     }
 
+    @PostMapping(UrlMapping.RESET_PASSWORD)
     public ResponseEntity<ApiResponse> resetPassword(@RequestBody
                                                      PasswordResetReq request) {
         String token = request.getToken();
