@@ -1,6 +1,7 @@
 package com.bumsoap.petcare.controller;
 
 import com.bumsoap.petcare.event.listener.NotiEventListener;
+import com.bumsoap.petcare.exception.ResourceNotFoundException;
 import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.repository.RepositoryUser;
 import com.bumsoap.petcare.request.LoginRequest;
@@ -8,12 +9,14 @@ import com.bumsoap.petcare.response.ApiResponse;
 import com.bumsoap.petcare.response.JwtResponse;
 import com.bumsoap.petcare.security.jwt.JwtUtil;
 import com.bumsoap.petcare.security.user.PcUserDetails;
+import com.bumsoap.petcare.service.password.ServicePwdResetI;
 import com.bumsoap.petcare.service.token.IServiceVerifToken;
 import com.bumsoap.petcare.utils.FeedbackMessage;
 import com.bumsoap.petcare.utils.SystemUtils;
 import com.bumsoap.petcare.utils.UrlMapping;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -40,6 +43,7 @@ public class ControllerAuth {
     private final IServiceVerifToken serviceVerifToken;
     private final RepositoryUser repositoryUser;
     private final NotiEventListener notiEventListener;
+    private final ServicePwdResetI pwdResetService;
 
     @PostMapping(UrlMapping.RESEND_EMAIL)
     public ResponseEntity<ApiResponse> resendEmail(@RequestParam String email) {
@@ -88,6 +92,12 @@ public class ControllerAuth {
         if (email == null || email.trim().isEmpty()) {
             return ResponseEntity.badRequest().body(
                     new ApiResponse(FeedbackMessage.NO_EMAIL_PWD_RESET_REQ, null));
+        }
+        try {
+            pwdResetService.passwordResetRequest(email);
+            return ResponseEntity.ok(new ApiResponse(
+                    FeedbackMessage.PWD_RESET_LINK_SENT, null));
+        } catch (ResourceNotFoundException e) {
         }
         return null;
     }
