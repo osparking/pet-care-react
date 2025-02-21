@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLOutput;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
@@ -112,6 +113,11 @@ public class ControllerAuth {
                 newPassword == null || newPassword.trim().isEmpty()) {
             return ResponseEntity.badRequest().body(new ApiResponse(
                     FeedbackMessage.PWD_RESET_INFO_MISSING, null));
+        }
+        Optional<User> user = pwdResetService.findUserByResetToken(token);
+        if (user.isEmpty()) {
+            return ResponseEntity.badRequest().body(
+                    new ApiResponse(FeedbackMessage.INVALID_TOKEN, null));
         }
         return null;
     }
