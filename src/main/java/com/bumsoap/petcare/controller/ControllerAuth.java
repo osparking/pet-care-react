@@ -98,8 +98,9 @@ public class ControllerAuth {
             return ResponseEntity.ok(new ApiResponse(
                     FeedbackMessage.PWD_RESET_LINK_SENT, null));
         } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(NOT_FOUND).body(
+                    new ApiResponse(e.getMessage(), null));
         }
-        return null;
     }
 
     @PostMapping(UrlMapping.LOGIN)
