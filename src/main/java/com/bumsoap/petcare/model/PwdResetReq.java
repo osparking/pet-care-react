@@ -1,5 +1,6 @@
 package com.bumsoap.petcare.model;
 
+import com.bumsoap.petcare.utils.SystemUtils;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,4 +19,9 @@ public class PwdResetReq {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+    public PwdResetReq(String token, User user) {
+        this.token = token;
+        this.user = user;
+        this.expiresOnTm = SystemUtils.getExpireTime();
+    }
 }
