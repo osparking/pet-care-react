@@ -2,8 +2,10 @@ package com.bumsoap.petcare.service.password;
 
 import com.bumsoap.petcare.event.PasswordResetE;
 import com.bumsoap.petcare.exception.ResourceNotFoundException;
+import com.bumsoap.petcare.model.PwdResetReq;
 import com.bumsoap.petcare.model.User;
 import com.bumsoap.petcare.model.VerifToken;
+import com.bumsoap.petcare.repository.RepoPwdResetToken;
 import com.bumsoap.petcare.repository.RepositoryUser;
 import com.bumsoap.petcare.repository.RepositoryVerifToken;
 import com.bumsoap.petcare.service.token.ServiceVerifToken;
@@ -23,6 +25,7 @@ public class ServicePwdReset implements  ServicePwdResetI{
     private final PasswordEncoder passwordEncoder;
     private final ApplicationEventPublisher eventPublisher;
     private final ServiceVerifToken verifTokenService;
+    private final RepoPwdResetToken pwdResetTokenRepo;
 
     @Override
     public Optional<User> findUserByResetToken(String token) {
@@ -54,5 +57,11 @@ public class ServicePwdReset implements  ServicePwdResetI{
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    @Override
+    public void pwdResetRequestToken(User user, String token) {
+        var prrEntity = new PwdResetReq(token, user);
+        pwdResetTokenRepo.save(prrEntity);
     }
 }
