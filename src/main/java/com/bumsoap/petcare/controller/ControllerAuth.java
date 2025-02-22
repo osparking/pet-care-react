@@ -52,13 +52,14 @@ public class ControllerAuth {
         try {
             User user = repositoryUser.findByEmail(email).orElseThrow(
                     () -> new UsernameNotFoundException(
-                            FeedbackMessage.NOT_FOUND_USER_EMAIL));
+                            FeedbackMessage.NOT_FOUND_USER_EMAIL + email));
             notiEventListener.saveToken_sendEmail(user);
             return ResponseEntity.ok(
                     new ApiResponse(FeedbackMessage.EMAIL_RESENT, null));
         } catch (UsernameNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND).body(
-                    new ApiResponse(FeedbackMessage.NOT_FOUND_USER_EMAIL, null));
+                    new ApiResponse(FeedbackMessage.NOT_FOUND_USER_EMAIL + email,
+                            null));
         }
     }
 

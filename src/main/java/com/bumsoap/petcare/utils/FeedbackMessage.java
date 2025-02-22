@@ -40,7 +40,7 @@ public class FeedbackMessage {
     public static final String NOT_FOUND_PHOTO = "사진 비 등록 유저";
     public static final String NOT_FOUND_REVIEW_ID = "존재하지 않는 리뷰 ID";
     public static final String NOT_FOUND_PET_ID = "존재하지 않는 팻 ID";
-    public static final String NOT_FOUND_USER_EMAIL = "존재하지 않는 유저 이메일";
+    public static final String NOT_FOUND_USER_EMAIL = "존재하지 않는 유저 이메일: ";
     public static final String NOT_FOUND_ROLE = "존재하지 않는 롤 오류";
 
     public static final String UPDATED_PWD = "비밀번호 갱신 성공";

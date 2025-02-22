@@ -40,7 +40,7 @@ public class ServicePwdReset implements  ServicePwdResetI{
             },
             () -> {
                 throw new ResourceNotFoundException(
-                    FeedbackMessage.NOT_FOUND_USER_EMAIL);
+                    FeedbackMessage.NOT_FOUND_USER_EMAIL + email);
             }
         );
     }
