@@ -178,7 +178,7 @@ public class NotiEventListener implements ApplicationListener<ApplicationEvent> 
     private void handlePwdResetRequest(PasswordResetE event) {
         User user = event.getUser();
         String token = UUID.randomUUID().toString();
-        Long vtId = serviceToken.saveUserVerifToken(token, user);
+        serviceToken.saveUserVerifToken(token, user);
         String resetUrl = frontendBaseUrl + "/reset_password?token=" + token;
         try {
             sendPwdResetEmail(user, resetUrl);
