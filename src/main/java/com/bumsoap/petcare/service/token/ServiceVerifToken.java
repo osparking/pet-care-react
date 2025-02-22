@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class ServiceVerifToken implements  IServiceVerifToken{
+public class ServiceVerifToken implements IServiceVerifToken{
     private final RepositoryUser userRepository;
     private final RepositoryVerifToken tokenRepository;
 
