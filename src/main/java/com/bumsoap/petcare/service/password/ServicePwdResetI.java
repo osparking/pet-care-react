@@ -20,4 +20,6 @@ public interface ServicePwdResetI {
      * @return 패스워드 리셋 성공 메시지
      */
     String resetPassword(String password, User user);
+
+    void pwdResetRequestToken(User user, String token);
 }
