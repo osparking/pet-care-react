@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(UrlMapping.VERIFY_TOKEN)
+@CrossOrigin("http://localhost:5173")
 public class ControllerTokenVerif {
     private final IServiceVerifToken serviceVerifToken;
     private final RepositoryUser repositoryUser;
