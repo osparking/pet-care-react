@@ -89,7 +89,7 @@ public class ControllerAuth {
 
     @PostMapping(UrlMapping.REQUEST_PASSWORD_RESET)
     public ResponseEntity<ApiResponse>
-                    handlePasswordResetRequest(Map<String, String> request) {
+                    handlePasswordResetRequest(@RequestBody Map<String, String> request) {
         String email = request.get("email");
 
         if (email == null || email.trim().isEmpty()) {
