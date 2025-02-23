@@ -22,7 +22,6 @@ import java.sql.SQLException;
 @RestController
 @RequestMapping(UrlMapping.PHOTO)
 @RequiredArgsConstructor
-@CrossOrigin("http://localhost:5173/")
 public class ControllerPhoto {
 
     private final IServicePhoto servicePhoto;

@@ -28,7 +28,6 @@ import static org.springframework.http.HttpStatus.*;
 @RestController
 @RequestMapping(UrlMapping.USERS)
 @RequiredArgsConstructor
-@CrossOrigin("http://localhost:5173/")
 public class ControllerUser {
     private final ServiceUser serviceUser;
     private final EntityConverter<User, DtoUser> userConverter;

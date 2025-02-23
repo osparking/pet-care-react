@@ -19,7 +19,6 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @RestController
 @RequestMapping(UrlMapping.VETS)
 @RequiredArgsConstructor
-@CrossOrigin("http://localhost:5173/")
 public class ControllerVet {
     private final IServiceVet serviceVet;
 

@@ -23,7 +23,6 @@ import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequestMapping(UrlMapping.APPOINTMENT)
-@CrossOrigin("http://localhost:5173/")
 @RequiredArgsConstructor
 public class ControllerAppointment {
     private final ServiceAppointment serviceAppointment;
