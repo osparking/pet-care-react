@@ -1,5 +1,6 @@
-Udemy course
-- title: A Complete Guide to Java Full Stack Development with React
-  - section 6, lecture 42
-- google docs file: "java with react"
-- local project location: /c/Users/jbpar/IdeaProjects/pet-care-react
+# Udemy course
+  - title: A Complete Guide to Java Full Stack Development with React
+
+# 관련 파일/폴더
+  - 구글문서 파일 : [Java with React](https://docs.google.com/spreadsheets/d/1Nt5jsg7Lo0GmYE5S2tkcUElmdXah0tdBwytEPP-vHqg/edit?usp=drive_link)
+  - 지역 프로젝트 : /c/Users/jbpar/IdeaProjects/pet-care-react
