@@ -2,4 +2,4 @@ Udemy course
 - title: A Complete Guide to Java Full Stack Development with React
   - section 6, lecture 42
 - google docs file: "java with react"
-- local project location: /f/study/fullstack/pet-care
+- local project location: /c/Users/jbpar/IdeaProjects/pet-care-react
